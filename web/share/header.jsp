@@ -32,7 +32,7 @@
     <script src="https://cdn.jsdelivr.net/gh/JDMcKinstry/JavaScriptDateFormat@master/Date.format.min.js"></script>
     <style>
         body{
-            background: url('https://bpbd.pangkalpinangkota.go.id/assets/svg/components/bg-elements-2.svg') no-repeat center center fixed; 
+            background: url('') no-repeat center center fixed; 
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -43,9 +43,12 @@
         .card-header{
             background-color:#0d6efd;
             color:white;
-          
+            
         }
-        
+        .modal-backdrop {
+            width: 100%;
+            height: 100%;
+        }
         .container{
             min-height:"100vh";
         }

@@ -16,6 +16,11 @@
         <servlet-name>TopicmainService</servlet-name>
         <servlet-class>com.pg.lib.service.TopicmainService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <servlet-class>com.sun.ws.rest.impl.container.servlet.ServletAdaptor</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
@@ -31,6 +36,10 @@
     <servlet-mapping>
         <servlet-name>TopicmainService</servlet-name>
         <url-pattern>/TopicmainService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,6 +6,7 @@ package com.pg.lib.service;
 
 import java.sql.*;
 import com.pg.lib.model.ET_Topicmain;
+import com.pg.lib.model.ET_Topicminor;
 import com.pg.lib.utility.ConnectDB;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,14 +17,14 @@ import java.util.Date;
  *
  * @author pakutsing
  */
-public class TopicmainService {
+public class TopicminorService {
 
     private static Connection conn;
     private static PreparedStatement ps;
     private static ResultSet rs;
 
     public static Boolean updatetopic(String name, String id) throws SQLException {
-        int primarykey = getprimarykey() + 1;
+
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -31,7 +32,7 @@ public class TopicmainService {
 
         try {
 
-            String sql = "UPDATE et_topicmain SET topicmain_name = ?,topicmain_date_modify = ? WHERE topicmain_id = ?";
+            String sql = "UPDATE et_topicminor SET topicminor_name = ? ,topicminor_date_modify = ? WHERE topicminor_id = ?";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
@@ -59,7 +60,7 @@ public class TopicmainService {
         int primarykey = 0;
         try {
             Boolean status = false;
-            String sql = "SELECT MAX(topicmain_id) as primarykey FROM et_topicmain";
+            String sql = "SELECT MAX(topicminor_id) as primarykey FROM et_topicminor";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -79,29 +80,60 @@ public class TopicmainService {
         return primarykey;
     }
 
-    public static Boolean deltopic(String id) throws SQLException {
-        Boolean status = false;
-
+    public static List<ET_Topicminor> getbyidlisttopicminor(String id) throws SQLException {
+        List<ET_Topicminor> list = new ArrayList();
         try {
-            String sql = "DELETE FROM et_topicmain WHERE topicmain_id = ?";
+            String sql = "SELECT * FROM et_topicminor  where topicminor_id = ?";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
+            rs = ps.executeQuery();
 
-            if (ps.executeUpdate() > 0) {
-                status = true;
-            } else {
-                status = false;
+            while (rs.next()) {
+                ET_Topicminor minor = new ET_Topicminor();
+                minor.setTopicminor_id(rs.getString("topicminor_id"));
+                minor.setTopicminor_name(rs.getString("topicminor_name"));
+                minor.setTopicminor_date_create(rs.getString("topicminor_date_create"));
+                minor.setTopicminor_date_modify(rs.getString("topicminor_date_modify"));
+                list.add(minor);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             conn.close();
             ps.close();
             rs.close();
+
         }
-        return status;
+        return list;
+    }
+
+    public static List<ET_Topicminor> listtopicminor() throws SQLException {
+        List<ET_Topicminor> list = new ArrayList();
+        try {
+            String sql = "SELECT * FROM et_topicminor where topicminor_id >99;";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ET_Topicminor minor = new ET_Topicminor();
+                minor.setTopicminor_id(rs.getString("topicminor_id"));
+                minor.setTopicminor_name(rs.getString("topicminor_name"));
+
+                minor.setTopicminor_date_create(rs.getString("topicminor_date_create"));
+                minor.setTopicminor_date_modify(rs.getString("topicminor_date_modify"));
+                list.add(minor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+            ps.close();
+            rs.close();
+
+        }
+        return list;
     }
 
     public static Boolean addtopic(String name) throws SQLException {
@@ -113,7 +145,7 @@ public class TopicmainService {
 
         try {
 
-            String sql = "INSERT INTO et_topicmain (topicmain_id, topicmain_name, topicmain_date_create) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO et_topicminor (topicminor_id, topicminor_name, topicminor_date_create) VALUES (?, ?, ?)";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
@@ -139,55 +171,22 @@ public class TopicmainService {
         return status;
     }
 
-    public static List<ET_Topicmain> listtopicmain() throws SQLException {
-        List<ET_Topicmain> list = new ArrayList();
+    public static Boolean deltopic(String id) throws SQLException {
+
+        Boolean status = false;
+
         try {
-
-            String sql = "SELECT * FROM et_topicmain where topicmain_id >99";
-            conn = ConnectDB.getConnectionMysql();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                ET_Topicmain main = new ET_Topicmain();
-                main.setTopicmain_id(rs.getString("topicmain_id"));
-                main.setTopicmain_name(rs.getString("topicmain_name"));
-                main.setTopicmain_date_modify(rs.getString("topicmain_date_modify"));
-                main.setTopicmain_date_create(rs.getString("topicmain_date_create"));
-                list.add(main);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            conn.close();
-            ps.close();
-            rs.close();
-
-        }
-
-
-        return list;
-
-    }
-
-    public static List<ET_Topicmain> gettopicmainbyid(String id) throws SQLException {
-        List<ET_Topicmain> list = new ArrayList();
-        try {
-
-            String sql = "SELECT * FROM et_topicmain where topicmain_id = ?";
+            String sql = "DELETE FROM et_topicminor WHERE topicminor_id = ? ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
-            rs = ps.executeQuery();
 
-            while (rs.next()) {
-                ET_Topicmain main = new ET_Topicmain();
-                main.setTopicmain_id(rs.getString("topicmain_id"));
-                main.setTopicmain_name(rs.getString("topicmain_name"));
-                main.setTopicmain_date_modify(rs.getString("topicmain_date_modify"));
-                main.setTopicmain_date_create(rs.getString("topicmain_date_create"));
-                list.add(main);
+            if (ps.executeUpdate() > 0) {
+                status = true;
+            } else {
+                status = false;
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -196,9 +195,6 @@ public class TopicmainService {
             rs.close();
 
         }
-
-
-        return list;
-
+        return status;
     }
 }

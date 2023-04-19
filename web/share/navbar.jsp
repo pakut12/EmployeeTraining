@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<nav class=" navbar-expand-lg navbar navbar-dark bg-primary shadow-lg mb-3">
+<nav class=" navbar-expand-lg sticky-top navbar navbar-dark bg-primary shadow-lg mb-3">
     <div class="container">
         <a class="navbar-brand" href="#">ระบบฝึกอบรมพนักงาน</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,8 +25,9 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="managetopic1.jsp">ข้อมูลหมวดหลัก</a></li>
                         <li><a class="dropdown-item" href="managetopic2.jsp">ข้อมูลหมวดย่อย</a></li>
-                        
-                        
+                        <li><a class="dropdown-item" href="managecourse.jsp">ข้อมูลหลักสูตร</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="managemain.jsp">ข้อมูลจัดกลุ่ม</a></li>
                     </ul>
                 </li>
                 

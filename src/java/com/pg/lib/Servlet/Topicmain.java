@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import org.json.JSONObject;
 
 /**
  *
@@ -45,6 +46,8 @@ public class Topicmain extends HttpServlet {
                     html += "<th>ชื่อ</th>";
                     html += "<th>วันที่สร้าง</th>";
                     html += "<th>วันที่เเก้ไข</th>";
+                    html += "<th>เเก้ไข</th>";
+                    html += "<th>ลบ</th>";
                     html += "</tr>";
                     html += "</thead>";
                     html += "<tbody>";
@@ -54,6 +57,8 @@ public class Topicmain extends HttpServlet {
                         html += "<td>" + list.get(i).getTopicmain_name() + "</td>";
                         html += "<td>" + list.get(i).getTopicmain_date_create() + "</td>";
                         html += "<td>" + list.get(i).getTopicmain_date_modify() + "</td>";
+                        html += "<td><button type='button' class='btn btn-warning btn-sm' onclick='edittopicmain(" + list.get(i).getTopicmain_id() + ")'>เเก้ไข</button></td>";
+                        html += "<td><button type='button' class='btn btn-danger btn-sm' onclick='deltopicmain(" + list.get(i).getTopicmain_id() + ")'>ลบ</button></td>";
                         html += "</tr>";
                     }
                     html += "</tbody>";
@@ -73,13 +78,67 @@ public class Topicmain extends HttpServlet {
                 } else {
                     out.print("false");
                 }
-                
+
+            } else if (type.equals("deltopicmain")) {
+                String id = request.getParameter("id").trim();
+                Boolean status = TopicmainService.deltopic(id);
+
+                if (status) {
+                    out.print("true");
+                } else {
+                    out.print("false");
+                }
+
+            } else if (type.equals("gettopicmainbyid")) {
+                String id = request.getParameter("id").trim();
+                try {
+
+                    List<ET_Topicmain> list = TopicmainService.gettopicmainbyid(id);
+                    JSONObject obj = new JSONObject();
+                    obj.put("id", list.get(0).getTopicmain_id());
+                    obj.put("name", list.get(0).getTopicmain_name());
+
+
+                    out.print(obj);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (type.equals("updatetopicmainbyid")) {
+                String name = request.getParameter("name").trim();
+                String id = request.getParameter("id").trim();
+                try {
+
+                    Boolean status = TopicmainService.updatetopic(name, id);
+                    if (status) {
+                        out.print("true");
+                    } else {
+                        out.print("false");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (type.equals("getlisttopicmain")) {
+                try {
+                    List<ET_Topicmain> list = TopicmainService.listtopicmain();
+
+                    String html = "";
+
+                    for (int i = 0; i < list.size(); i++) {
+                        html += "<option value='" + list.get(i).getTopicmain_id() + "'>" + list.get(i).getTopicmain_name() + "</option>";
+
+                    }
+
+                    out.print(html);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
-
-
-
-
-
 
 
         } finally {
