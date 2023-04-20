@@ -27,7 +27,7 @@
                         <li><a class="dropdown-item" href="managetopic2.jsp">ข้อมูลหมวดย่อย</a></li>
                         <li><a class="dropdown-item" href="managecourse.jsp">ข้อมูลหลักสูตร</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="managemain.jsp">ข้อมูลจัดกลุ่ม</a></li>
+                        <li><a class="dropdown-item" href="managemain.jsp">ข้อมูลกลุ่ม</a></li>
                     </ul>
                 </li>
                 

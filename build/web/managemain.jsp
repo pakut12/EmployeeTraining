@@ -95,168 +95,23 @@
         </div>
         
         <script>
-            
-            function deltopicmain(id){
-                $.ajax({
-                    type:"post",
-                    url:"Topicminor",
-                    data:{
-                        type:"deltopicminor"
-                    },
-                    success:function(msg){
-                        if(msg == "true"){
-                            Swal.fire({
-                                icon:"success",
-                                title:"ลบ",
-                                text:"ลบสำเร็จ"
-                            })
-                        }else{
-                            Swal.fire({
-                                icon:"error",
-                                title:"ลบ",
-                                text:"ลบไม่สำเร็จ"
-                            })
-                        }
-                        gettopicmain();
-                    }
-                })
+            function getcourse(){
+                
             }
-            
             function gettopicmain(){
                 $.ajax({
                     type:"post",
                     url:"Topicmain",
                     data:{
-                        type:"gettopicmain"
-                    },
-                    success:function(msg){
-                       
-                        $("#mytable").html(msg)
-                        $("#table_topicmain").DataTable();
+                         
                     }
+                    
                 })
-            }
-            
-    
-            function addtopicmain(){
-                $.ajax({
-                    type:"post",
-                    url:"Topicmain",
-                    data:{
-                        type:"addtopicmain",
-                        name:$("#add_name").val()
-                    },
-                    success:function(msg){
-                        if(msg == "true"){
-                            Swal.fire({
-                                icon:"success",
-                                title:"บันทึก",
-                                text:"บันทึกสำเร็จ"
-                            })
-                        }else{
-                            Swal.fire({
-                                icon:"error",
-                                title:"บันทึก",
-                                text:"บันทึกไม่สำเร็จ"
-                            })
-                        }
-                        $("#add_name").val("");
-                        $("#modal_addtopicmain").modal('hide');
-                        gettopicmain();
-                    }
-                })
-            }
-            
-            function edittopicmain(id){
-                $("#modal_edittopicmain").modal('show')
-                $.ajax({
-                    type:"post",
-                    url:"Topicmain",
-                    data:{
-                        type:"gettopicmainbyid",
-                        id:id
-                    },
-                    success:function(msg){
-                        var js = JSON.parse(msg);
-                        $("#edit_name").val(js.name);
-                        $("#edit_id").val(js.id);
-                       
-                    }
-                })
-        
-            }
-            
-            function updatetopicmain(){
-                $.ajax({
-                    type:"post",
-                    url:"Topicmain",
-                    data:{
-                        type:"updatetopicmainbyid",
-                        id:$("#edit_id").val(),
-                        name:$("#edit_name").val()
-                    },
-                    success:function(msg){
-                        if(msg == "true"){
-                            Swal.fire({
-                                icon:"success",
-                                title:"บันทึก",
-                                text:"บันทึกสำเร็จ"
-                            })
-                        }else{
-                            Swal.fire({
-                                icon:"error",
-                                title:"บันทึก",
-                                text:"บันทึกไม่สำเร็จ"
-                            })
-                        }
-                       
-                        $("#modal_edittopicmain").modal('hide');
-                        gettopicmain();
-                    }
-                })
-            }
-            function deltopicmain(id){
-                Swal.fire({
-                    title: 'คุณต้องการลบใช่หรือไม่',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'ใช่',
-                    cancelButtonText: 'ไม่ใช่'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type:"post",
-                            url:"Topicmain",
-                            data:{
-                                type:"deltopicmain",
-                                id:id
-                            },
-                            success:function(msg){
-                                if(msg == "true"){
-                                    Swal.fire({
-                                        icon:"success",
-                                        title:"ลบ",
-                                        text:"ลบสำเร็จ"
-                                    })
-                                }else{
-                                    Swal.fire({
-                                        icon:"error",
-                                        title:"ลบ",
-                                        text:"ลบไม่สำเร็จ"
-                                    })
-                                }
-                                gettopicmain()
-                            }
-                        })
-                    }
-                })
-        
-               
-            }
-            
-            
+                
+            }	
+            function gettopicminor(){
+                
+            }	
             $(document).ready(function(){
                 $("#adddata").click(function (){
                     $("#modal_addtopicmain").modal('show')
