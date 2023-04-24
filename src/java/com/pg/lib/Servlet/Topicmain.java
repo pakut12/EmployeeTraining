@@ -39,6 +39,7 @@ public class Topicmain extends HttpServlet {
                     List<ET_Topicmain> list = TopicmainService.listtopicmain();
 
                     String html = "";
+                    html += "<div class='table-responsive'>";
                     html += "<table class='table table-striped  table-sm text-center text-nowrap' id='table_topicmain'>";
                     html += "<thead>";
                     html += "<tr>";
@@ -63,7 +64,7 @@ public class Topicmain extends HttpServlet {
                     }
                     html += "</tbody>";
                     html += "</table>";
-
+                    html += "</div>";
                     out.print(html);
                 } catch (Exception e) {
                     e.printStackTrace();

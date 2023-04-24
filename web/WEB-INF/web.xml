@@ -21,6 +21,10 @@
         <servlet-class>com.sun.ws.rest.impl.container.servlet.ServletAdaptor</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>Group</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.Group</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>ServletAdaptor</servlet-name>
         <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Group</servlet-name>
+        <url-pattern>/Group</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

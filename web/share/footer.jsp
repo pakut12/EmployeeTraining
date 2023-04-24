@@ -9,7 +9,21 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <div id="footer-style" >
-        <p class="text-center mt-3">Copyright © People's garment public Co.Ltd. 666 Rama3 Bangpongpang Yannawa Bangkok 10120 Tel. 02-685-6500 Fax. 02-294-5159</p>
+    <footer class="main-footer " style="color:#3d9970">
+        <strong>Copyright © People's garment public Co.Ltd.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            666 Rama3 Bangpongpang Yannawa Bangkok 10120 Tel. 02-685-6500 Fax. 02-294-5159
+        </div>
+    </footer>
+    
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
+    <!-- ./wrapper -->
+
+  
 </html>

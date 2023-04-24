@@ -53,6 +53,7 @@ public class Course extends HttpServlet {
                     List<ET_Course> list = CourseService.getlistcourse();
 
                     String html = "";
+                    html += "<div class='table-responsive'>";
                     html += "<table class='table  table-sm text-center text-nowrap' id='table_course'>";
                     html += "<thead>";
                     html += "<tr>";
@@ -76,7 +77,7 @@ public class Course extends HttpServlet {
                     }
                     html += "</tbody>";
                     html += "</table>";
-
+                    html += "</div>";
                     out.print(html);
                 } catch (Exception e) {
                     e.printStackTrace();

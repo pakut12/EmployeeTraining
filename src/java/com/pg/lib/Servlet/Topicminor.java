@@ -41,6 +41,7 @@ public class Topicminor extends HttpServlet {
                     List<ET_Topicminor> list = TopicminorService.listtopicminor();
 
                     String html = "";
+                    html += "<div class='table-responsive'>";
                     html += "<table class='table table-striped table-sm text-center text-nowrap' id='table_topicminor'>";
                     html += "<thead>";
                     html += "<tr>";
@@ -55,7 +56,7 @@ public class Topicminor extends HttpServlet {
                     for (int i = 0; i < list.size(); i++) {
                         html += "<tr>";
                         html += "<td>" + (i + 1) + "</td>";
-                        
+
                         html += "<td>" + list.get(i).getTopicminor_name() + "</td>";
                         html += "<td>" + list.get(i).getTopicminor_date_create() + "</td>";
                         html += "<td><button type='button' class='btn btn-warning btn-sm' onclick='edittopicminor(" + list.get(i).getTopicminor_id() + ")'>เเก้ไข</button></td>";
@@ -64,14 +65,14 @@ public class Topicminor extends HttpServlet {
                     }
                     html += "</tbody>";
                     html += "</table>";
-
+                    html += "</div>";
                     out.print(html);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             } else if (type.equals("addtopicminor")) {
-               
+
                 String name = request.getParameter("name").trim();
 
 
@@ -99,7 +100,7 @@ public class Topicminor extends HttpServlet {
                 try {
 
                     List<ET_Topicminor> list = TopicminorService.getbyidlisttopicminor(id);
-                
+
                     JSONObject obj = new JSONObject();
                     obj.put("id", list.get(0).getTopicminor_id());
                     obj.put("name", list.get(0).getTopicminor_name());
@@ -113,12 +114,12 @@ public class Topicminor extends HttpServlet {
             } else if (type.equals("updatetopicmainbyid")) {
                 String name = request.getParameter("name").trim();
                 String id = request.getParameter("id").trim();
-                
+
 
                 try {
-                    
+
                     Boolean status = TopicminorService.updatetopic(name, id);
-                    
+
                     if (status) {
                         out.print("true");
                     } else {

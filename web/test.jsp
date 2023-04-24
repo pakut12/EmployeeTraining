@@ -1,88 +1,67 @@
 <%-- 
-    Document   : index
-    Created on : 20 ธ.ค. 2565, 14:04:11
+    Document   : test
+    Created on : 20 เม.ย. 2566, 9:56:43
     Author     : pakutsing
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
-        <%@ include file = "share/header.jsp" %>
-        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Select2 HTML by devbanban.com 2022</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     </head>
     <body>
-        <%@ include file = "share/navbar.jsp" %>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="modal_addcourse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลหลักสูตร</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <div class="mb-3">
-                            <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                            <select class="form-select form-select-sm text-center" id="add_topicmain">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                            <select class="form-select form-select-sm text-center" id="add_topicminor">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">ชื่อหลักสูตร</label>
-                            <input type="text" class="form-control form-control-sm text-center" id="add_course">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="addcourse()">Save</button>
-                    </div>
-                </div>
-            </div>
+        <div class="container" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="https://devbanban.com/?p=2867" method="post" class="form-horizontal">
+                        <div class="form-group row">
+                            <h4>Select2 Bootstrap5 by devbanban.com</h4>
+                            <div class="col-sm-8">
+                                <select class="form-control select2">
+                                    <option value="">-เลือกตำแหน่งงาน</option>
+                                    <option value="1">อาจารย์</option>
+                                    <option value="2">เจ้าหน้าที่บริหารงานทั่วไป</option>
+                                    <option value="3">นักวิชาการศึกษา</option>
+                                    <option value="4">เจ้าหน้าที่พัสดุ</option>
+                                    <option value="5">นักวิชาการคอมพิวเตอร์</option>
+                                </select> 
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="submit" class="btn btn-primary btn-sm">submit</button>
+                            </div>
+                            
+                            
+                        </div> <!-- /.form-group -->
+                    </form>
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
         </div>
-      
-        <div class="container ">
-            <div class="card">
-                <div class="card-header">
-                    จัดการหลักสูตร
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        </
-                </div>
-            </div>
-            
-        </div>
-        
-        <script>
-            
-            
-           
-            
-
-            
-            $(document).ready(function(){
-                $("#adddata").click(function (){
-                    $("#modal_addcourse").modal('show')
-                    gettopicmain()
-                })
-                $("#add_topicmain").on('input', function() {
-                    gettopicminor()
-                });
-                getcourse()
-            })
-        </script>
     </body>
-    <footer>
-        <%@ include file = "share/footer.jsp" %>
-    </footer>
 </html>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            
+        });
+    });
+</script>
+
+<!--
+
+ศึกษาการเรียกข้อมูลจากตาราง (Database) มาแสดงใน select/option ได้ที่ https://devbanban.com/?p=4429
+
+ศึกษาเพิ่มเติมได้ที่
+
+https://select2.org/
+https://bbbootstrap.com/snippets/select2-option-cdn-31353331
+
+-->
