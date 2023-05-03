@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:4306
--- Generation Time: Apr 20, 2023 at 07:56 AM
+-- Generation Time: May 03, 2023 at 11:31 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -24,40 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `et_course`
+-- Table structure for table `et_group`
 --
 
-CREATE TABLE `et_course` (
-  `course_id` int(10) NOT NULL,
-  `course_name` varchar(50) DEFAULT NULL,
-  `course_date_create` date DEFAULT NULL,
-  `course_date_modify` date DEFAULT NULL
+CREATE TABLE `et_group` (
+  `group_id` int(10) NOT NULL,
+  `group_topicmain_id` int(10) DEFAULT NULL,
+  `group_topicminor_id` int(10) DEFAULT NULL,
+  `group_course_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `et_course`
+-- Dumping data for table `et_group`
 --
 
-INSERT INTO `et_course` (`course_id`, `course_name`, `course_date_create`, `course_date_modify`) VALUES
-(99, NULL, NULL, NULL),
-(100, 'asd', '2566-04-19', NULL),
-(101, 'ฟหกฟหก', '2566-04-19', NULL),
-(102, 'ฟฟ', '2566-04-19', NULL),
-(103, 'ฟหก', '2566-04-19', NULL),
-(104, 'asd', '2566-04-19', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `et_main`
---
-
-CREATE TABLE `et_main` (
-  `et_main_id` int(10) NOT NULL,
-  `et_main_topicmain_id` int(10) NOT NULL,
-  `et_main_topicminor_id` int(10) NOT NULL,
-  `et_main_course_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `et_group` (`group_id`, `group_topicmain_id`, `group_topicminor_id`, `group_course_name`) VALUES
+(99, 0, 0, '0'),
+(100, 100, 100, 'T1'),
+(101, 100, 102, 'T2'),
+(102, 101, 99, 'T3');
 
 -- --------------------------------------------------------
 
@@ -77,8 +62,8 @@ CREATE TABLE `et_topicmain` (
 --
 
 INSERT INTO `et_topicmain` (`topicmain_id`, `topicmain_name`, `topicmain_date_create`, `topicmain_date_modify`) VALUES
-(99, '', NULL, NULL),
-(100, 'ปฐมนิเทศ', '2566-04-18', NULL),
+(99, '-', NULL, NULL),
+(100, 'ปฐมนิเทศ', '2566-04-18', '2566-04-25'),
 (101, 'QP-WI', '2566-04-18', NULL),
 (102, 'วิชาชีพเฉพาะด้าน', '2566-04-18', NULL),
 (103, 'การตลาด', '2566-04-18', NULL),
@@ -105,9 +90,9 @@ CREATE TABLE `et_topicminor` (
 --
 
 INSERT INTO `et_topicminor` (`topicminor_id`, `topicminor_name`, `topicminor_date_create`, `topicminor_date_modify`) VALUES
-(99, NULL, NULL, NULL),
-(100, 'พื้นฐาน', '2566-04-18', '2566-04-18'),
-(101, 'คปอ', '2566-04-18', NULL),
+(99, '-', NULL, NULL),
+(100, 'พื้นฐาน', '2566-04-18', '2566-04-24'),
+(101, 'คปอ', '2566-04-18', '2566-04-25'),
 (102, 'การทำงานกับสารเคมี', '2566-04-18', '2566-04-19'),
 (103, 'จป หัวหน้างาน', '2566-04-18', NULL),
 (104, 'จป บริหาร', '2566-04-18', NULL),
@@ -120,24 +105,42 @@ INSERT INTO `et_topicminor` (`topicminor_id`, `topicminor_name`, `topicminor_dat
 (111, 'การขับรถยก', '2566-04-18', NULL),
 (112, 'โรคภัยเเละสุขภาพ', '2566-04-18', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `et_training`
+--
+
+CREATE TABLE `et_training` (
+  `training_id` int(10) NOT NULL,
+  `training_company` varchar(10) NOT NULL,
+  `training_year` varchar(10) NOT NULL,
+  `training_datetraining` date NOT NULL,
+  `training_expenses` varchar(10) NOT NULL,
+  `training_address` varchar(100) NOT NULL,
+  `training_groupid` int(10) NOT NULL,
+  `training_employee` int(10) NOT NULL,
+  `training_date_create` date NOT NULL,
+  `training_date_modify` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `et_training`
+--
+
+INSERT INTO `et_training` (`training_id`, `training_company`, `training_year`, `training_datetraining`, `training_expenses`, `training_address`, `training_groupid`, `training_employee`, `training_date_create`, `training_date_modify`) VALUES
+(99, '', '', '0000-00-00', '', '', 0, 0, '0000-00-00', '0000-00-00');
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `et_course`
+-- Indexes for table `et_group`
 --
-ALTER TABLE `et_course`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `et_main`
---
-ALTER TABLE `et_main`
-  ADD PRIMARY KEY (`et_main_id`),
-  ADD KEY `et_main_topicmain_id` (`et_main_topicmain_id`),
-  ADD KEY `et_main_topicminor_id` (`et_main_topicminor_id`),
-  ADD KEY `et_main_course_id` (`et_main_course_id`);
+ALTER TABLE `et_group`
+  ADD PRIMARY KEY (`group_id`),
+  ADD KEY `group_topicmain_id` (`group_topicmain_id`,`group_topicminor_id`);
 
 --
 -- Indexes for table `et_topicmain`
@@ -150,6 +153,14 @@ ALTER TABLE `et_topicmain`
 --
 ALTER TABLE `et_topicminor`
   ADD PRIMARY KEY (`topicminor_id`);
+
+--
+-- Indexes for table `et_training`
+--
+ALTER TABLE `et_training`
+  ADD PRIMARY KEY (`training_id`),
+  ADD KEY `training_groupid` (`training_groupid`),
+  ADD KEY `training_employee` (`training_employee`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

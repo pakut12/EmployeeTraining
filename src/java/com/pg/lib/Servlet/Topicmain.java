@@ -99,10 +99,7 @@ public class Topicmain extends HttpServlet {
                     obj.put("id", list.get(0).getTopicmain_id());
                     obj.put("name", list.get(0).getTopicmain_name());
 
-
                     out.print(obj);
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -143,7 +143,7 @@ public class TopicmainService {
         List<ET_Topicmain> list = new ArrayList();
         try {
 
-            String sql = "SELECT * FROM et_topicmain where topicmain_id >99";
+            String sql = "SELECT * FROM et_topicmain ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();

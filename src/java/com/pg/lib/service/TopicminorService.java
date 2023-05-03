@@ -111,7 +111,7 @@ public class TopicminorService {
     public static List<ET_Topicminor> listtopicminor() throws SQLException {
         List<ET_Topicminor> list = new ArrayList();
         try {
-            String sql = "SELECT * FROM et_topicminor where topicminor_id >99;";
+            String sql = "SELECT * FROM et_topicminor ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();

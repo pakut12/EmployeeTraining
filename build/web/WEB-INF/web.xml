@@ -25,6 +25,10 @@
         <servlet-name>Group</servlet-name>
         <servlet-class>com.pg.lib.Servlet.Group</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Training</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.Training</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
@@ -48,6 +52,10 @@
     <servlet-mapping>
         <servlet-name>Group</servlet-name>
         <url-pattern>/Group</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Training</servlet-name>
+        <url-pattern>/Training</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

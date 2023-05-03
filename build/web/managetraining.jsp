@@ -21,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">จัดการข้อมูลหลักสูตร</h1>
+                            <h1 class="m-1">จัดการข้อมูลฝึกอบรม</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
-                                <li class="breadcrumb-item"><a href="#">ข้อมูล</a></li>
-                                <li class="breadcrumb-item active">จัดการข้อมูลหลักสูตร</li>
+                                <li class="breadcrumb-item"><a href="#">ฝึกอบรม</a></li>
+                                <li class="breadcrumb-item active">จัดการข้อมูลฝึกอบรม</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -35,7 +35,7 @@
             </div>
             <!-- /.content-header -->
 
-    <!-- Main content -->
+            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
@@ -43,32 +43,114 @@
                     
                     <!-- Modal -->
                     <div class="modal fade" id="modal_addgroup"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลหลักสูตร</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลกลุ่ม</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id">
-                                            
-                                        </select>
-                                        
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                                <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id">
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                                <select class="form-control form-control-sm text-center" id="add_topicminor_id" style="width: 100%">
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                                <select class="form-control form-control-sm text-center" id="add_course_id" style="width: 100%">
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                        <select class="form-control form-control-sm text-center" id="add_topicminor_id" style="width: 100%">
-                                            
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">บริษัท</label>
+                                                <input class="form-control form-control-sm text-center" type="text"> 
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">ปี</label>
+                                                <input class="form-control form-control-sm text-center" type="text"> 
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">สถาบันที่จัดอบรม</label>
+                                                <input class="form-control form-control-sm text-center" type="text"> 
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control text-center" id="add_course_name" style="width: 100%">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-center">
+                                                <input class="form-control form-control-sm text-center" type="text"> 
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-left">
+                                                <button class="btn btn-success btn-sm" type="button">Add</button>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -105,11 +187,11 @@
                                             
                                         </select>
                                     </div>
-                                    
                                     <div class="mb-3">
                                         <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control text-center" id="edit_course_name" style="width: 100%">
-                                        
+                                        <select class="form-control form-control-sm text-center" id="edit_course_id" style="width: 100%">
+                                            
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -122,7 +204,7 @@
                     
                     <div class="card">
                         <div class="card-header">
-                            จัดการข้อมูลหลักสูตร
+                            จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-3">
@@ -138,143 +220,32 @@
                     
                     <script>
                         
-                        function editgroup(id){
-                            $("#modal_editgroup").modal('show')
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"getgroupbyid",
-                                    main_id:id
-                                },
-                                success:function(msg){
-                                    var js = JSON.parse(msg)
-                                  
-                                    console.log(js)
-                                    $("#edit_main_id").val(id);
-                                    $("#edit_course_name").val(js.course_name)
-                                   
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Group",
-                                        data:{
-                                            type:"gettopicmain"
-                                        },
-                                        success:function(msg){
-                                            var s = "<option value='"+js.topicmain_id+"'>"+js.topicmain_name+"</option>";
-                                            var text = msg.replace(s, "");
-                                             
-                                            $("#edit_topicmain_id").empty();
-                                            $("#edit_topicmain_id").append("<option value='"+js.topicmain_id+"'>"+js.topicmain_name+"</option>");
-                                            $("#edit_topicmain_id").append(text);
-                                            $("#edit_topicmain_id").select2();
-                                        }
-                                    })
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Group",
-                                        data:{
-                                            type:"gettopicminor"
-                                        },
-                                        success:function(msg){
-                                            var s = "<option value='"+js.topicminor_id+"'>"+js.topicminor_name+"</option>";
-                                            var text = msg.replace(s, "");
-                                           
-                                            $("#edit_topicminor_id").empty();
-                                            $("#edit_topicminor_id").append("<option value='"+js.topicminor_id+"'>"+js.topicminor_name+"</option>");
-                                            $("#edit_topicminor_id").append(text);
-                                            $("#edit_topicminor_id").select2();
-                                        }
-                                    })
-                                    
-                                }
-                                
-                            })
-                        }
-    
-                        function updategroup(){
-                            var main_id = $("#edit_main_id").val()
-                            var topicmain_id = $("#edit_topicmain_id").val()
-                            var topicminor_id = $("#edit_topicminor_id").val()
-                            var course_name = $("#edit_course_name").val()
-
-                            
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"updategroup",
-                                    main_id:main_id,
-                                    topicmain_id:topicmain_id,
-                                    topicminor_id:topicminor_id,
-                                    course_name:course_name
-                                },
-                                success:function(msg){
-                                    if(msg == 'true'){
-                                        Swal.fire({
-                                            title:"เเก้ไข",
-                                            icon:"success",
-                                            text:"เเก้ไขสำเร็จ"
-                                        })
-                                    }else{
-                                        Swal.fire({
-                                            title:"เเก้ไข",
-                                            icon:"error",
-                                            text:"เเก้ไขไม่สำเร็จ"
-                                        })
-                                    }
-                                    gettablegroup()
-                                   
-                                }
-                            })
-                             
-                        }
-
-                        function delgroup(id){
                         
-                            Swal.fire({
-                                title: 'คุณต้องการลบใช่หรือไม่',
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'ใช่',
-                                cancelButtonText: 'ไม่ใช่'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Group",
-                                        data:{
-                                            type:"delgroup",
-                                            main_id:id
-                                        },
-                                        success:function(msg){
-                                    
-                                            if(msg == 'true'){
-                                                Swal.fire({
-                                                    title:"ลบ",
-                                                    icon:"success",
-                                                    text:"ลบสำเร็จ"
-                                                })
-                                            }else{
-                                                Swal.fire({
-                                                    title:"ลบ",
-                                                    icon:"error",
-                                                    text:"ลบไม่สำเร็จ"
-                                                })
-                                            }
-                                            gettablegroup()
-                                   
-                                        }
-                                    })
-                                }
-                            })
-        
-                           
-                        }
-                        
+
                        
+                        function getcourse(){
+                            var topicmain_id = $("#add_topicmain_id").val(); 
+                            var topicminor_id = $("#add_topicminor_id").val(); 
+                        
+                            console.log(topicmain_id)
+                            console.log(topicminor_id)
+        
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"getcoursebytopicminor_id",
+                                    topicmain_id:topicmain_id,
+                                    topicminor_id:topicminor_id
+                                },
+                                success:function(msg){
+                                  
+                                    $("#add_course_id").empty();
+                                    $("#add_course_id").append(msg);
+                                    $("#add_course_id").select2();
+                                }
+                            })
+                        }
                         function gettopicmain(){
                             $.ajax({
                                 type:"post",
@@ -284,6 +255,7 @@
                                 },
                                 success:function(msg){
                                     $("#add_topicmain_id").empty();
+                                  
                                     $("#add_topicmain_id").append(msg);
                                     $("#add_topicmain_id").select2();
                                 }
@@ -292,17 +264,21 @@
                         }	
                         
                         function gettopicminor(){
+                            var topicmain_id = $("#add_topicmain_id").val();               
+        
                             $.ajax({
                                 type:"post",
-                                url:"Group",
+                                url:"Training",
                                 data:{
-                                    type:"gettopicminor"
+                                    type:"gettopicminorbytopicmain_id",
+                                    topicmain_id:topicmain_id
                                 },
                                 success:function(msg){
+                                    
                                     $("#add_topicminor_id").empty();
-                               
                                     $("#add_topicminor_id").append(msg);
                                     $("#add_topicminor_id").select2();
+                                    getcourse()
                                 }
                             })
                         }	
@@ -315,13 +291,9 @@
                                     type:"gettablegroup"
                                 },
                                 success:function(msg){
-                                    
-        
-                                    
                                     $("#mytable").empty();
                                     $("#mytable").html(msg);
                                     $("#table_group").DataTable();
-                                    
                                 }
                             })
                         }
@@ -334,7 +306,7 @@
                                     type:"addgroup",
                                     topicmain_id :$("#add_topicmain_id").val(),
                                     topicminor_id :$("#add_topicminor_id").val(),
-                                    course_name:$("#add_course_name").val()
+                                    course_id:$("#add_course_id").val()
                                 },
                                 success:function(msg){
                                     if(msg == 'true'){
@@ -367,10 +339,20 @@
                             $("#datamain").addClass("active");
                             
                             gettopicmain()
-                            gettopicminor()
-                        
+                            
+                            
                             gettablegroup()
                             
+                            $("#add_topicmain_id").on('input', function() {
+                                gettopicminor()
+                            });
+                            
+    
+                            $("#add_topicminor_id").on('input', function() {
+                           
+                                getcourse()
+                            });
+    
                         })
                     </script>
                 </div><!-- /.container-fluid -->

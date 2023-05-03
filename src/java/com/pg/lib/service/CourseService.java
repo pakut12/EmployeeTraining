@@ -146,7 +146,7 @@ public class CourseService {
         List<ET_Course> list = new ArrayList();
         try {
 
-            String sql = "SELECT * FROM et_course WHERE course_id >99";
+            String sql = "SELECT * FROM et_course";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();

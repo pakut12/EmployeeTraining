@@ -74,12 +74,7 @@
                                 <p>ข้อมูลหลักสูตร</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="managemain.jsp" class="nav-link" id="datamain">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ข้อมูลกลุ่ม</p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
                 <li class="nav-item " id="listtraining">
@@ -93,9 +88,9 @@
                     <ul class="nav nav-treeview">
                         
                         <li class="nav-item">
-                            <a href="managemain.jsp" class="nav-link" id="datamain">
+                            <a href="managetraining.jsp" class="nav-link" id="datamain">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>ข้อมูลกลุ่ม</p>
+                                <p>ข้อมูลฝึกอบรม</p>
                             </a>
                         </li>
                     </ul>
