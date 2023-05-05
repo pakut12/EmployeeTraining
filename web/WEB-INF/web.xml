@@ -29,6 +29,10 @@
         <servlet-name>Training</servlet-name>
         <servlet-class>com.pg.lib.Servlet.Training</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Employee</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.Employee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
@@ -56,6 +60,10 @@
     <servlet-mapping>
         <servlet-name>Training</servlet-name>
         <url-pattern>/Training</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Employee</servlet-name>
+        <url-pattern>/Employee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

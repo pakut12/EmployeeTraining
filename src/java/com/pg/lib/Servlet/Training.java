@@ -68,6 +68,26 @@ public class Training extends HttpServlet {
                 }
 
 
+            } else if (type.equals("addtraining")) {
+                try {
+                    String topicmain_id = request.getParameter("add_topicmain_id").trim();
+                    String topicminor_id = request.getParameter("add_topicminor_id").trim();
+                    String course_id = request.getParameter("add_course_id").trim();
+                    String company = request.getParameter("add_company").trim();
+                    String expenses = request.getParameter("add_expenses").trim();
+                    String date = request.getParameter("add_date").trim();
+                    String year = request.getParameter("add_year").trim();
+                    String address = request.getParameter("add_address").trim();
+                    String hour = request.getParameter("add_hour").trim();
+                    String[] listemployeeid =  request.getParameter("listemployeeid").trim().split(",");
+
+
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
 
