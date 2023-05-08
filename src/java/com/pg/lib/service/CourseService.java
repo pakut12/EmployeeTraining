@@ -49,7 +49,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -81,7 +81,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -105,7 +105,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -134,7 +134,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -162,7 +162,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -197,7 +197,7 @@ public class CourseService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 

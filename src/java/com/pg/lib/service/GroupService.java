@@ -22,7 +22,7 @@ public class GroupService {
 
     public static Boolean updategroup(String group_id, String topicmain_id, String topicminor_id, String group_course_name) throws SQLException {
 
-        
+
         Boolean status = false;
 
         try {
@@ -43,7 +43,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -56,8 +56,8 @@ public class GroupService {
 
         try {
             String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id where a.group_id = ?";
-            
-            
+
+
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
@@ -77,7 +77,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -90,7 +90,7 @@ public class GroupService {
 
         try {
             String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id";
-            
+
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -109,7 +109,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -131,7 +131,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -149,7 +149,7 @@ public class GroupService {
         if (topicminor_id.isEmpty()) {
             topicminor_id = "99";
         }
-      
+
         try {
             String sql = "INSERT INTO et_group (group_id,group_topicmain_id,group_topicminor_id ,group_course_name ) VALUES (?,?,?,?)";
             conn = ConnectDB.getConnectionMysql();
@@ -168,7 +168,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }
@@ -193,7 +193,7 @@ public class GroupService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
         }

@@ -20,6 +20,42 @@ public class ET_Training {
     private String training_employee;
     private String training_date_create;
     private String training_date_modify;
+    private String training_hour;
+    private String training_topicmain;
+    private String training_topminor;
+    private String training_course;
+
+    public String getTraining_course() {
+        return training_course;
+    }
+
+    public void setTraining_course(String training_course) {
+        this.training_course = training_course;
+    }
+
+    public String getTraining_topicmain() {
+        return training_topicmain;
+    }
+
+    public void setTraining_topicmain(String training_topicmain) {
+        this.training_topicmain = training_topicmain;
+    }
+
+    public String getTraining_topminor() {
+        return training_topminor;
+    }
+
+    public void setTraining_topminor(String training_topminor) {
+        this.training_topminor = training_topminor;
+    }
+
+    public String getTraining_hour() {
+        return training_hour;
+    }
+
+    public void setTraining_hour(String training_hour) {
+        this.training_hour = training_hour;
+    }
 
     public String getTraining_address() {
         return training_address;
@@ -100,11 +136,4 @@ public class ET_Training {
     public void setTraining_year(String training_year) {
         this.training_year = training_year;
     }
-    
-    
-    
-    
-    
-    
-    
 }

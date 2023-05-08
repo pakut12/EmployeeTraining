@@ -50,7 +50,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
         }
         return status;
@@ -72,7 +72,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -100,7 +100,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -128,7 +128,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -163,7 +163,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 
@@ -190,7 +190,7 @@ public class TopicminorService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            ConnectDB.closeConnection(conn);
             ps.close();
             rs.close();
 

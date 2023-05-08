@@ -4,12 +4,16 @@
  */
 package com.pg.lib.Servlet;
 
+import com.google.gson.Gson;
 import com.pg.lib.model.ET_Course;
 import com.pg.lib.model.ET_Topicminor;
+import com.pg.lib.model.ET_Training;
+import com.pg.lib.service.EmployeeService;
 import com.pg.lib.service.TrainingService;
 import java.io.*;
 import java.net.*;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -79,10 +83,57 @@ public class Training extends HttpServlet {
                     String year = request.getParameter("add_year").trim();
                     String address = request.getParameter("add_address").trim();
                     String hour = request.getParameter("add_hour").trim();
-                    String[] listemployeeid =  request.getParameter("listemployeeid").trim().split(",");
+                    String[] listemployeeid = request.getParameter("listemployeeid").trim().split(",");
+
+
+                    Boolean CheckTraining = TrainingService.CheckTraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid);
+
+                    if (CheckTraining) {
+                        HashMap statusaddtraining = TrainingService.addtraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid);
+                        if (statusaddtraining.get("status").equals("true")) {
+                            Boolean statusem = EmployeeService.addemployee(listemployeeid, statusaddtraining.get("id").toString());
+                            if (statusem) {
+                                out.print("true");
+                            } else {
+                                out.print("false3");
+                            }
+
+                        } else {
+                            out.print("false2");
+                        }
+                    } else {
+                        out.print("false1");
+                    }
 
 
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (type.equals("getdatatraining")) {
+                try {
+                    int draw = Integer.parseInt(request.getParameter("draw"));
+                    int start = Integer.parseInt(request.getParameter("start"));
+                    int length = Integer.parseInt(request.getParameter("length"));
+                    String searchValue = request.getParameter("search[value]");
+                    String orderColumn = request.getParameter("order[0][column]");
+                    String orderDir = request.getParameter("order[0][dir]");
+
+                    List<ET_Training> list = TrainingService.gettabletraining(start,length);
+
+                    System.out.println(list);
+
+                    Gson gson = new Gson();
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("draw", draw);
+                    obj.put("recordsTotal", TrainingService.gettotletabletraining());
+                    obj.put("recordsFiltered", 1000);
+                    obj.put("data", gson.toJsonTree(list));
+
+                    response.setContentType("application/json");
+                    response.getWriter().write(obj.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();

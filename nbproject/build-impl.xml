@@ -516,9 +516,11 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy-ear-war file="${file.reference.mysql-connector-java-5.0.2.jar}" propname="included.lib.file.reference.mysql-connector-java-5.0.2.jar.X"/>
         <basename file="${file.reference.org.json.jar}" property="included.lib.file.reference.org.json.jar"/>
         <copy-ear-war file="${file.reference.org.json.jar}" propname="included.lib.file.reference.org.json.jar.X"/>
+        <basename file="${file.reference.gson-2.8.2.jar}" property="included.lib.file.reference.gson-2.8.2.jar"/>
+        <copy-ear-war file="${file.reference.gson-2.8.2.jar}" propname="included.lib.file.reference.gson-2.8.2.jar.X"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${included.lib.file.reference.jdbc-oracle.jar} ${included.lib.file.reference.mysql-connector-java-5.0.2.jar} ${included.lib.file.reference.org.json.jar} "/>
+            <attribute name="Class-Path" value="${included.lib.file.reference.jdbc-oracle.jar} ${included.lib.file.reference.mysql-connector-java-5.0.2.jar} ${included.lib.file.reference.org.json.jar} ${included.lib.file.reference.gson-2.8.2.jar} "/>
         </manifest>
         <delete dir="${dist.ear.dir}/temp"/>
     </target>
@@ -526,6 +528,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy file="${file.reference.jdbc-oracle.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${file.reference.mysql-connector-java-5.0.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${file.reference.org.json.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copy file="${file.reference.gson-2.8.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" name="do-ear-dist">
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>

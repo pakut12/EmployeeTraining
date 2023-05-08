@@ -86,9 +86,8 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        
                         <li class="nav-item">
-                            <a href="managetraining.jsp" class="nav-link" id="datamain">
+                            <a href="managetraining.jsp" class="nav-link" id="datatraining">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ข้อมูลฝึกอบรม</p>
                             </a>

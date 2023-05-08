@@ -46,18 +46,18 @@
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลกลุ่ม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลฝึกอบรม</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <form id="myformadd"> 
+                                    <form id="myformadd" > 
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" name="add_topicmain_id">
+                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" name="add_topicmain_id" required>
                                                         
                                                     </select>
                                                 </div>
@@ -65,7 +65,7 @@
                                             <div class="col-4">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_topicminor_id" name="add_topicminor_id" style="width: 100%">
+                                                    <select class="form-control form-control-sm text-center" id="add_topicminor_id" name="add_topicminor_id" style="width: 100%" required>
                                                         
                                                     </select>
                                                 </div>
@@ -73,7 +73,7 @@
                                             <div class="col-4">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_course_id" name="add_course_id" style="width: 100%">
+                                                    <select class="form-control form-control-sm text-center" id="add_course_id" name="add_course_id" style="width: 100%" required>
                                                         
                                                     </select>
                                                 </div>
@@ -85,37 +85,37 @@
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">บริษัท</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_company" name="add_company"> 
+                                                    <input class="form-control form-control-sm text-center" type="text" id="add_company" name="add_company" required> 
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ค่าใช้จ่าย</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_expenses" name="add_expenses"> 
+                                                    <input class="form-control form-control-sm text-center" type="text" id="add_expenses" name="add_expenses" required> 
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">วันที่อบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="date" id="add_date" name="add_date"> 
+                                                    <input class="form-control form-control-sm text-center" type="date" id="add_date" name="add_date" required> 
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ปี</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_year" name="add_year"> 
+                                                    <input class="form-control form-control-sm text-center" type="text" id="add_year" name="add_year" required> 
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">สถาบันที่จัดอบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_address" name="add_address"> 
+                                                    <input class="form-control form-control-sm text-center" type="text" id="add_address" name="add_address" required>  
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">ชั่วโมง</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_hour" name="add_hour"> 
+                                                    <input class="form-control form-control-sm text-center" type="text" id="add_hour" name="add_hour" required> 
                                                 </div>
                                             </div>
                                         </div>
@@ -149,6 +149,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary" onclick="addTraining()">Save</button>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -158,7 +159,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลจัดกลุ่ม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลฝึกอบรม</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -206,7 +207,22 @@
                                 <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
-                                
+                                <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
+                                    <thead>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -217,6 +233,17 @@
                         
                         const employeelist = [];
                     
+    
+                        function ClearInput(){
+                            employeelist.length = [];
+                            $("#myformadd input").val("");
+                            $("#employee_id").val("");
+                            gettopicmain()
+                            $("#myformadd select").empty();
+                            
+                            
+                        }
+    
                         function getcourse(){
                             var topicmain_id = $("#add_topicmain_id").val(); 
                             var topicminor_id = $("#add_topicminor_id").val(); 
@@ -379,6 +406,98 @@
                         }
 
 
+                        function gettabletraining(){
+                            var table = $("#table_training").DataTable({
+                                serverSide: true,
+                                ajax: {
+                                    type:"post",
+                                    url:"Training",
+                                    data:{
+                                        type:"getdatatraining" 
+                                    },
+                                    dataSrc:function(json){
+                                        var data = JSON.parse(json.data)
+                                        var arr = []
+                                        
+                                        $.each(data,function(k,v){
+                                            var result = {
+                                                training_address : v.training_address,
+                                                training_company :  v.training_company,
+                                                training_datetraining :  v.training_datetraining,
+                                                training_expenses :  v.training_expenses,
+                                                training_hour :  v.training_hour,
+                                                training_id :  v.training_id,
+                                                training_topicmain :  v.training_topicmain,
+                                                training_topminor :  v.training_topminor,
+                                                training_year :  v.training_year,
+                                                training_course:v.training_course,
+                                                btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="edit_customer('+v.training_id+')" id="bt_edit">เเก้ไข</button>',
+                                                btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="del_customer('+v.training_id+')" id="bt_del">ลบ</button>'
+                                            }
+                                            arr.push(result);
+                             
+                                        })
+                                        return arr
+                                    }
+                                },
+                                columns: [
+                                    { 
+                                        title: 'รหัส',
+                                        data: "training_id"
+                                    },
+                                    { 
+                                        title: 'บริษัท',
+                                        data: "training_company"
+                                    },
+                                    { 
+                                        title: 'ปี', 
+                                        data: "training_year"
+                                    },
+                                    { 
+                                        title: 'ชั้วโมง', 
+                                        data: "training_hour"
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" },
+                                    { 
+                                        title: 'ค่าใช้จ่าย',
+                                        data: "training_expenses" },
+                                    { 
+                                        title: 'สถานที่จัดอบรม', 
+                                        data:"training_address"
+                                                 
+                                    },
+                                    { 
+                                        title: 'หมวดหลัก', 
+                                        data: "training_topicmain"
+                                    },
+                                    { 
+                                        title: 'หมวดย่อย',
+                                        data: "training_topminor" 
+                                    },
+                                    {
+                                        title: 'หลักสูตร',
+                                        data: "training_course" 
+                                    },
+                                    { 
+                                        title: 'เเก้ไข',
+                                        data: "btn_edit"
+                                    },
+                                    { 
+                                        title: 'ลบ',
+                                        data: "btn_del"
+                                    }
+                                    
+                                ],
+                                bDestroy: true,
+                                scrollX:true       
+                            })
+                            
+        
+                        }
+
+
                         function addTraining(){
                             var form = $("#myformadd").serialize()
                             var numlist = employeelist.length-1
@@ -389,14 +508,37 @@
                             form += "&listemployeeid=" + listemployeeid
                             form += "&type=addtraining"
                             
-                            console.log(form)
-                            
                             $.ajax({
                                 type:"post",
                                 url:"Training",
                                 data:form,
                                 success:function(msg){
-                                    console.log(msg)
+                                    if(msg == "true"){
+                                        Swal.fire({
+                                            icon:"success",
+                                            title:"บันทึก",
+                                            text:"บันทึกสำเร็จ"
+                                        })
+                                    }else if(msg == "false1"){
+                                        Swal.fire({
+                                            icon:"error",
+                                            title:"บันทึก",
+                                            text:"บันทึกไม่สำเร็จ : มีข้อมูลเเล้ว "
+                                        })
+                                    }else if(msg == "false2"){
+                                        Swal.fire({
+                                            icon:"error",
+                                            title:"บันทึก",
+                                            text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลฝึกอบรมไม่สำเร็จ"
+                                        })
+                                    }else if(msg == "false3"){
+                                        Swal.fire({
+                                            icon:"error",
+                                            title:"บันทึก",
+                                            text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
+                                        })
+                                    }
+                                    ClearInput()
                                 }
                             })
         
@@ -405,13 +547,20 @@
 
    
                         $(document).ready(function(){
+                        
+                            gettabletraining()
+        
+        
+        
                             $("#adddata").click(function (){
+                                ClearInput()
+                                
                                 $("#modal_addtraining").modal('show')
                             })
                             
-                            $("#listdata").addClass("menu-is-opening menu-open");
-                            $("#pagedata").addClass("active");
-                            $("#datamain").addClass("active");
+                            $("#listtraining").addClass("menu-is-opening menu-open");
+                            $("#pagetraining").addClass("active");
+                            $("#datatraining").addClass("active");
                             
                             gettopicmain()
                             
@@ -419,7 +568,7 @@
                                 gettopicminor()
                             });
                             
-    
+
                             $("#add_topicminor_id").on('input', function() {
                                 getcourse()
                             });
