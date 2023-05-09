@@ -25,11 +25,75 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
+    public static Boolean deltraining(String training_id) throws SQLException {
+
+        Boolean status = false;
+        try {
+            String sql = "DELETE FROM et_training WHERE training_id = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, training_id);
+
+            if (ps.executeUpdate() > 0) {
+                status = true;
+            } else {
+                status = false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+        }
+        return status;
+    }
+
+    public static List<ET_Training> getdatatrainingbyid(String id) throws SQLException {
+        List<ET_Training> list = new ArrayList<ET_Training>();
+
+        try {
+            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE a.training_id = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ET_Training training = new ET_Training();
+
+                training.setTraining_id(rs.getString("training_id"));
+                training.setTraining_company(rs.getString("training_company"));
+                training.setTraining_expenses(rs.getString("training_expenses"));
+                training.setTraining_datetraining(rs.getString("training_datetraining"));
+                training.setTraining_year(rs.getString("training_year"));
+                training.setTraining_hour(rs.getString("training_hour"));
+                training.setTraining_address(rs.getString("training_address"));
+                training.setTraining_topicmain_id(rs.getString("topicmain_id"));
+                training.setTraining_topicmain(rs.getString("topicmain_name"));
+                training.setTraining_topminor_id(rs.getString("topicminor_id"));
+                training.setTraining_topminor(rs.getString("topicminor_name"));
+                training.setTraining_course(rs.getString("group_course_name"));
+
+                list.add(training);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return list;
+    }
+
     public static Boolean CheckTraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour, String[] listemployeeid) throws SQLException {
         Boolean status = false;
         String groupid = Checkidgroup(topicmain_id, topicminor_id, course_id);
         try {
-            String sql = "SELECT COUNT(*) FROM et_training WHERE training_company = ? AND training_year = ? AND training_hour = ? AND training_datetraining = ? AND training_expenses = ? AND training_address = ? AND training_groupid = ? and training_date_create =?";
+            String sql = "SELECT COUNT(*) FROM et_training WHERE training_company = ? AND training_year = ? AND training_hour = ? AND training_datetraining = ? AND training_expenses = ? AND training_address = ? AND training_groupid = ? ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, company);
@@ -39,7 +103,7 @@ public class TrainingService {
             ps.setString(5, expenses);
             ps.setString(6, address);
             ps.setString(7, groupid);
-            ps.setString(8, getdatetoday());
+
 
             rs = ps.executeQuery();
 
@@ -91,15 +155,76 @@ public class TrainingService {
         return totle;
     }
 
-    public static List<ET_Training> gettabletraining(int start, int length) throws SQLException {
-        List<ET_Training> listtraining = new ArrayList<ET_Training>();
+    public static int getfilteredtabletraining(String searchValue) throws SQLException {
+        int totle = 0;
         try {
-            String sql = "SELECT a.training_id,a.training_company,a.training_year,a.training_hour,a.training_datetraining,a.training_expenses,a.training_address,c.topicmain_name,d.topicminor_name,b.group_course_name FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id INNER JOIN et_employee e on e.training_id = a.training_id GROUP BY a.training_id,a.training_company,a.training_year,a.training_hour,a.training_datetraining,a.training_expenses,a.training_address,c.topicmain_name,d.topicminor_name limit ?,? ";
+            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE " +
+                    "a.training_company LIKE ? OR " +
+                    "a.training_year LIKE ? OR " +
+                    "a.training_hour LIKE ? OR " +
+                    "a.training_expenses LIKE ? OR " +
+                    "a.training_address LIKE ? OR " +
+                    "c.topicmain_name LIKE ? OR " +
+                    "d.topicminor_name LIKE ? OR " +
+                    "b.group_course_name LIKE ?";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, start);
-            ps.setInt(2, start + length);
+            ps.setString(1, "%" + searchValue + "%");
+            ps.setString(2, "%" + searchValue + "%");
+            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(4, "%" + searchValue + "%");
+            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+            ps.setString(8, "%" + searchValue + "%");
+
             rs = ps.executeQuery();
+
+            while (rs.next()) {
+                totle = rs.getInt("COUNT(*)");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return totle;
+    }
+
+    public static List<ET_Training> gettabletraining(int start, int length, String searchValue) throws SQLException {
+        List<ET_Training> listtraining = new ArrayList<ET_Training>();
+        try {
+            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE " +
+                    "a.training_company LIKE ? OR " +
+                    "a.training_year LIKE ? OR " +
+                    "a.training_hour LIKE ? OR " +
+                    "a.training_expenses LIKE ? OR " +
+                    "a.training_address LIKE ? OR " +
+                    "c.topicmain_name LIKE ? OR " +
+                    "d.topicminor_name LIKE ? OR " +
+                    "b.group_course_name LIKE ? LIMIT ?,?";
+
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + searchValue + "%");
+            ps.setString(2, "%" + searchValue + "%");
+            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(4, "%" + searchValue + "%");
+            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+            ps.setString(8, "%" + searchValue + "%");
+            ps.setInt(9, start);
+            ps.setInt(10, start + length);
+            rs = ps.executeQuery();
+
+            System.out.println(searchValue);
+            System.out.println(start);
+            System.out.println(start + length);
 
             while (rs.next()) {
                 ET_Training training = new ET_Training();
@@ -115,7 +240,6 @@ public class TrainingService {
                 training.setTraining_course(rs.getString("group_course_name"));
 
                 listtraining.add(training);
-
             }
 
         } catch (Exception e) {
@@ -125,7 +249,6 @@ public class TrainingService {
             ps.close();
             rs.close();
         }
-
         return listtraining;
     }
 
@@ -227,7 +350,7 @@ public class TrainingService {
         List<ET_Topicminor> listminor = new ArrayList<ET_Topicminor>();
 
         try {
-            String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id where group_topicmain_id = ?";
+            String sql = "SELECT b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.group_topicmain_id = ? GROUP BY b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, topicmain_id);
@@ -276,5 +399,39 @@ public class TrainingService {
         }
 
         return listcourse;
+    }
+
+    public static Boolean updatetraining(String edit_training_id, String edit_topicmain_id, String edit_topicminor_id, String edit_course_id, String edit_company, String edit_expenses, String edit_date, String edit_year, String edit_address, String edit_hour) throws SQLException {
+        Boolean status = false;
+        try {
+            String groupid = Checkidgroup(edit_topicmain_id, edit_topicminor_id, edit_course_id);
+            String sql = "UPDATE et_training SET training_company = ?,training_year = ?,training_hour = ?, training_datetraining = ?,training_expenses = ?,training_address = ?,training_groupid = ?,training_date_modify = ? WHERE training_id = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, edit_company);
+            ps.setString(2, edit_year);
+            ps.setString(3, edit_hour);
+            ps.setString(4, edit_date);
+            ps.setString(5, edit_expenses);
+            ps.setString(6, edit_address);
+            ps.setString(7, groupid);
+            ps.setString(8, getdatetoday());
+            ps.setString(9, edit_training_id);
+
+            if (ps.executeUpdate() > 0) {
+                status = true;
+            } else {
+                status = false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return status;
     }
 }

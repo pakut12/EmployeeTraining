@@ -24,9 +24,27 @@ public class ET_Training {
     private String training_topicmain;
     private String training_topminor;
     private String training_course;
+    private String training_topicmain_id;
+    private String training_topminor_id;
 
     public String getTraining_course() {
         return training_course;
+    }
+
+    public String getTraining_topicmain_id() {
+        return training_topicmain_id;
+    }
+
+    public void setTraining_topicmain_id(String training_topicmain_id) {
+        this.training_topicmain_id = training_topicmain_id;
+    }
+
+    public String getTraining_topminor_id() {
+        return training_topminor_id;
+    }
+
+    public void setTraining_topminor_id(String training_topminor_id) {
+        this.training_topminor_id = training_topminor_id;
     }
 
     public void setTraining_course(String training_course) {

@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="text-center">
-                                                <input class="form-control form-control-sm text-center" type="text" id="employee_id"> 
+                                                <input class="form-control form-control-sm text-center" type="text" id="employee_id_add"> 
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -139,7 +139,7 @@
                                     <div class="row mt-3">
                                         
                                         <div class="col-12">
-                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee" >
+                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_add" >
                                                 
                                             </table>
                                         </div>
@@ -155,8 +155,8 @@
                         </div>
                     </div>
                     
-                    <div class="modal fade" id="modal_editgroup"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                    <div class="modal fade" id="modal_edittraining"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลฝึกอบรม</h5>
@@ -165,34 +165,104 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">เลขที่</label>
-                                        <input class="form-control form-control-sm text-center" id="edit_main_id" disabled>
+                                    <form id="myformedit" > 
+                                        <input class="" type="hidden" id="edit_training_id" name="edit_training_id" > 
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id" name="edit_topicmain_id" required>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                                    <select class="form-control form-control-sm text-center" id="edit_topicminor_id" name="edit_topicminor_id" style="width: 100%" required>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                                    <select class="form-control form-control-sm text-center" id="edit_course_id" name="edit_course_id" style="width: 100%" required>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">บริษัท</label>
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_company" name="edit_company" required> 
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ค่าใช้จ่าย</label>
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_expenses" name="edit_expenses" required> 
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">วันที่อบรม</label>
+                                                    <input class="form-control form-control-sm text-center" type="date" id="edit_date" name="edit_date" required> 
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ปี</label>
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_year" name="edit_year" required> 
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">สถาบันที่จัดอบรม</label>
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_address" name="edit_address" required>  
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">ชั่วโมง</label>
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_hour" name="edit_hour" required> 
+                                                </div>
+                                            </div>
+                                        </div>
                                         
+                                    </form>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-center">
+                                                <input class="form-control form-control-sm text-center" type="text" id="employee_id_edit"> 
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-left">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="add_employee_edit()" >Add</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id">
-                                            
-                                        </select>
+                                    <div class="row mt-3">
                                         
+                                        <div class="col-12">
+                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_edit" >
+                                                
+                                            </table>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                        <select class="form-control form-control-sm text-center" id="edit_topicminor_id" style="width: 100%">
-                                            
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <select class="form-control form-control-sm text-center" id="edit_course_id" style="width: 100%">
-                                            
-                                        </select>
-                                    </div>
+                                    
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="updategroup()">Save</button>
+                                    <button type="button" class="btn btn-primary" onclick="updatetraining()">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -233,15 +303,13 @@
                         
                         const employeelist = [];
                     
-    
                         function ClearInput(){
                             employeelist.length = [];
                             $("#myformadd input").val("");
-                            $("#employee_id").val("");
+                            $("#employee_id_add").val("");
                             gettopicmain()
                             $("#myformadd select").empty();
-                            
-                            
+                            $("#table_employee_add").empty();
                         }
     
                         function getcourse(){
@@ -274,7 +342,6 @@
                                 },
                                 success:function(msg){
                                     $("#add_topicmain_id").empty();
-                                  
                                     $("#add_topicmain_id").append(msg);
                                     $("#add_topicmain_id").select2();
                                 }
@@ -303,7 +370,7 @@
                         }	
                         
                         function getemployeebyid(){
-                            var table = $("#table_employee").DataTable({
+                            var table = $("#table_employee_add").DataTable({
                                 data:employeelist,
                                 columns: [
                                     { 
@@ -370,7 +437,7 @@
                         }
 
                         function addemployeebyid(){
-                            var id = $("#employee_id").val();
+                            var id = $("#employee_id_add").val();
                             
                             $.ajax({
                                 type:"post",
@@ -400,10 +467,407 @@
                                     
                                     employeelist.push(employee)
                                     getemployeebyid()
-                                 
+                                    $("#employee_id_add").val("");
                                 }
                             })
                         }
+                        function add_employee_edit(){
+                            var t_id = $("#edit_training_id").val();
+                            var e_id = $("#employee_id_edit").val();
+                        
+                            $.ajax({
+                                type:"post",
+                                url:"Employee",
+                                data:{
+                                    type:"addemployeebyid",
+                                    training_id:t_id,
+                                    employee_id:e_id
+                                },
+                                success:function(msg){
+                                    console.log(msg)
+                                    $.ajax({
+                                        type:"post",
+                                        url:"Training",
+                                        data:{
+                                            type:"getdatatrainingbyid",
+                                            training_id:t_id
+                                        },
+                                        success:function(msg){
+                                            var js =  JSON.parse(msg);
+                                            console.log(js)
+                                            $("#table_employee_edit").DataTable({
+                                                data:js.listem,
+                                                columns: [
+                                                    { 
+                                                        title: 'รหัส',
+                                                        data: "employee_id"
+                                                    },
+                                                    { 
+                                                        title: 'เลขบัตรประชาชน',
+                                                        data: "employee_idcard"
+                                                    },
+                                                    { 
+                                                        title: 'คำหน้า', 
+                                                        data: "employee_prefixdesc"
+                                                    },
+                                                    { 
+                                                        title: 'ชื่อ', 
+                                                        data: "employee_fname"
+                                                    },
+                                                    { 
+                                                        title: 'สกุล', 
+                                                        data: "employee_lname" },
+                                                    { 
+                                                        title: 'ตำเเหน่ง',
+                                                        data: "employee_posiddesc" },
+                                                    { 
+                                                        title: 'ระดับงาน', 
+                                                        data:"employee_deptdesc"
+                                                 
+                                                    },
+                                                    { 
+                                                        title: 'หน่วยงาน', 
+                                                        data: "employee_deptdesc"
+                                                    },
+                                                    { 
+                                                        title: 'CT',
+                                                        data: "employee_ct" 
+                                                    },
+                                                    {
+                                                        title: 'วัน/เดือน/ปี เกิด',
+                                                        data: "employee_deptdesc" 
+                                                    },
+                                                    { 
+                                                        title: 'วันเริ่มงาน',
+                                                        data: "employee_startdate"
+                                                    },
+                                                    { 
+                                                        title: 'ลบ',
+                                                        data: "btn_del"
+                                                    }
+                                          
+                                                ],
+                                     
+                                       
+                                                bDestroy: true
+                                        
+                                            })
+                                        }
+                                    })
+                                   
+                                }
+                            })
+                            
+
+                        }
+
+
+                        function del_employee_edit(training_id,employee_id){
+                        
+                            $.ajax({
+                                type:"post",
+                                url:"Employee",
+                                data:{
+                                    type:"delemployeebyid",
+                                    training_id:training_id,
+                                    employee_id:employee_id
+                                },
+                                success:function(msg){
+                                    console.log(msg)
+                                    $.ajax({
+                                        type:"post",
+                                        url:"Training",
+                                        data:{
+                                            type:"getdatatrainingbyid",
+                                            training_id:training_id
+                                        },
+                                        success:function(msg){
+                                            var js =  JSON.parse(msg);
+                                            console.log(js)
+                                            
+                                    
+                                            $("#table_employee_edit").DataTable({
+                                                data:js.listem,
+                                                columns: [
+                                                    { 
+                                                        title: 'รหัส',
+                                                        data: "employee_id"
+                                                    },
+                                                    { 
+                                                        title: 'เลขบัตรประชาชน',
+                                                        data: "employee_idcard"
+                                                    },
+                                                    { 
+                                                        title: 'คำหน้า', 
+                                                        data: "employee_prefixdesc"
+                                                    },
+                                                    { 
+                                                        title: 'ชื่อ', 
+                                                        data: "employee_fname"
+                                                    },
+                                                    { 
+                                                        title: 'สกุล', 
+                                                        data: "employee_lname" },
+                                                    { 
+                                                        title: 'ตำเเหน่ง',
+                                                        data: "employee_posiddesc" },
+                                                    { 
+                                                        title: 'ระดับงาน', 
+                                                        data:"employee_deptdesc"
+                                                 
+                                                    },
+                                                    { 
+                                                        title: 'หน่วยงาน', 
+                                                        data: "employee_deptdesc"
+                                                    },
+                                                    { 
+                                                        title: 'CT',
+                                                        data: "employee_ct" 
+                                                    },
+                                                    {
+                                                        title: 'วัน/เดือน/ปี เกิด',
+                                                        data: "employee_deptdesc" 
+                                                    },
+                                                    { 
+                                                        title: 'วันเริ่มงาน',
+                                                        data: "employee_startdate"
+                                                    },
+                                                    { 
+                                                        title: 'ลบ',
+                                                        data: "btn_del"
+                                                    }
+                                          
+                                                ],
+                                     
+                                                
+                                                bDestroy: true
+                                        
+                                            })
+                                        }
+                                    })
+                                   
+                                }
+                            })
+                            
+                        }
+                        
+                        function edit_getcourse(course_name){
+                            var edit_topicmain_id = $("#edit_topicmain_id").val(); 
+                            var edit_topicminor_id = $("#edit_topicminor_id").val(); 
+                     
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"getcoursebytopicminor_id",
+                                    topicmain_id:edit_topicmain_id,
+                                    topicminor_id:edit_topicminor_id
+                                },
+                                success:function(msg){
+                                  
+                                    $("#edit_course_id").empty();
+                                    if(course_name){
+                                        $("#edit_course_id").append('<option value="'+course_name+'">'+course_name+'</option>');
+                                      
+                                    }
+                                    $("#edit_course_id").append(msg);
+                                    $("#edit_course_id").select2();
+                                }
+                            })
+                        }
+                        
+                        function edit_gettopicminor(minor_id,minor_name,course_name){
+                            var edit_topicmain_id = $("#edit_topicmain_id").val();               
+        
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"gettopicminorbytopicmain_id",
+                                    topicmain_id:edit_topicmain_id
+                                },
+                                success:function(msg){
+                                    
+                                    $("#edit_topicminor_id").empty();
+                                    if(minor_id && minor_name){
+                                        $("#edit_topicminor_id").append('<option value="'+minor_id+'">'+minor_name+'</option>');
+                                        edit_getcourse(course_name)
+                                    }
+                                    $("#edit_topicminor_id").append(msg);
+                                    $("#edit_topicminor_id").select2();
+                                    
+                                }
+                            })
+                        }	
+                        
+                        function edit_gettopicmain(main_id,main_name,minor_id,minor_name,course_name){
+                            $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"gettopicmain"
+                                },
+                                success:function(msg){
+                                    $("#edit_topicmain_id").empty();
+                                    $("#edit_topicmain_id").append('<option value="'+main_id+'"  >'+main_name+'</option>');
+                                    $("#edit_topicmain_id").append(msg);
+                                    $("#edit_topicmain_id").select2();
+                                    edit_gettopicminor(minor_id,minor_name,course_name)
+                                }
+                            })
+                
+                        }
+
+                        function updatetraining(){
+                            var form = $("#myformedit").serialize()
+                            form += "&type=updatetraining"
+                         
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:form,
+                                success:function(msg){
+                                    if(msg == "true"){
+                                        Swal.fire({
+                                            title:"เเก้ไข",
+                                            text:"เเก้ไขสำเร็จ",
+                                            icon:"success"
+                                        })
+                                    }else if(msg == "false"){
+                                        Swal.fire({
+                                            title:"เเก้ไข",
+                                            text:"เเก้ไขไม่สำเร็จ",
+                                            icon:"error"
+                                        })
+                                       
+                                    }
+                                    $("#modal_edittraining").modal('hide')
+                                    gettabletraining()
+                                        
+                                }
+                            })
+                   
+        
+        
+        
+                        }
+
+                        function edit_training(id){
+                            $("#modal_edittraining").modal('show')
+                        
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"getdatatrainingbyid",
+                                    training_id:id
+                                },
+                                success:function(msg){
+                                    var js =  JSON.parse(msg);
+                                    console.log(js)
+                                    
+                                    edit_gettopicmain(js.training_topicmain_id,js.training_topicmain_name,js.training_topicminor_id,js.training_topicminor_name,js.training_course)
+        
+                                    $("#edit_training_id").val(js.training_id);
+                                    $("#edit_company").val(js.training_company);
+                                    $("#edit_expenses").val(js.training_expenses);
+                                    $("#edit_date").val(js.training_datetraining);
+                                    $("#edit_year").val(js.training_year);
+                                    $("#edit_address").val(js.training_address);
+                                    $("#edit_hour").val(js.training_hour);
+                                    
+                                    $("#table_employee_edit").DataTable({
+                                        data:js.listem,
+                                        columns: [
+                                            { 
+                                                title: 'รหัส',
+                                                data: "employee_id"
+                                            },
+                                            { 
+                                                title: 'เลขบัตรประชาชน',
+                                                data: "employee_idcard"
+                                            },
+                                            { 
+                                                title: 'คำหน้า', 
+                                                data: "employee_prefixdesc"
+                                            },
+                                            { 
+                                                title: 'ชื่อ', 
+                                                data: "employee_fname"
+                                            },
+                                            { 
+                                                title: 'สกุล', 
+                                                data: "employee_lname" },
+                                            { 
+                                                title: 'ตำเเหน่ง',
+                                                data: "employee_posiddesc" },
+                                            { 
+                                                title: 'ระดับงาน', 
+                                                data:"employee_deptdesc"
+                                                 
+                                            },
+                                            { 
+                                                title: 'หน่วยงาน', 
+                                                data: "employee_deptdesc"
+                                            },
+                                            { 
+                                                title: 'CT',
+                                                data: "employee_ct" 
+                                            },
+                                            {
+                                                title: 'วัน/เดือน/ปี เกิด',
+                                                data: "employee_deptdesc" 
+                                            },
+                                            { 
+                                                title: 'วันเริ่มงาน',
+                                                data: "employee_startdate"
+                                            },
+                                            { 
+                                                title: 'ลบ',
+                                                data: "btn_del"
+                                            }
+                                          
+                                        ],
+                                       
+                                        bDestroy: true
+                                        
+                                    })
+                                }
+                            })
+        
+                        }
+
+                        function del_training(id){
+                            
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"deltraining",
+                                    training_id:id
+                                },
+                                success:function(msg){
+                                    if(msg == 'true'){
+                                        Swal.fire({
+                                            icon:"success",
+                                            text:"ลบสำเร็จ",
+                                            title:"ลบ"
+                                        })
+            
+                                    }else if(msg == 'false'){
+                                        Swal.fire({
+                                            icon:"error",
+                                            text:"ลบไม่สำเร็จ",
+                                            title:"ลบ"
+                                        })
+                                    }
+                                    gettabletraining()
+        
+                                }
+                            })
+        
+                        }
+
 
 
                         function gettabletraining(){
@@ -431,8 +895,8 @@
                                                 training_topminor :  v.training_topminor,
                                                 training_year :  v.training_year,
                                                 training_course:v.training_course,
-                                                btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="edit_customer('+v.training_id+')" id="bt_edit">เเก้ไข</button>',
-                                                btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="del_customer('+v.training_id+')" id="bt_del">ลบ</button>'
+                                                btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="edit_training('+v.training_id+')" id="bt_edit">เเก้ไข</button>',
+                                                btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="del_training('+v.training_id+')" id="bt_del">ลบ</button>'
                                             }
                                             arr.push(result);
                              
@@ -490,8 +954,8 @@
                                     }
                                     
                                 ],
-                                bDestroy: true,
-                                scrollX:true       
+                                bDestroy: true
+                                  
                             })
                             
         
@@ -538,7 +1002,9 @@
                                             text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
                                         })
                                     }
+                                    gettabletraining()
                                     ClearInput()
+                                     $("#modal_addtraining").modal('hide')
                                 }
                             })
         
@@ -550,11 +1016,8 @@
                         
                             gettabletraining()
         
-        
-        
                             $("#adddata").click(function (){
                                 ClearInput()
-                                
                                 $("#modal_addtraining").modal('show')
                             })
                             
@@ -568,11 +1031,17 @@
                                 gettopicminor()
                             });
                             
-
                             $("#add_topicminor_id").on('input', function() {
                                 getcourse()
                             });
-    
+                            
+                            $("#edit_topicmain_id").on('input', function() {
+                                edit_gettopicminor()
+                            });
+                            
+                            $("#edit_topicminor_id").on('input', function() {
+                                edit_getcourse()
+                            });
                         })
                     </script>
                 </div><!-- /.container-fluid -->

@@ -47,12 +47,46 @@ public class Employee extends HttpServlet {
                     obj.put("employee_ct", list.get(0).getEmployee_ct());
                     obj.put("employee_startdate", list.get(0).getEmployee_startdate());
 
-                    
+
                     out.print(obj);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
+
+            } else if (type.equals("delemployeebyid")) {
+                try {
+                    String training_id = request.getParameter("training_id").trim();
+                    String employee_id = request.getParameter("employee_id").trim();
+
+                    Boolean status = EmployeeService.delemployeebyid(training_id, employee_id);
+
+                    if (status) {
+                        out.print("true");
+                    } else {
+                        out.print("false");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (type.equals("addemployeebyid")) {
+                try {
+                    String training_id = request.getParameter("training_id").trim();
+                    String employee_id = request.getParameter("employee_id").trim();
+
+                    Boolean status = EmployeeService.addemployeebyid(employee_id, training_id);
+
+                    if (status) {
+                        out.print("true");
+                    } else {
+                        out.print("false");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         } finally {
