@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 /**
  *
  * @author pakutsing
@@ -46,6 +45,38 @@ public class EmployeeService {
             rs.close();
         }
         return primarykey;
+    }
+
+    public static Boolean Chkemployeebyid(String training_id, String employee) throws SQLException {
+        Boolean status = false;
+        int row = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM et_employee WHERE training_id = ? and employee = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, training_id);
+            ps.setString(2, employee);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                row = rs.getInt("COUNT(*)");
+            }
+
+            if (row > 0) {
+                status = false;
+            } else {
+                status = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return status;
     }
 
     public static Boolean addemployeebyid(String employeeid, String training_id) throws SQLException {
@@ -182,7 +213,7 @@ public class EmployeeService {
                 em.setEmployee_startdate(Utility.CoverDate(rs.getString("PWSTARTDATE")));
                 em.setEmployee_birthday(Utility.CoverDate(rs.getString("PWBIRTHDAY")));
                 em.setEmployee_pwgroup(rs.getString("PWGROUP"));
-                
+
                 listemployee.add(em);
             }
 

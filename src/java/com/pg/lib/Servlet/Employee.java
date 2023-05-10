@@ -46,8 +46,8 @@ public class Employee extends HttpServlet {
                         employee_group = "รายวัน";
                     }
 
-                    
-                   
+
+
 
                     JSONObject obj = new JSONObject();
                     obj.put("employee_id", list.get(0).getEmployee_id());
@@ -91,19 +91,26 @@ public class Employee extends HttpServlet {
                     String training_id = request.getParameter("training_id").trim();
                     String employee_id = request.getParameter("employee_id").trim();
 
-                    Boolean status = EmployeeService.addemployeebyid(employee_id, training_id);
+                    Boolean statuschk = EmployeeService.Chkemployeebyid(training_id, employee_id);
 
-                    if (status) {
-                        out.print("true");
+                    if (statuschk) {
+                        Boolean status = EmployeeService.addemployeebyid(employee_id, training_id);
+                        if (status) {
+                            out.print("true");
+                        } else {
+                            out.print("false2");
+                        }
                     } else {
-                        out.print("false");
+                        out.print("false1");
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
+
         } finally {
             out.close();
         }

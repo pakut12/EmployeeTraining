@@ -495,7 +495,21 @@
                                     employee_id:e_id
                                 },
                                 success:function(msg){
-                                    console.log(msg)
+                                     if(msg == "false1"){
+                                        Swal.fire({
+                                            title:"บันทึก",
+                                            text:"บันทึกไม่สำเร็จ : มีรายชื่ออยู่เเล้ว",
+                                            icon:"error"
+                                        }) 
+                                    }else if(msg == "false2"){
+                                        Swal.fire({
+                                            title:"บันทึก",
+                                            text:"บันทึกไม่สำเร็จ",
+                                            icon:"error"
+                                        }) 
+                                    }
+                                    
+        
                                     $("#employee_id_edit").val("");
                                     $.ajax({
                                         type:"post",
