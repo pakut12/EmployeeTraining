@@ -74,6 +74,7 @@ public class TrainingService {
                 training.setTraining_topminor_id(rs.getString("topicminor_id"));
                 training.setTraining_topminor(rs.getString("topicminor_name"));
                 training.setTraining_course(rs.getString("group_course_name"));
+                
 
                 list.add(training);
             }
@@ -89,7 +90,7 @@ public class TrainingService {
         return list;
     }
 
-    public static Boolean CheckTraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour, String[] listemployeeid) throws SQLException {
+    public static Boolean CheckTraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour) throws SQLException {
         Boolean status = false;
         String groupid = Checkidgroup(topicmain_id, topicminor_id, course_id);
         try {
@@ -103,15 +104,12 @@ public class TrainingService {
             ps.setString(5, expenses);
             ps.setString(6, address);
             ps.setString(7, groupid);
-
-
+            
             rs = ps.executeQuery();
 
             int row = 0;
             while (rs.next()) {
                 row = rs.getInt("COUNT(*)");
-                System.out.println(row);
-
             }
 
             if (row > 0) {

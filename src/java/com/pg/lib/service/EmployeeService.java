@@ -9,10 +9,12 @@ import com.pg.lib.model.ET_Employee;
 import com.pg.lib.model.ET_Topicminor;
 import com.pg.lib.model.ET_Training;
 import com.pg.lib.utility.ConnectDB;
+import com.pg.lib.utility.Utility;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 /**
  *
@@ -115,8 +117,8 @@ public class EmployeeService {
         List<ET_Employee> listemployee = new ArrayList<ET_Employee>();
 
         try {
-            String sql = "select * from V_PWEMPLOYEE where PWEMPLOYEE = ?";
-            conn = ConnectDB.getConnection();
+            String sql = "select * from v_pwemployee@l_myhrpg where PWEMPLOYEE = ?";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, employeebyid);
 
@@ -132,7 +134,9 @@ public class EmployeeService {
                 em.setEmployee_posiddesc(rs.getString("PWPOSIDESC"));
                 em.setEmployee_deptdesc(rs.getString("PWDEPTDESC"));
                 em.setEmployee_ct(rs.getString("PWCOST"));
-                em.setEmployee_startdate(rs.getString("PWSTARTDATE"));
+                em.setEmployee_startdate(Utility.CoverDate(rs.getString("PWSTARTDATE")));
+                em.setEmployee_birthday(Utility.CoverDate(rs.getString("PWBIRTHDAY")));
+                em.setEmployee_pwgroup(rs.getString("PWGROUP"));
                 listemployee.add(em);
             }
 
@@ -151,7 +155,7 @@ public class EmployeeService {
         List<ET_Employee> listemployee = new ArrayList<ET_Employee>();
 
         try {
-            String sql = "select * from V_PWEMPLOYEE where PWEMPLOYEE in (";
+            String sql = "select * from v_pwemployee@l_myhrpg where PWEMPLOYEE in (";
             for (int n = 0; n < listem.size(); n++) {
                 if (n < listem.size() - 1) {
                     sql += "'" + listem.get(n).getEmployee_id() + "',";
@@ -161,11 +165,11 @@ public class EmployeeService {
 
             }
 
-            conn = ConnectDB.getConnection();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-               
+
                 ET_Employee em = new ET_Employee();
                 em.setEmployee_id(rs.getString("PWEMPLOYEE"));
                 em.setEmployee_idcard(rs.getString("PWIDCARD"));
@@ -175,7 +179,10 @@ public class EmployeeService {
                 em.setEmployee_posiddesc(rs.getString("PWPOSIDESC"));
                 em.setEmployee_deptdesc(rs.getString("PWDEPTDESC"));
                 em.setEmployee_ct(rs.getString("PWCOST"));
-                em.setEmployee_startdate(rs.getString("PWSTARTDATE"));
+                em.setEmployee_startdate(Utility.CoverDate(rs.getString("PWSTARTDATE")));
+                em.setEmployee_birthday(Utility.CoverDate(rs.getString("PWBIRTHDAY")));
+                em.setEmployee_pwgroup(rs.getString("PWGROUP"));
+                
                 listemployee.add(em);
             }
 

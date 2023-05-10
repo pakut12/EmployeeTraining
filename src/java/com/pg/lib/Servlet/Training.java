@@ -11,6 +11,7 @@ import com.pg.lib.model.ET_Topicminor;
 import com.pg.lib.model.ET_Training;
 import com.pg.lib.service.EmployeeService;
 import com.pg.lib.service.TrainingService;
+import com.pg.lib.utility.Utility;
 import java.io.*;
 import java.net.*;
 
@@ -88,7 +89,7 @@ public class Training extends HttpServlet {
                     String[] listemployeeid = request.getParameter("listemployeeid").trim().split(",");
 
 
-                    Boolean CheckTraining = TrainingService.CheckTraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid);
+                    Boolean CheckTraining = TrainingService.CheckTraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour);
 
                     if (CheckTraining) {
                         HashMap statusaddtraining = TrainingService.addtraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid);
@@ -149,7 +150,15 @@ public class Training extends HttpServlet {
 
                     JSONArray arr = new JSONArray();
 
+
                     for (ET_Employee l : listem) {
+
+                        String employee_group = "";
+                        if (l.getEmployee_pwgroup().equals("M")) {
+                            employee_group = "รายเดือน";
+                        } else if (l.getEmployee_pwgroup().equals("D")) {
+                            employee_group = "รายวัน";
+                        }
 
                         JSONObject objem = new JSONObject();
                         objem.put("employee_id", l.getEmployee_id());
@@ -161,6 +170,9 @@ public class Training extends HttpServlet {
                         objem.put("employee_deptdesc", l.getEmployee_deptdesc());
                         objem.put("employee_ct", l.getEmployee_ct());
                         objem.put("employee_startdate", l.getEmployee_startdate());
+                        objem.put("employee_birthday", l.getEmployee_birthday());
+                        objem.put("employee_employment", employee_group);
+                        objem.put("employee_age",Utility.GetWorkTime(l.getEmployee_startdate()));
                         objem.put("btn_del", "<button class='btn btn-danger btn-sm' type='button' onclick='del_employee_edit(" + id + "," + l.getEmployee_id() + ")' >ลบ</button>");
                         arr.put(objem);
                     }
@@ -180,11 +192,7 @@ public class Training extends HttpServlet {
                     obj.put("training_topicminor_name", list.get(0).getTraining_topminor());
                     obj.put("training_course", list.get(0).getTraining_course());
 
-
-
-
                     obj.put("listem", arr);
-
 
                     out.print(obj);
 
@@ -226,13 +234,18 @@ public class Training extends HttpServlet {
                     String edit_address = request.getParameter("edit_address").trim();
                     String edit_hour = request.getParameter("edit_hour").trim();
 
-                    Boolean statusupdate = TrainingService.updatetraining(edit_training_id, edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour);
 
-                    if (statusupdate) {
-                        out.print("true");
+                    if (TrainingService.CheckTraining(edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour)) {
+                        Boolean statusupdate = TrainingService.updatetraining(edit_training_id, edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour);
+                        if (statusupdate) {
+                            out.print("true");
+                        } else {
+                            out.print("false2");
+                        }
                     } else {
-                        out.print("false");
+                        out.print("false1");
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

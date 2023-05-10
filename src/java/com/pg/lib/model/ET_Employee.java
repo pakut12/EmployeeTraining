@@ -21,6 +21,15 @@ public class ET_Employee {
     private String employee_startdate;
     private String employee_agework;
     private String employee_birthday;
+    private String employee_pwgroup;
+
+    public String getEmployee_pwgroup() {
+        return employee_pwgroup;
+    }
+
+    public void setEmployee_pwgroup(String employee_pwgroup) {
+        this.employee_pwgroup = employee_pwgroup;
+    }
 
     public String getEmployee_agework() {
         return employee_agework;

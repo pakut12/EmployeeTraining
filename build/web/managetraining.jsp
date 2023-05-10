@@ -378,6 +378,10 @@
                                         data: "employee_id"
                                     },
                                     { 
+                                        title: 'การจ้าง',
+                                        data: "employee_employment"
+                                    },
+                                    { 
                                         title: 'เลขบัตรประชาชน',
                                         data: "employee_idcard"
                                     },
@@ -394,12 +398,9 @@
                                         data: "employee_lname" },
                                     { 
                                         title: 'ตำเเหน่ง',
-                                        data: "employee_posiddesc" },
-                                    { 
-                                        title: 'ระดับงาน', 
-                                        data:"employee_deptdesc"
-                                                 
+                                        data: "employee_posiddesc"
                                     },
+                                    
                                     { 
                                         title: 'หน่วยงาน', 
                                         data: "employee_deptdesc"
@@ -410,11 +411,15 @@
                                     },
                                     {
                                         title: 'วัน/เดือน/ปี เกิด',
-                                        data: "employee_deptdesc" 
+                                        data: "employee_birthday" 
                                     },
                                     { 
                                         title: 'วันเริ่มงาน',
                                         data: "employee_startdate"
+                                    },
+                                    { 
+                                        title: 'อายุงาน',
+                                        data: "employee_age"
                                     },
                                     { 
                                         title: 'ลบ',
@@ -435,7 +440,8 @@
                             employeelist.splice(id,1)
                             getemployeebyid()
                         }
-
+                       
+    
                         function addemployeebyid(){
                             var id = $("#employee_id_add").val();
                             
@@ -449,7 +455,7 @@
                                 success:function(msg){
                                     
                                     var js = JSON.parse(msg)
-                                  
+                                    console.log(js)
                                     var employee = {
                                         employee_id:js.employee_id,
                                         employee_idcard:js.employee_idcard,
@@ -461,6 +467,9 @@
                                         employee_startdate:js.employee_startdate,
                                         employee_posiddesc:js.employee_posiddesc,
                                         employee_ct:js.employee_ct,
+                                        employee_birthday:js.employee_birthday,   
+                                        employee_employment:js.employee_employment,
+                                        employee_age:js.employee_age,
                                         employee_btdel:"<button type='button' class='btn btn-danger btn-sm' onclick='delemployeebyid("+(employeelist.length-1)+")'>ลบ</button>"
                                       
                                     }
@@ -471,10 +480,12 @@
                                 }
                             })
                         }
+                        
                         function add_employee_edit(){
                             var t_id = $("#edit_training_id").val();
                             var e_id = $("#employee_id_edit").val();
-                        
+                            
+                            
                             $.ajax({
                                 type:"post",
                                 url:"Employee",
@@ -485,6 +496,7 @@
                                 },
                                 success:function(msg){
                                     console.log(msg)
+                                    $("#employee_id_edit").val("");
                                     $.ajax({
                                         type:"post",
                                         url:"Training",
@@ -495,12 +507,17 @@
                                         success:function(msg){
                                             var js =  JSON.parse(msg);
                                             console.log(js)
+                                            
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
                                                     { 
                                                         title: 'รหัส',
                                                         data: "employee_id"
+                                                    },
+                                                    { 
+                                                        title: 'การจ้าง',
+                                                        data: "employee_employment"
                                                     },
                                                     { 
                                                         title: 'เลขบัตรประชาชน',
@@ -519,11 +536,7 @@
                                                         data: "employee_lname" },
                                                     { 
                                                         title: 'ตำเเหน่ง',
-                                                        data: "employee_posiddesc" },
-                                                    { 
-                                                        title: 'ระดับงาน', 
-                                                        data:"employee_deptdesc"
-                                                 
+                                                        data: "employee_posiddesc"
                                                     },
                                                     { 
                                                         title: 'หน่วยงาน', 
@@ -535,23 +548,28 @@
                                                     },
                                                     {
                                                         title: 'วัน/เดือน/ปี เกิด',
-                                                        data: "employee_deptdesc" 
+                                                        data: "employee_birthday" 
                                                     },
                                                     { 
                                                         title: 'วันเริ่มงาน',
                                                         data: "employee_startdate"
                                                     },
                                                     { 
+                                                        title: 'อายุงาน',
+                                                        data: "employee_age"
+                                                    },
+                                                    { 
                                                         title: 'ลบ',
                                                         data: "btn_del"
-                                                    }
+                                                    },
                                           
                                                 ],
-                                     
-                                       
+                                                scrollCollapse: true,
+                                                scrollX:true,  
                                                 bDestroy: true
                                         
                                             })
+                                           
                                         }
                                     })
                                    
@@ -594,6 +612,10 @@
                                                         data: "employee_id"
                                                     },
                                                     { 
+                                                        title: 'การจ้าง',
+                                                        data: "employee_employment"
+                                                    },
+                                                    { 
                                                         title: 'เลขบัตรประชาชน',
                                                         data: "employee_idcard"
                                                     },
@@ -610,11 +632,7 @@
                                                         data: "employee_lname" },
                                                     { 
                                                         title: 'ตำเเหน่ง',
-                                                        data: "employee_posiddesc" },
-                                                    { 
-                                                        title: 'ระดับงาน', 
-                                                        data:"employee_deptdesc"
-                                                 
+                                                        data: "employee_posiddesc"
                                                     },
                                                     { 
                                                         title: 'หน่วยงาน', 
@@ -626,20 +644,25 @@
                                                     },
                                                     {
                                                         title: 'วัน/เดือน/ปี เกิด',
-                                                        data: "employee_deptdesc" 
+                                                        data: "employee_birthday" 
                                                     },
                                                     { 
                                                         title: 'วันเริ่มงาน',
                                                         data: "employee_startdate"
                                                     },
                                                     { 
+                                                        title: 'อายุงาน',
+                                                        data: "employee_age"
+                                                    },
+                                                    { 
                                                         title: 'ลบ',
                                                         data: "btn_del"
-                                                    }
+                                                    },
                                           
                                                 ],
                                      
-                                                
+                                                scrollCollapse: true,
+                                                scrollX:true, 
                                                 bDestroy: true
                                         
                                             })
@@ -733,10 +756,17 @@
                                             text:"เเก้ไขสำเร็จ",
                                             icon:"success"
                                         })
-                                    }else if(msg == "false"){
+                                    }else if(msg == "false1"){
                                         Swal.fire({
                                             title:"เเก้ไข",
                                             text:"เเก้ไขไม่สำเร็จ",
+                                            icon:"error"
+                                        })
+                                       
+                                    }else if(msg == "false2"){
+                                        Swal.fire({
+                                            title:"เเก้ไข",
+                                            text:"เเก้ไขไม่สำเร็จ : มีข้อมูลอยู่เเล้ว",
                                             icon:"error"
                                         })
                                        
@@ -784,6 +814,10 @@
                                                 data: "employee_id"
                                             },
                                             { 
+                                                title: 'การจ้าง',
+                                                data: "employee_employment"
+                                            },
+                                            { 
                                                 title: 'เลขบัตรประชาชน',
                                                 data: "employee_idcard"
                                             },
@@ -800,11 +834,7 @@
                                                 data: "employee_lname" },
                                             { 
                                                 title: 'ตำเเหน่ง',
-                                                data: "employee_posiddesc" },
-                                            { 
-                                                title: 'ระดับงาน', 
-                                                data:"employee_deptdesc"
-                                                 
+                                                data: "employee_posiddesc"
                                             },
                                             { 
                                                 title: 'หน่วยงาน', 
@@ -816,19 +846,24 @@
                                             },
                                             {
                                                 title: 'วัน/เดือน/ปี เกิด',
-                                                data: "employee_deptdesc" 
+                                                data: "employee_birthday" 
                                             },
                                             { 
                                                 title: 'วันเริ่มงาน',
                                                 data: "employee_startdate"
                                             },
                                             { 
+                                                title: 'อายุงาน',
+                                                data: "employee_age"
+                                            },
+                                            { 
                                                 title: 'ลบ',
                                                 data: "btn_del"
-                                            }
+                                            },
                                           
                                         ],
-                                       
+                                        scrollCollapse: true,
+                                        scrollX:true, 
                                         bDestroy: true
                                         
                                     })
@@ -954,6 +989,8 @@
                                     }
                                     
                                 ],
+                                scrollCollapse: true,
+                                scrollX:true, 
                                 bDestroy: true
                                   
                             })
@@ -1004,7 +1041,7 @@
                                     }
                                     gettabletraining()
                                     ClearInput()
-                                     $("#modal_addtraining").modal('hide')
+                                    $("#modal_addtraining").modal('hide')
                                 }
                             })
         
