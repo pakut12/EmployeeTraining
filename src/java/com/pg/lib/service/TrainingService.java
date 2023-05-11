@@ -53,7 +53,7 @@ public class TrainingService {
         List<ET_Training> list = new ArrayList<ET_Training>();
 
         try {
-            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE a.training_id = ?";
+            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id INNER JOIN et_address e ON e.address_id = a.training_address WHERE a.training_id = ?";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
@@ -68,7 +68,8 @@ public class TrainingService {
                 training.setTraining_datetraining(rs.getString("training_datetraining"));
                 training.setTraining_year(rs.getString("training_year"));
                 training.setTraining_hour(rs.getString("training_hour"));
-                training.setTraining_address(rs.getString("training_address"));
+                training.setTraining_address(rs.getString("address_name"));
+                training.setAddress_id(rs.getString("address_id"));
                 training.setTraining_topicmain_id(rs.getString("topicmain_id"));
                 training.setTraining_topicmain(rs.getString("topicmain_name"));
                 training.setTraining_topminor_id(rs.getString("topicminor_id"));
@@ -132,7 +133,7 @@ public class TrainingService {
     public static int gettotletabletraining() throws SQLException {
         int totle = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id ";
+            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id INNER JOIN et_address e ON e.address_id = a.training_address ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
 
@@ -156,7 +157,7 @@ public class TrainingService {
     public static int getfilteredtabletraining(String searchValue) throws SQLException {
         int totle = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE " +
+            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
                     "a.training_company LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
@@ -196,7 +197,7 @@ public class TrainingService {
     public static List<ET_Training> gettabletraining(int start, int length, String searchValue) throws SQLException {
         List<ET_Training> listtraining = new ArrayList<ET_Training>();
         try {
-            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id WHERE " +
+            String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
                     "a.training_company LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
@@ -232,7 +233,7 @@ public class TrainingService {
                 training.setTraining_hour(rs.getString("training_hour"));
                 training.setTraining_datetraining(rs.getString("training_datetraining"));
                 training.setTraining_expenses(rs.getString("training_expenses"));
-                training.setTraining_address(rs.getString("training_address"));
+                training.setTraining_address(rs.getString("address_name"));
                 training.setTraining_topicmain(rs.getString("topicmain_name"));
                 training.setTraining_topminor(rs.getString("topicminor_name"));
                 training.setTraining_course(rs.getString("group_course_name"));

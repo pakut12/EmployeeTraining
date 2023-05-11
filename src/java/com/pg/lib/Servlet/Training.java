@@ -172,7 +172,8 @@ public class Training extends HttpServlet {
                         objem.put("employee_startdate", l.getEmployee_startdate());
                         objem.put("employee_birthday", l.getEmployee_birthday());
                         objem.put("employee_employment", employee_group);
-                        objem.put("employee_age",Utility.GetWorkTime(l.getEmployee_startdate()));
+
+                        objem.put("employee_age", Utility.GetWorkTime(l.getEmployee_startdate()));
                         objem.put("btn_del", "<button class='btn btn-danger btn-sm' type='button' onclick='del_employee_edit(" + id + "," + l.getEmployee_id() + ")' >ลบ</button>");
                         arr.put(objem);
                     }
@@ -185,7 +186,7 @@ public class Training extends HttpServlet {
                     obj.put("training_year", list.get(0).getTraining_year());
                     obj.put("training_hour", list.get(0).getTraining_hour());
                     obj.put("training_address", list.get(0).getTraining_address());
-
+                    obj.put("training_address_id", list.get(0).getAddress_id());
                     obj.put("training_topicmain_id", list.get(0).getTraining_topicmain_id());
                     obj.put("training_topicmain_name", list.get(0).getTraining_topicmain());
                     obj.put("training_topicminor_id", list.get(0).getTraining_topminor_id());

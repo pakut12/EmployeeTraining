@@ -74,6 +74,12 @@
                                 <p>ข้อมูลหลักสูตร</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="manageaddress.jsp" class="nav-link"  id="dataaddress">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ข้อมูลสถานที่จัดอบรม</p>
+                            </a>
+                        </li>
                         
                     </ul>
                 </li>
@@ -92,6 +98,37 @@
                                 <p>ข้อมูลฝึกอบรม</p>
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a href="managegauge.jsp" class="nav-link" id="datagauge">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ประเมินผลผู้เข้าอบรม</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item " id="listreport">
+                    <a href="#" class="nav-link " id="pagereport">
+                        <i class="nav-icon fas fa fa-file"></i>
+                        <p>
+                            รายงาน
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="managereport.jsp" class="nav-link " id="datareport">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="">แสดงการฝึกอบรมตามหลักสูตร</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="managereport.jsp" class="nav-link " id="datareport">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p class="">แสดงการฝึกอบรมตามรหัสพนักงาน</p>
+                            </a>
+                        </li>
+                        
+                        
                     </ul>
                 </li>
             </ul>

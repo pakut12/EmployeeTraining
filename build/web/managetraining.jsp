@@ -79,7 +79,6 @@
                                                 </div>
                                             </div>
                                             
-                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-2">
@@ -108,8 +107,11 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">สถาบันที่จัดอบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_address" name="add_address" required>  
+                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                    <select class="form-control form-control-sm text-center" id="add_address" name="add_address" style="width: 100%" required>
+                                                        
+                                                    </select>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-2">
@@ -222,8 +224,11 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">สถาบันที่จัดอบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_address" name="edit_address" required>  
+                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                    <select class="form-control form-control-sm text-center" id="edit_address" name="edit_address" style="width: 100%" required>
+                                                        
+                                                    </select>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-2">
@@ -303,6 +308,7 @@
                         
                         const employeelist = [];
                     
+                       
                         function ClearInput(){
                             employeelist.length = [];
                             $("#myformadd input").val("");
@@ -369,6 +375,24 @@
                             })
                         }	
                         
+                        function getaddress(){
+                                         
+                            $.ajax({
+                                type:"post",
+                                url:"Address",
+                                data:{
+                                    type:"getaddress"
+                                },
+                                success:function(msg){
+                                    
+                                    $("#add_address").empty();
+                                    $("#add_address").append(msg);
+                                    $("#add_address").select2();
+                                   
+                                }
+                            })
+                        }                        
+
                         function getemployeebyid(){
                             var table = $("#table_employee_add").DataTable({
                                 data:employeelist,
@@ -455,7 +479,7 @@
                                 success:function(msg){
                                     
                                     var js = JSON.parse(msg)
-                                    console.log(js)
+                                    //console.log(js)
                                     var employee = {
                                         employee_id:js.employee_id,
                                         employee_idcard:js.employee_idcard,
@@ -474,7 +498,33 @@
                                       
                                     }
                                     
-                                    employeelist.push(employee)
+                                    const result = employeelist.find((em) => {
+                                        let chk = null;  
+                                        if(id == em.employee_id){
+                                            chk = true;
+                                        }else{
+                                            chk = false;
+                                        }
+            
+                                        return chk
+                                    });
+                                    
+                                    if(!result){
+                                        employeelist.push(employee);
+                                    }else{
+                                        Swal.fire({
+                                            title:"บันทึก",
+                                            icon:"error",
+                                            text:"บันทึกไม่สำเร็จ : มีรายชื่ออยู่เเล้ว"
+                                        })
+                                    }
+                                    
+                                    /*
+                                    if(result){
+                                        employeelist.push(employee);
+                                    }
+                                     */
+                                    
                                     getemployeebyid()
                                     $("#employee_id_add").val("");
                                 }
@@ -485,7 +535,6 @@
                             var t_id = $("#edit_training_id").val();
                             var e_id = $("#employee_id_edit").val();
                             
-                            
                             $.ajax({
                                 type:"post",
                                 url:"Employee",
@@ -495,7 +544,7 @@
                                     employee_id:e_id
                                 },
                                 success:function(msg){
-                                     if(msg == "false1"){
+                                    if(msg == "false1"){
                                         Swal.fire({
                                             title:"บันทึก",
                                             text:"บันทึกไม่สำเร็จ : มีรายชื่ออยู่เเล้ว",
@@ -522,6 +571,7 @@
                                             var js =  JSON.parse(msg);
                                             console.log(js)
                                             
+        
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
@@ -580,8 +630,10 @@
                                                 ],
                                                 scrollCollapse: true,
                                                 scrollX:true,  
-                                                bDestroy: true
-                                        
+                                                bDestroy: true,
+                                                fixedColumns:   {
+                                                    right: 1
+                                                }
                                             })
                                            
                                         }
@@ -605,7 +657,7 @@
                                     employee_id:employee_id
                                 },
                                 success:function(msg){
-                                    console.log(msg)
+                                    
                                     $.ajax({
                                         type:"post",
                                         url:"Training",
@@ -615,7 +667,7 @@
                                         },
                                         success:function(msg){
                                             var js =  JSON.parse(msg);
-                                            console.log(js)
+                                            
                                             
                                     
                                             $("#table_employee_edit").DataTable({
@@ -677,8 +729,10 @@
                                      
                                                 scrollCollapse: true,
                                                 scrollX:true, 
-                                                bDestroy: true
-                                        
+                                                bDestroy: true,
+                                                fixedColumns:   {
+                                                    right: 1
+                                                }
                                             })
                                         }
                                     })
@@ -691,7 +745,9 @@
                         function edit_getcourse(course_name){
                             var edit_topicmain_id = $("#edit_topicmain_id").val(); 
                             var edit_topicminor_id = $("#edit_topicminor_id").val(); 
-                     
+                            
+                           
+                            
                             $.ajax({
                                 type:"post",
                                 url:"Training",
@@ -705,17 +761,17 @@
                                     $("#edit_course_id").empty();
                                     if(course_name){
                                         $("#edit_course_id").append('<option value="'+course_name+'">'+course_name+'</option>');
-                                      
                                     }
                                     $("#edit_course_id").append(msg);
                                     $("#edit_course_id").select2();
+                                    
                                 }
                             })
                         }
                         
                         function edit_gettopicminor(minor_id,minor_name,course_name){
                             var edit_topicmain_id = $("#edit_topicmain_id").val();               
-        
+                           
                             $.ajax({
                                 type:"post",
                                 url:"Training",
@@ -724,10 +780,12 @@
                                     topicmain_id:edit_topicmain_id
                                 },
                                 success:function(msg){
-                                    
+                                     
                                     $("#edit_topicminor_id").empty();
                                     if(minor_id && minor_name){
                                         $("#edit_topicminor_id").append('<option value="'+minor_id+'">'+minor_name+'</option>');
+                                        edit_getcourse(course_name)
+                                    }else{
                                         edit_getcourse(course_name)
                                     }
                                     $("#edit_topicminor_id").append(msg);
@@ -770,14 +828,14 @@
                                             text:"เเก้ไขสำเร็จ",
                                             icon:"success"
                                         })
-                                    }else if(msg == "false1"){
+                                    }else if(msg == "false2"){
                                         Swal.fire({
                                             title:"เเก้ไข",
                                             text:"เเก้ไขไม่สำเร็จ",
                                             icon:"error"
                                         })
                                        
-                                    }else if(msg == "false2"){
+                                    }else if(msg == "false1"){
                                         Swal.fire({
                                             title:"เเก้ไข",
                                             text:"เเก้ไขไม่สำเร็จ : มีข้อมูลอยู่เเล้ว",
@@ -791,11 +849,29 @@
                                 }
                             })
                    
-        
-        
-        
                         }
 
+
+                        function edit_getaddress(id,name){
+                            $.ajax({
+                                type:"post",
+                                url:"Address",
+                                data:{
+                                    type:"getaddress"
+                                },
+                                success:function(msg){
+                                    let html = msg.replace('<option value="'+id+'"  >'+name+'</option>', "");
+                                   
+                                    $("#edit_address").empty();
+                                    $("#edit_address").append('<option value="'+id+'"  >'+name+'</option>');
+                                    $("#edit_address").append(html);
+                                    $("#edit_address").select2();
+                                   
+                                }
+                            })
+                
+                        }
+                        
                         function edit_training(id){
                             $("#modal_edittraining").modal('show')
                         
@@ -808,8 +884,9 @@
                                 },
                                 success:function(msg){
                                     var js =  JSON.parse(msg);
-                                    console.log(js)
+                                    console.log(js);
                                     
+                                    edit_getaddress(js.training_address_id,js.training_address)
                                     edit_gettopicmain(js.training_topicmain_id,js.training_topicmain_name,js.training_topicminor_id,js.training_topicminor_name,js.training_course)
         
                                     $("#edit_training_id").val(js.training_id);
@@ -878,7 +955,10 @@
                                         ],
                                         scrollCollapse: true,
                                         scrollX:true, 
-                                        bDestroy: true
+                                        bDestroy: true,
+                                        fixedColumns:{
+                                            right: 1
+                                        }
                                         
                                     })
                                 }
@@ -1070,6 +1150,7 @@
                             $("#adddata").click(function (){
                                 ClearInput()
                                 $("#modal_addtraining").modal('show')
+                                getaddress()
                             })
                             
                             $("#listtraining").addClass("menu-is-opening menu-open");
@@ -1091,8 +1172,10 @@
                             });
                             
                             $("#edit_topicminor_id").on('input', function() {
+                                
                                 edit_getcourse()
                             });
+                            
                         })
                     </script>
                 </div><!-- /.container-fluid -->

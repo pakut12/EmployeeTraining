@@ -46,9 +46,6 @@ public class Employee extends HttpServlet {
                         employee_group = "รายวัน";
                     }
 
-
-
-
                     JSONObject obj = new JSONObject();
                     obj.put("employee_id", list.get(0).getEmployee_id());
                     obj.put("employee_idcard", list.get(0).getEmployee_idcard());

@@ -21,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">จัดการข้อมูลหลักสูตร</h1>
+                            <h1 class="m-1">แสดงการฝึกอบรมตามรหัสพนักงาน</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
-                                <li class="breadcrumb-item"><a href="#">ข้อมูล</a></li>
-                                <li class="breadcrumb-item active">จัดการข้อมูลหลักสูตร</li>
+                                <li class="breadcrumb-item"><a href="#">รายงาน</a></li>
+                                <li class="breadcrumb-item active">แสดงการฝึกอบรมตามรหัสพนักงาน</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -40,7 +40,6 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                   
-                    
                     <!-- Modal -->
                     <div class="modal fade" id="modal_addgroup"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

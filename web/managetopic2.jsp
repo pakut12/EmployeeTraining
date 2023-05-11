@@ -274,6 +274,7 @@
             
                         $(document).ready(function(){
                             $("#adddata").click(function (){
+                                $("#add_name").val("")
                                 $("#modal_addtopicminor").modal('show')
                                 gettopicmain()
                             })

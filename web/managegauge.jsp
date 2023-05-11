@@ -21,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">จัดการข้อมูลฝึกอบรม</h1>
+                            <h1 class="m-1">ประเมินผลผู้เข้าอบรม</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
                                 <li class="breadcrumb-item"><a href="#">ฝึกอบรม</a></li>
-                                <li class="breadcrumb-item active">จัดการข้อมูลฝึกอบรม</li>
+                                <li class="breadcrumb-item active">ประเมินผลผู้เข้าอบรม</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -42,120 +42,7 @@
                   
                     
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_addtraining"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลฝึกอบรม</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <form id="myformadd" > 
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" name="add_topicmain_id" required>
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_topicminor_id" name="add_topicminor_id" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_course_id" name="add_course_id" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">บริษัท</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_company" name="add_company" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ค่าใช้จ่าย</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_expenses" name="add_expenses" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">วันที่อบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="date" id="add_date" name="add_date" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ปี</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_year" name="add_year" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_address" name="add_address" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชั่วโมง</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_hour" name="add_hour" required> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="text-center">
-                                                <input class="form-control form-control-sm text-center" type="text" id="employee_id_add"> 
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="text-left">
-                                                <button class="btn btn-success btn-sm" type="button" onclick="addemployeebyid()" >Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        
-                                        <div class="col-12">
-                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_add" >
-                                                
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="addTraining()">Save</button>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
                     
                     <div class="modal fade" id="modal_edittraining"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -225,10 +112,7 @@
                                             <div class="col-2">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">สถานที่จัดอบรม</label>
-                                                    <select class="form-control form-control-sm text-center" id="edit_address" name="edit_address" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                    
+                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_address" name="edit_address" required>  
                                                 </div>
                                             </div>
                                             <div class="col-2">
@@ -278,9 +162,7 @@
                             จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
-                            <div class="text-right mb-3">
-                                <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
-                            </div>
+                            
                             <div class="" id="mytable">
                                 <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
                                     <thead>
@@ -308,7 +190,6 @@
                         
                         const employeelist = [];
                     
-                       
                         function ClearInput(){
                             employeelist.length = [];
                             $("#myformadd input").val("");
@@ -375,24 +256,6 @@
                             })
                         }	
                         
-                        function getaddress(){
-                                         
-                            $.ajax({
-                                type:"post",
-                                url:"Address",
-                                data:{
-                                    type:"getaddress"
-                                },
-                                success:function(msg){
-                                    
-                                    $("#add_address").empty();
-                                    $("#add_address").append(msg);
-                                    $("#add_address").select2();
-                                   
-                                }
-                            })
-                        }                        
-
                         function getemployeebyid(){
                             var table = $("#table_employee_add").DataTable({
                                 data:employeelist,
@@ -571,7 +434,6 @@
                                             var js =  JSON.parse(msg);
                                             console.log(js)
                                             
-        
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
@@ -657,7 +519,7 @@
                                     employee_id:employee_id
                                 },
                                 success:function(msg){
-                                    
+                                    console.log(msg)
                                     $.ajax({
                                         type:"post",
                                         url:"Training",
@@ -667,7 +529,7 @@
                                         },
                                         success:function(msg){
                                             var js =  JSON.parse(msg);
-                                            
+                                            console.log(js)
                                             
                                     
                                             $("#table_employee_edit").DataTable({
@@ -746,7 +608,8 @@
                             var edit_topicmain_id = $("#edit_topicmain_id").val(); 
                             var edit_topicminor_id = $("#edit_topicminor_id").val(); 
                             
-                           
+                            console.log(edit_topicmain_id)
+                            console.log(edit_topicminor_id)
                             
                             $.ajax({
                                 type:"post",
@@ -789,7 +652,7 @@
                                         edit_getcourse(course_name)
                                     }
                                     $("#edit_topicminor_id").append(msg);
-                                    $("#edit_topicminor_id").select2();
+                                  //  $("#edit_topicminor_id").select2();
                                     
                                 }
                             })
@@ -828,14 +691,14 @@
                                             text:"เเก้ไขสำเร็จ",
                                             icon:"success"
                                         })
-                                    }else if(msg == "false2"){
+                                    }else if(msg == "false1"){
                                         Swal.fire({
                                             title:"เเก้ไข",
                                             text:"เเก้ไขไม่สำเร็จ",
                                             icon:"error"
                                         })
                                        
-                                    }else if(msg == "false1"){
+                                    }else if(msg == "false2"){
                                         Swal.fire({
                                             title:"เเก้ไข",
                                             text:"เเก้ไขไม่สำเร็จ : มีข้อมูลอยู่เเล้ว",
@@ -851,27 +714,6 @@
                    
                         }
 
-
-                        function edit_getaddress(id,name){
-                            $.ajax({
-                                type:"post",
-                                url:"Address",
-                                data:{
-                                    type:"getaddress"
-                                },
-                                success:function(msg){
-                                    let html = msg.replace('<option value="'+id+'"  >'+name+'</option>', "");
-                                   
-                                    $("#edit_address").empty();
-                                    $("#edit_address").append('<option value="'+id+'"  >'+name+'</option>');
-                                    $("#edit_address").append(html);
-                                    $("#edit_address").select2();
-                                   
-                                }
-                            })
-                
-                        }
-                        
                         function edit_training(id){
                             $("#modal_edittraining").modal('show')
                         
@@ -884,9 +726,8 @@
                                 },
                                 success:function(msg){
                                     var js =  JSON.parse(msg);
-                                    console.log(js);
+                                    console.log(js)
                                     
-                                    edit_getaddress(js.training_address_id,js.training_address)
                                     edit_gettopicmain(js.training_topicmain_id,js.training_topicmain_name,js.training_topicminor_id,js.training_topicminor_name,js.training_course)
         
                                     $("#edit_training_id").val(js.training_id);
@@ -1150,12 +991,11 @@
                             $("#adddata").click(function (){
                                 ClearInput()
                                 $("#modal_addtraining").modal('show')
-                                getaddress()
                             })
                             
                             $("#listtraining").addClass("menu-is-opening menu-open");
                             $("#pagetraining").addClass("active");
-                            $("#datatraining").addClass("active");
+                            $("#datagauge").addClass("active");
                             
                             gettopicmain()
                             
@@ -1175,7 +1015,6 @@
                                 
                                 edit_getcourse()
                             });
-                            
                         })
                     </script>
                 </div><!-- /.container-fluid -->

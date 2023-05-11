@@ -276,6 +276,7 @@
             
                         $(document).ready(function(){
                             $("#adddata").click(function (){
+                                $("#add_name").val("")
                                 $("#modal_addtopicmain").modal('show')
                             })
                             

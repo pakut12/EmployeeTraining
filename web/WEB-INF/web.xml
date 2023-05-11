@@ -33,7 +33,11 @@
         <servlet-name>Employee</servlet-name>
         <servlet-class>com.pg.lib.Servlet.Employee</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet>
+        <servlet-name>Address</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.Address</servlet-class>
+    </servlet>
+    <servlet><servlet-name>ET_Address</servlet-name><servlet-class>com.pg.lib.model.ET_Address</servlet-class></servlet><servlet><servlet-name>Report</servlet-name><servlet-class>com.pg.lib.Servlet.Report</servlet-class></servlet><servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
     </servlet-mapping>
@@ -64,6 +68,18 @@
     <servlet-mapping>
         <servlet-name>Employee</servlet-name>
         <url-pattern>/Employee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Address</servlet-name>
+        <url-pattern>/Address</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ET_Address</servlet-name>
+        <url-pattern>/ET_Address</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Report</servlet-name>
+        <url-pattern>/Report</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

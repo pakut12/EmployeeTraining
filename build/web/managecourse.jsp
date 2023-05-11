@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control text-center" id="add_course_name" style="width: 100%">
+                                        <input type="text" class="form-control form-control-sm text-center" id="add_course_name" style="width: 100%">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -81,7 +81,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลจัดกลุ่ม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลหลักสูตร</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -108,7 +108,7 @@
                                     
                                     <div class="mb-3">
                                         <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control text-center" id="edit_course_name" style="width: 100%">
+                                        <input type="text" class="form-control form-control-sm text-center" id="edit_course_name" style="width: 100%">
                                         
                                     </div>
                                 </div>
@@ -359,15 +359,16 @@
 
                         $(document).ready(function(){
                             $("#adddata").click(function (){
+                                gettopicmain()
+                                gettopicminor()
+                                $("#add_course_name").val("");
                                 $("#modal_addgroup").modal('show')
                             })
                             
                             $("#listdata").addClass("menu-is-opening menu-open");
                             $("#pagedata").addClass("active");
-                            $("#datamain").addClass("active");
+                            $("#datacourse").addClass("active");
                             
-                            gettopicmain()
-                            gettopicminor()
                         
                             gettablegroup()
                             
