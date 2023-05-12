@@ -47,6 +47,7 @@
                         </p>
                     </a>
                 </li>
+               
                 <li class="nav-item " id="listdata">
                     <a href="#" class="nav-link " id="pagedata">
                         <i class="nav-icon fas fa-database"></i>
@@ -83,6 +84,7 @@
                         
                     </ul>
                 </li>
+           
                 <li class="nav-item " id="listtraining">
                     <a href="#" class="nav-link " id="pagetraining">
                         <i class="nav-icon fas fa-running"></i>
@@ -99,13 +101,14 @@
                             </a>
                         </li>
                          <li class="nav-item">
-                            <a href="managegauge.jsp" class="nav-link" id="datagauge">
+                            <a href="manageevaluation.jsp" class="nav-link" id="dataevaluation">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ประเมินผลผู้เข้าอบรม</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+                
                 <li class="nav-item " id="listreport">
                     <a href="#" class="nav-link " id="pagereport">
                         <i class="nav-icon fas fa fa-file"></i>

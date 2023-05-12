@@ -75,7 +75,7 @@ public class TrainingService {
                 training.setTraining_topminor_id(rs.getString("topicminor_id"));
                 training.setTraining_topminor(rs.getString("topicminor_name"));
                 training.setTraining_course(rs.getString("group_course_name"));
-                
+
 
                 list.add(training);
             }
@@ -105,7 +105,7 @@ public class TrainingService {
             ps.setString(5, expenses);
             ps.setString(6, address);
             ps.setString(7, groupid);
-            
+
             rs = ps.executeQuery();
 
             int row = 0;
@@ -162,7 +162,7 @@ public class TrainingService {
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
                     "a.training_expenses LIKE ? OR " +
-                    "a.training_address LIKE ? OR " +
+                    "e.address_name LIKE ? OR " +
                     "c.topicmain_name LIKE ? OR " +
                     "d.topicminor_name LIKE ? OR " +
                     "b.group_course_name LIKE ?";
@@ -194,36 +194,42 @@ public class TrainingService {
         return totle;
     }
 
-    public static List<ET_Training> gettabletraining(int start, int length, String searchValue) throws SQLException {
+    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date) throws SQLException {
         List<ET_Training> listtraining = new ArrayList<ET_Training>();
         try {
+            String idgroup = Checkidgroup(search_topicmain_id, search_topicminor_id, search_course_id);
+
+
             String sql = "SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
-                    "a.training_company LIKE ? OR " +
+                    "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and " +
+                    "(a.training_company LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
                     "a.training_expenses LIKE ? OR " +
-                    "a.training_address LIKE ? OR " +
+                    "e.address_name LIKE ? OR " +
                     "c.topicmain_name LIKE ? OR " +
                     "d.topicminor_name LIKE ? OR " +
-                    "b.group_course_name LIKE ? LIMIT ?,?";
+                    "b.group_course_name LIKE ?) LIMIT ?,?";
 
+
+      
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + searchValue + "%");
-            ps.setString(2, "%" + searchValue + "%");
-            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(1, "%" +search_topicmain_id+ "%");
+            ps.setString(2, "%" +search_topicminor_id+ "%");
+            ps.setString(3, "%" +search_course_id+ "%");
             ps.setString(4, "%" + searchValue + "%");
             ps.setString(5, "%" + searchValue + "%");
             ps.setString(6, "%" + searchValue + "%");
             ps.setString(7, "%" + searchValue + "%");
             ps.setString(8, "%" + searchValue + "%");
-            ps.setInt(9, start);
-            ps.setInt(10, start + length);
+            ps.setString(9, "%" + searchValue + "%");
+            ps.setString(10, "%" + searchValue + "%");
+            ps.setString(11, "%" + searchValue + "%");
+            ps.setInt(12, start);
+            ps.setInt(13, start + length);
             rs = ps.executeQuery();
 
-            System.out.println(searchValue);
-            System.out.println(start);
-            System.out.println(start + length);
 
             while (rs.next()) {
                 ET_Training training = new ET_Training();

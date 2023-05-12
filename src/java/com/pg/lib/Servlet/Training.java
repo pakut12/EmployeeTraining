@@ -123,7 +123,17 @@ public class Training extends HttpServlet {
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
 
-                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue);
+                    String search_topicmain_id = request.getParameter("search_topicmain_id").trim();
+                    String search_topicminor_id = request.getParameter("search_topicminor_id").trim();
+                    String search_course_id = request.getParameter("search_course_id").trim();
+                    String search_date = request.getParameter("search_date").trim();
+
+                    System.out.println(search_topicmain_id);
+                    System.out.println(search_topicminor_id);
+                    System.out.println(search_course_id);
+                    System.out.println(search_date);
+                    
+                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue,search_topicmain_id,search_topicminor_id,search_course_id,search_date);
 
                     Gson gson = new Gson();
 
@@ -149,8 +159,7 @@ public class Training extends HttpServlet {
                     List<ET_Employee> listem = EmployeeService.getemployeebylistid(listid);
 
                     JSONArray arr = new JSONArray();
-
-
+                    int n = 0;
                     for (ET_Employee l : listem) {
 
                         String employee_group = "";
@@ -159,6 +168,14 @@ public class Training extends HttpServlet {
                         } else if (l.getEmployee_pwgroup().equals("D")) {
                             employee_group = "รายวัน";
                         }
+
+                        String result = "";
+                        if (listid.get(n).getEmployee_result().equals("0")) {
+                            result = "<div class='text-danger'>ไม่ผ่าน</div>";
+                        } else if (listid.get(n).getEmployee_result().equals("1")) {
+                            result = "<div class='text-success'>ผ่าน</div>";
+                        }
+
 
                         JSONObject objem = new JSONObject();
                         objem.put("employee_id", l.getEmployee_id());
@@ -172,10 +189,13 @@ public class Training extends HttpServlet {
                         objem.put("employee_startdate", l.getEmployee_startdate());
                         objem.put("employee_birthday", l.getEmployee_birthday());
                         objem.put("employee_employment", employee_group);
+                        objem.put("employee_result", result);
 
                         objem.put("employee_age", Utility.GetWorkTime(l.getEmployee_startdate()));
                         objem.put("btn_del", "<button class='btn btn-danger btn-sm' type='button' onclick='del_employee_edit(" + id + "," + l.getEmployee_id() + ")' >ลบ</button>");
+
                         arr.put(objem);
+                        n++;
                     }
 
                     JSONObject obj = new JSONObject();

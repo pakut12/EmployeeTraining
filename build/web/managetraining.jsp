@@ -274,10 +274,46 @@
                     </div>
                     
                     <div class="card">
+                        <div class="card-header ">
+                            ค้นหา
+                        </div>
+                        <div class="card-body">
+                            <form id="myformsearch">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label>หมวดหลัก</label>
+                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicmain_id" name="search_topicmain_id" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>หมวดย่อย</label>
+                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicminor_id" name="search_topicminor_id" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>หลักสูตร</label>
+                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_course_id" name="search_course_id" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>วันที่อบรม</label>
+                                        <input class="form-control form-control-sm" type="date" id="search_date" name="search_date"></input> 
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary btm-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
                         <div class="card-header">
                             จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
+                            
                             <div class="text-right mb-3">
                                 <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
                             </div>
@@ -303,7 +339,6 @@
                     </div>
                     
                     
-                    
                     <script>
                         
                         const employeelist = [];
@@ -318,61 +353,121 @@
                             $("#table_employee_add").empty();
                         }
     
-                        function getcourse(){
-                            var topicmain_id = $("#add_topicmain_id").val(); 
-                            var topicminor_id = $("#add_topicminor_id").val(); 
+                        function getcourse(num){
+                            if(num == 1){
+                                var topicmain_id = $("#search_topicmain_id").val(); 
+                                var topicminor_id = $("#search_topicminor_id").val(); 
                      
-                            $.ajax({
-                                type:"post",
-                                url:"Training",
-                                data:{
-                                    type:"getcoursebytopicminor_id",
-                                    topicmain_id:topicmain_id,
-                                    topicminor_id:topicminor_id
-                                },
-                                success:function(msg){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Training",
+                                    data:{
+                                        type:"getcoursebytopicminor_id",
+                                        topicmain_id:topicmain_id,
+                                        topicminor_id:topicminor_id
+                                    },
+                                    success:function(msg){
                                   
-                                    $("#add_course_id").empty();
-                                    $("#add_course_id").append(msg);
-                                    $("#add_course_id").select2();
-                                }
-                            })
+                                        $("#search_course_id").empty();
+                                        $("#search_course_id").append(msg);
+                                        $("#search_course_id").select2();
+                                    }
+                                })
+                            }else if(num == 2){
+                                var topicmain_id = $("#add_topicmain_id").val(); 
+                                var topicminor_id = $("#add_topicminor_id").val(); 
+                     
+                                $.ajax({
+                                    type:"post",
+                                    url:"Training",
+                                    data:{
+                                        type:"getcoursebytopicminor_id",
+                                        topicmain_id:topicmain_id,
+                                        topicminor_id:topicminor_id
+                                    },
+                                    success:function(msg){
+                                  
+                                        $("#add_course_id").empty();
+                                        $("#add_course_id").append(msg);
+                                        $("#add_course_id").select2();
+                                    }
+                                })
+                            }
                         }
                         
-                        function gettopicmain(){
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"gettopicmain"
-                                },
-                                success:function(msg){
-                                    $("#add_topicmain_id").empty();
-                                    $("#add_topicmain_id").append(msg);
-                                    $("#add_topicmain_id").select2();
-                                }
-                            })
+                        function gettopicmain(num){
+                            if(num == 1){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"gettopicmain"
+                                    },
+                                    success:function(msg){
+                                        $("#search_topicmain_id").empty();
+                                        $("#search_topicmain_id").append(msg);
+                                        $("#search_topicmain_id").select2();
+                                    }
+                                })
+                            }else if(num == 2){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"gettopicmain"
+                                    },
+                                    success:function(msg){
+                                        $("#add_topicmain_id").empty();
+                                        $("#add_topicmain_id").append(msg);
+                                        $("#add_topicmain_id").select2();
+                                    }
+                                })
+                            }
+                                            
+                            
                 
                         }	
                         
-                        function gettopicminor(){
-                            var topicmain_id = $("#add_topicmain_id").val();               
+                        function gettopicminor(num){
+                            if(num == 1){
+                                var topicmain_id = $("#search_topicmain_id").val();               
         
-                            $.ajax({
-                                type:"post",
-                                url:"Training",
-                                data:{
-                                    type:"gettopicminorbytopicmain_id",
-                                    topicmain_id:topicmain_id
-                                },
-                                success:function(msg){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Training",
+                                    data:{
+                                        type:"gettopicminorbytopicmain_id",
+                                        topicmain_id:topicmain_id
+                                    },
+                                    success:function(msg){
                                     
-                                    $("#add_topicminor_id").empty();
-                                    $("#add_topicminor_id").append(msg);
-                                    $("#add_topicminor_id").select2();
-                                    getcourse()
-                                }
-                            })
+                                        $("#search_topicminor_id").empty();
+                                        $("#search_topicminor_id").append(msg);
+                                        $("#search_topicminor_id").select2();
+                                        getcourse(1)
+                                    }
+                                })
+                            
+                            }else if(num == 2){
+                                var topicmain_id = $("#add_topicmain_id").val();               
+        
+                                $.ajax({
+                                    type:"post",
+                                    url:"Training",
+                                    data:{
+                                        type:"gettopicminorbytopicmain_id",
+                                        topicmain_id:topicmain_id
+                                    },
+                                    success:function(msg){
+                                    
+                                        $("#add_topicminor_id").empty();
+                                        $("#add_topicminor_id").append(msg);
+                                        $("#add_topicminor_id").select2();
+                                        getcourse(2)
+                                    }
+                                })
+                            }
+                            
                         }	
                         
                         function getaddress(){
@@ -668,8 +763,6 @@
                                         success:function(msg){
                                             var js =  JSON.parse(msg);
                                             
-                                            
-                                    
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
@@ -746,8 +839,6 @@
                             var edit_topicmain_id = $("#edit_topicmain_id").val(); 
                             var edit_topicminor_id = $("#edit_topicminor_id").val(); 
                             
-                           
-                            
                             $.ajax({
                                 type:"post",
                                 url:"Training",
@@ -757,12 +848,12 @@
                                     topicminor_id:edit_topicminor_id
                                 },
                                 success:function(msg){
-                                  
+                                    let html = msg.replace("<option value='"+course_name+"'>"+course_name+"</option>", "");
                                     $("#edit_course_id").empty();
                                     if(course_name){
                                         $("#edit_course_id").append('<option value="'+course_name+'">'+course_name+'</option>');
                                     }
-                                    $("#edit_course_id").append(msg);
+                                    $("#edit_course_id").append(html);
                                     $("#edit_course_id").select2();
                                     
                                 }
@@ -780,15 +871,18 @@
                                     topicmain_id:edit_topicmain_id
                                 },
                                 success:function(msg){
-                                     
+                                    let html = msg.replace("<option value='"+minor_id+"'>"+minor_name+"</option>", "");
                                     $("#edit_topicminor_id").empty();
-                                    if(minor_id && minor_name){
+                                    if(minor_id && minor_name && course_name){
                                         $("#edit_topicminor_id").append('<option value="'+minor_id+'">'+minor_name+'</option>');
                                         edit_getcourse(course_name)
+                                        console.log('Y')
                                     }else{
-                                        edit_getcourse(course_name)
+                                        console.log('N')
+                                        edit_getcourse()
+                                        
                                     }
-                                    $("#edit_topicminor_id").append(msg);
+                                    $("#edit_topicminor_id").append(html);
                                     $("#edit_topicminor_id").select2();
                                     
                                 }
@@ -803,9 +897,10 @@
                                     type:"gettopicmain"
                                 },
                                 success:function(msg){
+                                    let html = msg.replace("<option value='"+main_id+"'>"+main_name+"</option>", "");
                                     $("#edit_topicmain_id").empty();
                                     $("#edit_topicmain_id").append('<option value="'+main_id+'"  >'+main_name+'</option>');
-                                    $("#edit_topicmain_id").append(msg);
+                                    $("#edit_topicmain_id").append(html);
                                     $("#edit_topicmain_id").select2();
                                     edit_gettopicminor(minor_id,minor_name,course_name)
                                 }
@@ -860,10 +955,9 @@
                                     type:"getaddress"
                                 },
                                 success:function(msg){
-                                    let html = msg.replace('<option value="'+id+'"  >'+name+'</option>', "");
-                                   
+                                    let html = msg.replace("<option value='"+id+"'>"+name+"</option>", "");
                                     $("#edit_address").empty();
-                                    $("#edit_address").append('<option value="'+id+'"  >'+name+'</option>');
+                                    $("#edit_address").append('<option value="'+id+'">'+name+'</option>');
                                     $("#edit_address").append(html);
                                     $("#edit_address").select2();
                                    
@@ -884,7 +978,7 @@
                                 },
                                 success:function(msg){
                                     var js =  JSON.parse(msg);
-                                    console.log(js);
+                                    
                                     
                                     edit_getaddress(js.training_address_id,js.training_address)
                                     edit_gettopicmain(js.training_topicmain_id,js.training_topicmain_name,js.training_topicminor_id,js.training_topicminor_name,js.training_course)
@@ -967,31 +1061,42 @@
                         }
 
                         function del_training(id){
-                            
-                            $.ajax({
-                                type:"post",
-                                url:"Training",
-                                data:{
-                                    type:"deltraining",
-                                    training_id:id
-                                },
-                                success:function(msg){
-                                    if(msg == 'true'){
-                                        Swal.fire({
-                                            icon:"success",
-                                            text:"ลบสำเร็จ",
-                                            title:"ลบ"
-                                        })
+                            Swal.fire({
+                                title: 'คุณต้องการลบใช่หรือไม่',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'ใช่',
+                                cancelButtonText: 'ไม่ใช่'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        type:"post",
+                                        url:"Training",
+                                        data:{
+                                            type:"deltraining",
+                                            training_id:id
+                                        },
+                                        success:function(msg){
+                                            if(msg == 'true'){
+                                                Swal.fire({
+                                                    icon:"success",
+                                                    text:"ลบสำเร็จ",
+                                                    title:"ลบ"
+                                                })
             
-                                    }else if(msg == 'false'){
-                                        Swal.fire({
-                                            icon:"error",
-                                            text:"ลบไม่สำเร็จ",
-                                            title:"ลบ"
-                                        })
-                                    }
-                                    gettabletraining()
+                                            }else if(msg == 'false'){
+                                                Swal.fire({
+                                                    icon:"error",
+                                                    text:"ลบไม่สำเร็จ",
+                                                    title:"ลบ"
+                                                })
+                                            }
+                                            gettabletraining()
         
+                                        }
+                                    })
                                 }
                             })
         
@@ -999,14 +1104,33 @@
 
 
 
-                        function gettabletraining(){
+                        function gettabletraining(num){
+                            let search_topicmain_id = $("#search_topicmain_id").val()
+                            let search_topicminor_id = $("#search_topicminor_id").val()
+                            let search_course_id = $("#search_course_id").val()
+                            let search_date = $("#search_date").val()
+        
+                            if(num == 1){
+                                search_topicmain_id = null
+                                search_topicminor_id = null
+                                search_course_id = null
+                            }
+                            console.log(search_topicmain_id)
+                            console.log(search_topicminor_id)
+                            console.log(search_course_id)
+                            
+        
                             var table = $("#table_training").DataTable({
                                 serverSide: true,
                                 ajax: {
                                     type:"post",
                                     url:"Training",
                                     data:{
-                                        type:"getdatatraining" 
+                                        type:"getdatatraining",
+                                        search_topicmain_id:search_topicmain_id,
+                                        search_topicminor_id:search_topicminor_id,
+                                        search_course_id:search_course_id,
+                                        search_date:search_date
                                     },
                                     dataSrc:function(json){
                                         var data = JSON.parse(json.data)
@@ -1145,9 +1269,11 @@
    
                         $(document).ready(function(){
                         
-                            gettabletraining()
-        
+                            gettabletraining(1)
+                            gettopicmain(1)
+                            
                             $("#adddata").click(function (){
+                                gettopicmain(2)
                                 ClearInput()
                                 $("#modal_addtraining").modal('show')
                                 getaddress()
@@ -1157,22 +1283,33 @@
                             $("#pagetraining").addClass("active");
                             $("#datatraining").addClass("active");
                             
-                            gettopicmain()
                             
+                            $("#search_topicmain_id").on('input', function() {
+                                gettopicminor(1)
+                                 
+                            });
+                            
+                            $("#search_topicminor_id").on('input', function() {
+                                getcourse(1)
+                            });
+                            
+    
                             $("#add_topicmain_id").on('input', function() {
-                                gettopicminor()
+                                gettopicminor(2)
                             });
                             
                             $("#add_topicminor_id").on('input', function() {
-                                getcourse()
+                                getcourse(2)
                             });
                             
+    
+    
                             $("#edit_topicmain_id").on('input', function() {
                                 edit_gettopicminor()
+                                
                             });
                             
                             $("#edit_topicminor_id").on('input', function() {
-                                
                                 edit_getcourse()
                             });
                             

@@ -25,6 +25,35 @@ public class EmployeeService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
+    public static Boolean updateresult(String[] listem, String result,String training_id) throws SQLException {
+        Boolean status = false;
+        try {
+            String sql = "UPDATE et_employee SET employee_result = ? WHERE employee = ? and training_id = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+
+            for (String em : listem) {
+                ps.setString(1, result);
+                ps.setString(2, em);
+                ps.setString(3, training_id);
+                ps.addBatch();
+            }
+
+            ps.executeBatch();
+
+            status = true;
+
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+        }
+        return status;
+
+    }
+
     private static int getprimarykey() throws SQLException {
         int primarykey = 0;
         try {
@@ -84,12 +113,13 @@ public class EmployeeService {
         Boolean status = false;
         try {
 
-            String sql = "INSERT INTO et_employee (employee_id,training_id , employee) VALUES (?, ?, ?) ";
+            String sql = "INSERT INTO et_employee (employee_id,training_id , employee, employee_result) VALUES (?, ?, ?,?) ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, training_id);
             ps.setString(3, employeeid);
+            ps.setString(4, "0");
 
             if (ps.executeUpdate() > 0) {
                 status = true;
@@ -114,7 +144,7 @@ public class EmployeeService {
         Boolean status = false;
         try {
 
-            String sql = "INSERT INTO et_employee (employee_id,training_id , employee) VALUES (?, ?, ?) ";
+            String sql = "INSERT INTO et_employee (employee_id,training_id , employee,employee_result) VALUES (?, ?, ?,?) ";
             conn = ConnectDB.getConnectionMysql();
             ps = conn.prepareStatement(sql);
 
@@ -122,6 +152,7 @@ public class EmployeeService {
                 ps.setInt(1, primarykey);
                 ps.setString(2, training_id);
                 ps.setString(3, id);
+                ps.setString(4, "0");
                 ps.addBatch();
                 primarykey++;
             }
@@ -242,6 +273,7 @@ public class EmployeeService {
             while (rs.next()) {
                 ET_Employee em = new ET_Employee();
                 em.setEmployee_id(rs.getString("employee"));
+                em.setEmployee_result(rs.getString("employee_result"));
                 listemployee.add(em);
             }
 

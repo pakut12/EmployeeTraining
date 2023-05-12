@@ -22,6 +22,15 @@ public class ET_Employee {
     private String employee_agework;
     private String employee_birthday;
     private String employee_pwgroup;
+    private String employee_result;
+
+    public String getEmployee_result() {
+        return employee_result;
+    }
+
+    public void setEmployee_result(String employee_result) {
+        this.employee_result = employee_result;
+    }
 
     public String getEmployee_pwgroup() {
         return employee_pwgroup;

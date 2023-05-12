@@ -106,6 +106,23 @@ public class Employee extends HttpServlet {
                     e.printStackTrace();
                 }
 
+            } else if (type.equals("updateresult")) {
+                try {
+                    String[] id = request.getParameter("listem").trim().split(",");
+                    String result = request.getParameter("result").trim();
+                    String idt = request.getParameter("idt").trim();
+
+                    Boolean status = EmployeeService.updateresult(id, result, idt);
+
+                    if (status) {
+                        out.print("true");
+                    } else {
+                        out.print("false");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         } finally {
