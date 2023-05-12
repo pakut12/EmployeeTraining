@@ -1110,10 +1110,11 @@
                             let search_course_id = $("#search_course_id").val()
                             let search_date = $("#search_date").val()
         
-                            if(num == 1){
+                            if(!search_topicmain_id || !search_topicminor_id || !search_course_id ){
                                 search_topicmain_id = null
                                 search_topicminor_id = null
                                 search_course_id = null
+                                
                             }
                             console.log(search_topicmain_id)
                             console.log(search_topicminor_id)
