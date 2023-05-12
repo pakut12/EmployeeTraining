@@ -603,9 +603,6 @@
                             })
                         }
 
-
-                        
-                       
                         $(document).ready(function(){
                             gettopicmain(1)
                             gettabletraining(1)

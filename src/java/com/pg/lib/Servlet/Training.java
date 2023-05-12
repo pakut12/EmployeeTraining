@@ -128,11 +128,6 @@ public class Training extends HttpServlet {
                     String search_course_id = request.getParameter("search_course_id").trim();
                     String search_date = request.getParameter("search_date").trim();
 
-                    System.out.println(search_topicmain_id);
-                    System.out.println(search_topicminor_id);
-                    System.out.println(search_course_id);
-                    System.out.println(search_date);
-                    
                     List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue,search_topicmain_id,search_topicminor_id,search_course_id,search_date);
 
                     Gson gson = new Gson();
@@ -140,7 +135,7 @@ public class Training extends HttpServlet {
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.gettotletabletraining());
-                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue));
+                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue,search_topicmain_id,search_topicminor_id,search_course_id,search_date));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
