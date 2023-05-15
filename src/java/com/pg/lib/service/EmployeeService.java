@@ -25,7 +25,7 @@ public class EmployeeService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static Boolean updateresult(String[] listem, String result,String training_id) throws SQLException {
+    public static Boolean updateresult(String[] listem, String result, String training_id) throws SQLException {
         Boolean status = false;
         try {
             String sql = "UPDATE et_employee SET employee_result = ? WHERE employee = ? and training_id = ?";
@@ -33,6 +33,8 @@ public class EmployeeService {
             ps = conn.prepareStatement(sql);
 
             for (String em : listem) {
+                System.out.println(em);
+
                 ps.setString(1, result);
                 ps.setString(2, em);
                 ps.setString(3, training_id);
@@ -257,6 +259,32 @@ public class EmployeeService {
         }
 
         return listemployee;
+    }
+
+    public static HashMap<String,String> getemployeeresult(String training_id) throws SQLException {
+         HashMap<String,String> listresult = new HashMap<String, String>();
+
+        try {
+            String sql = "SELECT * FROM et_employee where training_id = ?";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, training_id);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                listresult.put(rs.getString("employee"), rs.getString("employee_result"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return listresult;
     }
 
     public static List<ET_Employee> getemployeebytraining_id(String training_id) throws SQLException {

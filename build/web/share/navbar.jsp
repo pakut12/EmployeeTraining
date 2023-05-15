@@ -7,7 +7,7 @@
 </div>
 
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light  ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -24,32 +24,28 @@
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-olive">
+<aside class="main-sidebar elevation-4 sidebar-light-olive ">
     <!-- Brand Logo -->
     
-    <a href="index.jsp" class="brand-link text-md">
+    <a href="index.jsp" class="brand-link text-md border-success">
         <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image  img-fluid m-0" >
-        <span class="brand-text p-1 fw-bold " style="color:#3d9970" >EmployeeTraining</span>
+        <span class="brand-text p-1 fw-bold text-uppercase" style="color:#3d9970" >Employee Training</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
         
+        
+        
         <!-- Sidebar Menu -->
-        <nav class="mt-3">
+        <nav class="mt-2 ">
             <ul class="nav nav-pills nav-sidebar flex-column  nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item">
-                    <a href="index.jsp" class="nav-link " id="pagehome">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>
-                            หน้าเเรก
-                        </p>
-                    </a>
-                </li>
+                
                
-                <li class="nav-item " id="listdata">
-                    <a href="#" class="nav-link " id="pagedata">
+                <li class="nav-header font-weight-bold  bg-success text-center">จัดการข้อมูล</li>
+                <li class="nav-item menu-is-opening menu-open" id="listdata">
+                    <a href="#" class="nav-link active" id="pagedata">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             ข้อมูล
@@ -84,9 +80,9 @@
                         
                     </ul>
                 </li>
-           
-                <li class="nav-item " id="listtraining">
-                    <a href="#" class="nav-link " id="pagetraining">
+                <li class="nav-header font-weight-bold  bg-success text-center">จัดการการฝึกอบรม</li>
+                <li class="nav-item menu-is-opening menu-open" id="listtraining">
+                    <a href="#" class="nav-link active" id="pagetraining">
                         <i class="nav-icon fas fa-running"></i>
                         <p>
                             ฝึกอบรม
@@ -100,7 +96,7 @@
                                 <p>ข้อมูลฝึกอบรม</p>
                             </a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a href="manageevaluation.jsp" class="nav-link" id="dataevaluation">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ประเมินผลผู้เข้าอบรม</p>
@@ -108,9 +104,9 @@
                         </li>
                     </ul>
                 </li>
-                
-                <li class="nav-item " id="listreport">
-                    <a href="#" class="nav-link " id="pagereport">
+                <li class="nav-header font-weight-bold bg-success text-center">ออกรายงาน</li>
+                <li class="nav-item menu-is-opening menu-open" id="listreport">
+                    <a href="#" class="nav-link active" id="pagereport">
                         <i class="nav-icon fas fa fa-file"></i>
                         <p>
                             รายงาน
@@ -119,23 +115,29 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="managereport.jsp" class="nav-link " id="datareport">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p class="">แสดงการฝึกอบรมตามหลักสูตร</p>
+                            <a href="managereportcourse.jsp" class="nav-link " id="datareportcourse">
+                                <div class="row">
+                                    <div class="col-2 mt-1 "><i class="far fa-circle nav-icon"></i></div>
+                                    <div class="col-10 px-3"><p class="">แสดงการฝึกอบรมตามหลักสูตร</p></div>
+                                </div>
+                                
+                                
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="managereport.jsp" class="nav-link " id="datareport">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p class="">แสดงการฝึกอบรมตามรหัสพนักงาน</p>
+                            <a href="managereportemployee.jsp" class="nav-link " id="datareportemployee">
+                                <div class="row">
+                                    <div class="col-2 mt-1"><i class="far fa-circle nav-icon"></i></div>
+                                    <div class="col-10 px-3"><p class="">แสดงการฝึกอบรมตามรหัสพนักงาน</p></div>
+                                </div>
+                                
                             </a>
                         </li>
-                        
                         
                     </ul>
                 </li>
             </ul>
-            
+           
         </nav>
         <!-- /.sidebar-menu -->
     </div>

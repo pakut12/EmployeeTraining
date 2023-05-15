@@ -40,7 +40,7 @@
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="card text-success">
+                            <div class="card card-success card-outline shadow-sm">
                                 <div class="card-header">
                                     <h3 class="card-title">คู่มือระบบฝึกอบรมพนักงาน</h3>
                                 </div>

@@ -21,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">ประเมินผลผู้เข้าอบรม</h1>
+                            <h1 class="m-1">แสดงการฝึกอบรมตามรหัสพนักงาน</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
-                                <li class="breadcrumb-item"><a href="#">ฝึกอบรม</a></li>
-                                <li class="breadcrumb-item active">ประเมินผลผู้เข้าอบรม</li>
+                                <li class="breadcrumb-item"><a href="#">รายงาน</a></li>
+                                <li class="breadcrumb-item active">แสดงการฝึกอบรมตามรหัสพนักงาน</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -44,90 +44,87 @@
                     <!-- Modal -->
                  
                     
-                    <div class="modal fade" id="modal_evaluation"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modal_report"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">ประเมินผลผู้เข้าอบรม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">แสดงการฝึกอบรมตามรหัสพนักงาน</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body ">
                                     <div class="text-center">
-                                    <form id="myformevaluation" > 
-                                        <input class="" type="hidden" id="evaluation_training_id" name="evaluation_training_id" > 
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                                    
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_topicmain_id" name="evaluation_topicmain_id" disabled> 
+                                        <form id="myformevaluation" > 
+                                            <input class="" type="hidden" id="evaluation_training_id" name="evaluation_training_id" > 
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                                        
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_topicmain_id" name="evaluation_topicmain_id" disabled> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                                        
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_topicminor_id" name="evaluation_topicminor_id" disabled> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                                        
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_course_id" name="evaluation_course_id" disabled> 
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                                    
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_topicminor_id" name="evaluation_topicminor_id" disabled> 
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">บริษัท</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_company" name="evaluation_company" disabled> 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                                    
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_course_id" name="evaluation_course_id" disabled> 
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ค่าใช้จ่าย</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_expenses" name="evaluation_expenses" disabled> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">วันที่อบรม</label>
+                                                        <input class="form-control form-control-sm text-center" type="date" id="evaluation_date" name="evaluation_date" disabled> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ปี</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_year" name="evaluation_year" disabled> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_address" name="evaluation_address" disabled>  
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชั่วโมง</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="evaluation_hour" name="evaluation_hour" disabled> 
+                                                    </div>
                                                 </div>
                                             </div>
                                             
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">บริษัท</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_company" name="evaluation_company" disabled> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ค่าใช้จ่าย</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_expenses" name="evaluation_expenses" disabled> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">วันที่อบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="date" id="evaluation_date" name="evaluation_date" disabled> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ปี</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_year" name="evaluation_year" disabled> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_address" name="evaluation_address" disabled>  
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชั่วโมง</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="evaluation_hour" name="evaluation_hour" disabled> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
+                                        </form>
                                     </div>
-                                    
                                     <div class="row mt-3">
                                         
                                         <div class="col-12">
-                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_evaluation" >
+                                            <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_evaluation" style="width:100%">
                                                 
                                             </table>
                                         </div>
@@ -136,58 +133,36 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-danger" onclick="updateevaluation(0)">ไม่ผ่าน</button>
-                                    <button type="button" class="btn btn-success" onclick="updateevaluation(1)">ผ่าน</button>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     
-                     <div class="card card-success card-outline shadow-sm">
+                    <div class="card card-success card-outline shadow-sm">
                         <div class="card-header ">
                             ค้นหา
                         </div>
                         <div class="card-body">
                             <form id="myformsearch">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label>หมวดหลัก</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicmain_id" name="search_topicmain_id" required>
-                                        </select>
-                                    </div>
-                                    <div class="col-3">
-                                        <label>หมวดย่อย</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicminor_id" name="search_topicminor_id" required>
-                                        </select>
-                                    </div>
-                                    <div class="col-3">
-                                        <label>หลักสูตร</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="search_course_id" name="search_course_id" required>
-                                        </select>
-                                    </div>
-                                    <div class="col-3">
-                                        <label>วันที่อบรม</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date" name="search_date"></input> 
-                                    </div>
+                                <div class="row mx-auto">
+                                    <div class="col-sm-12 col-md-4"> <div class="text-right mt-1 ">รหัสพนักงาน : </div></div>
+                                    <div class="col-sm-12 col-md-4"> <input class="form-control form-control-sm w-100 text-center" id="search_employee_id" name="search_employee_id"></div>
+                                    <div class="col-sm-12 col-md-4"> <button class="btn btn-primary btn-sm text-left" onclick="gettabletraining()" type="button">ค้นหา</button></div>
                                 </div>
                             </form>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <button class="btn btn-primary btn-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="card card-success card-outline shadow-sm">
                         <div class="card-header">
-                            จัดการข้อมูลฝึกอบรม
+                            แสดงการฝึกอบรมตามรหัสพนักงาน
                         </div>
                         <div class="card-body">
                             
                             <div class="" id="mytable">
-                                <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
+                                <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_report" >
                                     <thead>
                                         <th></th>
                                         <th></th>
@@ -212,6 +187,15 @@
                         
                         const employeelist = [];
                     
+                        pdfMake.fonts = {
+                            THSarabun: {
+                                normal: 'THSarabunNew.ttf',
+                                bold: 'THSarabunNew-Bold.ttf',
+                                italics: 'THSarabunNew-Italic.ttf',
+                                bolditalics: 'THSarabunNew-BoldItalic.ttf'
+                            }
+                        }
+    
                         function ClearInput(){
                             employeelist.length = [];
                             $("#myformadd input").val("");
@@ -222,7 +206,8 @@
                         }
     
                       
-                         function getcourse(num){
+                        
+                        function getcourse(num){
                             if(num == 1){
                                 var topicmain_id = $("#search_topicmain_id").val(); 
                                 var topicminor_id = $("#search_topicminor_id").val(); 
@@ -387,8 +372,8 @@
 
 
                         function evaluation(id){
-                            $("#modal_evaluation").modal('show')
-                        
+                            $("#modal_report").modal('show')
+                           
                             $.ajax({
                                 type:"post",
                                 url:"Training",
@@ -398,7 +383,10 @@
                                 },
                                 success:function(msg){
                                     var js =  JSON.parse(msg);
-                                    console.log(js)
+                                    
+                                    
+    
+        
                                     $("#evaluation_training_id").val(js.training_id);
                                     $("#evaluation_topicmain_id").val(js.training_topicmain_name);
                                     $("#evaluation_topicminor_id").val(js.training_topicminor_name);
@@ -410,16 +398,10 @@
                                     $("#evaluation_address").val(js.training_address);
                                     $("#evaluation_hour").val(js.training_hour);
                                     
-                                    $("#table_employee_evaluation").DataTable({
+                                    var table = $("#table_employee_evaluation").DataTable({
                                         data: js.listem,
                                         columns: [
-                                            {
-                                                data:"employee_id",
-                                                defaultContent:'',
-                                                checkboxes:{
-                                                    selectRow:true
-                                                }
-                                            },  
+                                              
                                             { 
                                                 title: 'รหัส',
                                                 data: "employee_id"
@@ -473,7 +455,7 @@
                                                 data: "employee_result"
                                             },
                                         ],
-                                        
+                                        processing: true,
                                         scrollCollapse: true,
                                         scrollX: true, 
                                         bDestroy: true,
@@ -481,51 +463,60 @@
                                             left: 2,
                                             right: 1
                                         },
-                                        columnDefs: [
+                                       
+                                        dom: 'Bfrtip',
+                                        lengthMenu: [[10, 25, 50,100,9999999], [10, 25, 50,100 ,"All"]],
+                                        buttons: [
+                                            'pageLength',
                                             {
-                                                targets: 0,
-                                                checkboxes: {
-                                                    selectRow: true
+                                                extend: 'excel',
+                                                title: 'รายชื่อผู้เข้าอบรมหลักสูตร : ' + js.training_course
+                                            },
+                                            { // กำหนดพิเศษเฉพาะปุ่ม pdf
+                                                extend: 'pdf', // ปุ่มสร้าง pdf ไฟล์
+                                                text: 'PDF', // ข้อความที่แสดง
+                                                pageSize: 'A4',   // ขนาดหน้ากระดาษเป็น A4            
+                                                customize:function(doc){ // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
+                                                  
+                                                    
+                                                    
+                                                                                    
+                                                    console.log(doc); // เอาไว้ debug ดู doc object proptery เพื่ออ้างอิงเพิ่มเติม
                                                 }
-                                            }
+                                            }, // สิ้นสุดกำหนดพิเศษปุ่ม pdf
                                         ],
-                                        select: {
-                                            style: "multi"
-                                        },
-                                       order: [[1, 'asc']]
+                                        order: [[1, 'asc']]
                                     });
                                     
-     
-        
+                                    $(document).on('shown.bs.modal', '#modal_report', function () {
+                                        table.columns.adjust().draw();
+                                    });
+       
                                 }
                             })
         
                         }
 
 
+
+
                         function gettabletraining(num){
-                            let search_topicmain_id = $("#search_topicmain_id").val()
-                            let search_topicminor_id = $("#search_topicminor_id").val()
-                            let search_course_id = $("#search_course_id").val()
-                            let search_date = $("#search_date").val()
+                            let search_employee_id = $("#search_employee_id").val()
+                           
         
                             if(num == 1){
-                                search_topicmain_id = null
-                                search_topicminor_id = null
-                                search_course_id = null
+                                search_employee_id = null
+                              
                             }
-                            var table = $("#table_training").DataTable({
+                            var table = $("#table_report").DataTable({
                                 serverSide: true,
                                 processing: true,
                                 ajax: {
                                     type:"post",
                                     url:"Training",
                                     data:{
-                                        type:"getdatatraining",
-                                        search_topicmain_id:search_topicmain_id,
-                                        search_topicminor_id:search_topicminor_id,
-                                        search_course_id:search_course_id,
-                                        search_date:search_date
+                                        type:"getdatatrainingbyemid",
+                                        search_employee_id:search_employee_id
                                     },
                                     dataSrc:function(json){
                                         var data = JSON.parse(json.data)
@@ -543,7 +534,7 @@
                                                 training_topminor :  v.training_topminor,
                                                 training_year :  v.training_year,
                                                 training_course:v.training_course,
-                                                btn_evaluation : '<button class="btn btn-success btn-sm" type="button" onclick="evaluation('+v.training_id+')" id="bt_evaluation">ประเมินผล</button>',
+                                                btn_details : '<button class="btn btn-warning btn-sm" type="button" onclick="evaluation('+v.training_id+')" id="bt_details">ดูรายละเอียด</button>',
                                                 
                                             }
                                             arr.push(result);
@@ -552,6 +543,65 @@
                                         return arr
                                     }
                                 },
+                                columns: [
+                                    { 
+                                        title: 'ค่าใช้จ่าย',
+                                        data: "training_expenses" },
+                                    { 
+                                        title: 'สถานที่จัดอบรม', 
+                                        data:"training_address"         
+                                    },
+                                    { 
+                                        title: 'หมวดหลัก', 
+                                        data: "training_topicmain"
+                                    },
+                                    { 
+                                        title: 'หมวดย่อย',
+                                        data: "training_topminor" 
+                                    },
+                                    {
+                                        title: 'หลักสูตร',
+                                        data: "training_course" 
+                                    },
+                                    { 
+                                        title: 'บริษัท',
+                                        data: "training_company"
+                                    },
+                                    { 
+                                        title: 'รายละเอียด',
+                                        data: "btn_details"
+                                    },
+                                    { 
+                                        title: 'ปี', 
+                                        data: "training_year"
+                                    },
+                                    { 
+                                        title: 'ชั้วโมง', 
+                                        data: "training_hour"
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" 
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" 
+                                    }
+                                ],
+                                
+                                scrollCollapse: true,
+                                scrollX:true, 
+                                bDestroy: true
+                            })
+                        }
+
+
+                        
+
+                        $(document).ready(function(){
+                            gettopicmain(1)
+                            /*
+                            $("#table_report").DataTable({
                                 columns: [
                                     { 
                                         title: 'รหัส',
@@ -593,26 +643,12 @@
                                         data: "training_course" 
                                     },
                                     { 
-                                        title: 'ประเมินผล',
-                                        data: "btn_evaluation"
+                                        title: 'รายละเอียด',
+                                        data: "btn_details"
                                     }
-                                ],
-                                
-                                scrollCollapse: true,
-                                scrollX:true, 
-                                bDestroy: true
+                                ]
                             })
-                        }
-
-                        $(document).ready(function(){
-                            gettopicmain(1)
-                            gettabletraining(1)
-                            
-                                            
-                             $(document).on('shown.bs.modal', '#modal_evaluation', function () {
-                                  $("#table_employee_evaluation").DataTable().columns.adjust().draw();
-                             });               
-                              
+                              */
                             $("#search_topicmain_id").on('input', function() {
                                 gettopicminor(1)
                                  
@@ -623,14 +659,11 @@
                             });
         
         
-                            $("#adddata").click(function (){
-                                ClearInput()
-                                $("#modal_addtraining").modal('show')
-                            })
+                          
                             
-                            $("#listtraining").addClass("menu-is-opening menu-open");
-                            $("#pagetraining").addClass("active");
-                            $("#dataevaluation").addClass("active");
+                            $("#listreport").addClass("menu-is-opening menu-open");
+                            $("#pagereport").addClass("active");
+                            $("#datareportemployee").addClass("active");
                             
                            
                         })

@@ -15,8 +15,11 @@ import com.pg.lib.utility.Utility;
 import java.io.*;
 import java.net.*;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import org.json.JSONArray;
@@ -34,7 +37,7 @@ public class Training extends HttpServlet {
      * @param response servlet response
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -128,14 +131,14 @@ public class Training extends HttpServlet {
                     String search_course_id = request.getParameter("search_course_id").trim();
                     String search_date = request.getParameter("search_date").trim();
 
-                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue,search_topicmain_id,search_topicminor_id,search_course_id,search_date);
+                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.gettotletabletraining());
-                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue,search_topicmain_id,search_topicminor_id,search_course_id,search_date));
+                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
@@ -153,6 +156,8 @@ public class Training extends HttpServlet {
                     List<ET_Employee> listid = EmployeeService.getemployeebytraining_id(id);
                     List<ET_Employee> listem = EmployeeService.getemployeebylistid(listid);
 
+                    HashMap<String, String> listresult = EmployeeService.getemployeeresult(id);
+
                     JSONArray arr = new JSONArray();
                     int n = 0;
                     for (ET_Employee l : listem) {
@@ -165,9 +170,9 @@ public class Training extends HttpServlet {
                         }
 
                         String result = "";
-                        if (listid.get(n).getEmployee_result().equals("0")) {
+                        if (listresult.get(l.getEmployee_id()).equals("0")) {
                             result = "<div class='text-danger'>ไม่ผ่าน</div>";
-                        } else if (listid.get(n).getEmployee_result().equals("1")) {
+                        } else if (listresult.get(l.getEmployee_id()).equals("1")) {
                             result = "<div class='text-success'>ผ่าน</div>";
                         }
 
@@ -267,6 +272,38 @@ public class Training extends HttpServlet {
                     e.printStackTrace();
                 }
 
+            } else if (type.equals("getdatatrainingbyemid")) {
+                try {
+
+                    String id = request.getParameter("search_employee_id").trim();
+
+                    int draw = Integer.parseInt(request.getParameter("draw"));
+                    int start = Integer.parseInt(request.getParameter("start"));
+                    int length = Integer.parseInt(request.getParameter("length"));
+                    String searchValue = request.getParameter("search[value]");
+                    String orderColumn = request.getParameter("order[0][column]");
+                    String orderDir = request.getParameter("order[0][dir]");
+
+                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id,searchValue);
+
+                    Gson gson = new Gson();
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("draw", draw);
+                    obj.put("recordsTotal", TrainingService.getdatatotaltrainingbyemid(id));
+                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue));
+                    obj.put("data", gson.toJsonTree(list));
+
+                    response.setContentType("application/json");
+                    response.getWriter().write(obj.toString());
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+
             }
 
         } finally {
@@ -282,7 +319,11 @@ public class Training extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Training.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 
@@ -292,7 +333,11 @@ public class Training extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Training.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** 

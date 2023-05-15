@@ -103,13 +103,13 @@
                         </div>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-header">
+                    <div class="card card-success card-outline shadow-sm">
+                        <div class="card-header ">
                             จัดการข้อมูลหลักสูตร
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-3">
-                                <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
+                                <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
                                 <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_address" >

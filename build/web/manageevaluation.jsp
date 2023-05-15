@@ -53,7 +53,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body text-center">
+                                <div class="modal-body ">
+                                    <div class="text-center">
                                     <form id="myformevaluation" > 
                                         <input class="" type="hidden" id="evaluation_training_id" name="evaluation_training_id" > 
                                         <div class="row">
@@ -121,6 +122,7 @@
                                         </div>
                                         
                                     </form>
+                                    </div>
                                     
                                     <div class="row mt-3">
                                         
@@ -142,7 +144,7 @@
                     </div>
                     
                     
-                     <div class="card">
+                     <div class="card card-success card-outline shadow-sm">
                         <div class="card-header ">
                             ค้นหา
                         </div>
@@ -172,13 +174,13 @@
                             </form>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <button class="btn btn-primary btm-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
+                                    <button class="btn btn-primary btn-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card">
+                    <div class="card card-success card-outline shadow-sm">
                         <div class="card-header">
                             จัดการข้อมูลฝึกอบรม
                         </div>
@@ -220,7 +222,6 @@
                         }
     
                       
-                        
                          function getcourse(num){
                             if(num == 1){
                                 var topicmain_id = $("#search_topicmain_id").val(); 
@@ -352,6 +353,7 @@
                           
                                 let input = "type=updateresult&listem="+arrlist+"&result="+result+"&idt="+idt
                             
+                                console.log(input)
                                 $.ajax({
                                     type:"post",
                                     url:"Employee",
@@ -501,8 +503,6 @@
                         }
 
 
-
-
                         function gettabletraining(num){
                             let search_topicmain_id = $("#search_topicmain_id").val()
                             let search_topicminor_id = $("#search_topicminor_id").val()
@@ -516,6 +516,7 @@
                             }
                             var table = $("#table_training").DataTable({
                                 serverSide: true,
+                                processing: true,
                                 ajax: {
                                     type:"post",
                                     url:"Training",
@@ -606,6 +607,11 @@
                         $(document).ready(function(){
                             gettopicmain(1)
                             gettabletraining(1)
+                            
+                                            
+                             $(document).on('shown.bs.modal', '#modal_evaluation', function () {
+                                  $("#table_employee_evaluation").DataTable().columns.adjust().draw();
+                             });               
                               
                             $("#search_topicmain_id").on('input', function() {
                                 gettopicminor(1)

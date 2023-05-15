@@ -51,78 +51,80 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body text-center">
-                                    <form id="myformadd" > 
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" name="add_topicmain_id" required>
-                                                        
-                                                    </select>
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <form id="myformadd" > 
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" name="add_topicmain_id" required>
+                                                            
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_topicminor_id" name="add_topicminor_id" style="width: 100%" required>
-                                                        
-                                                    </select>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                                        <select class="form-control form-control-sm text-center" id="add_topicminor_id" name="add_topicminor_id" style="width: 100%" required>
+                                                            
+                                                        </select>
+                                                    </div>
                                                 </div>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                                        <select class="form-control form-control-sm text-center" id="add_course_id" name="add_course_id" style="width: 100%" required>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_course_id" name="add_course_id" style="width: 100%" required>
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">บริษัท</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="add_company" name="add_company" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ค่าใช้จ่าย</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="add_expenses" name="add_expenses" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">วันที่อบรม</label>
+                                                        <input class="form-control form-control-sm text-center" type="date" id="add_date" name="add_date" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ปี</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="add_year" name="add_year" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                        <select class="form-control form-control-sm text-center" id="add_address" name="add_address" style="width: 100%" required>
+                                                            
+                                                        </select>
                                                         
-                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชั่วโมง</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="add_hour" name="add_hour" required> 
+                                                    </div>
                                                 </div>
                                             </div>
                                             
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">บริษัท</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_company" name="add_company" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ค่าใช้จ่าย</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_expenses" name="add_expenses" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">วันที่อบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="date" id="add_date" name="add_date" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ปี</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_year" name="add_year" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
-                                                    <select class="form-control form-control-sm text-center" id="add_address" name="add_address" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชั่วโมง</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="add_hour" name="add_hour" required> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
+                                        </form>
+                                    </div>
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
@@ -166,7 +168,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body text-center">
+                                <div class="modal-body ">
+                                    <div class="text-center">
                                     <form id="myformedit" > 
                                         <input class="" type="hidden" id="edit_training_id" name="edit_training_id" > 
                                         <div class="row">
@@ -240,6 +243,7 @@
                                         </div>
                                         
                                     </form>
+                                </div>
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
@@ -273,7 +277,7 @@
                         </div>
                     </div>
                     
-                    <div class="card">
+                    <div class="card card-success card-outline shadow-sm">
                         <div class="card-header ">
                             ค้นหา
                         </div>
@@ -303,19 +307,19 @@
                             </form>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <button class="btn btn-primary btm-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
+                                    <button class="btn btn-primary btn-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card card-success card-outline shadow-sm">
                         <div class="card-header">
                             จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
                             
                             <div class="text-right mb-3">
-                                <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
+                                <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
                                 <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
@@ -1272,6 +1276,10 @@
                         
                             gettabletraining(1)
                             gettopicmain(1)
+                             
+                            $(document).on('shown.bs.modal', '#modal_edittraining', function () {
+                                  $("#table_employee_edit").DataTable().columns.adjust().draw();
+                             });
                             
                             $("#adddata").click(function (){
                                 gettopicmain(2)

@@ -93,13 +93,13 @@
                         </div>
                     </div>
                     
-                    <div class="card">
+                    <div class="card card-success card-outline shadow-sm">
                         <div class="card-header">
                             จัดการข้อมูลหมวดย่อย
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-3">
-                                <div class="btn-success btn" id="adddata">เพิ่มข้อมูล</div>
+                                <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
                                 

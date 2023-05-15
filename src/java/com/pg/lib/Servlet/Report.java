@@ -27,16 +27,13 @@ public class Report extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Report</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Report at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            */
+            String type = request.getParameter("type").trim();
+            
+            if(type.equals("")){
+            }
+            
+            
+            
         } finally { 
             out.close();
         }

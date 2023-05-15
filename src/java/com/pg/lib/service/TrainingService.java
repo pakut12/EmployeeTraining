@@ -25,6 +25,127 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
+    public static int getdatafilteredtrainingbyemid(String id, String searchValue) throws SQLException {
+        List<ET_Training> list = new ArrayList<ET_Training>();
+        int total = 0;
+        try {
+            String sql = "SELECT count(*) FROM et_employee a " +
+                    "INNER JOIN et_training b on a.training_id = b.training_id " +
+                    "INNER JOIN et_group c on c.group_id = b.training_groupid " +
+                    "INNER JOIN et_topicmain e on c.group_topicmain_id = e.topicmain_id " +
+                    "INNER JOIN et_topicminor f on f.topicminor_id = c.group_topicminor_id " +
+                    "INNER JOIN et_address g on g.address_id = b.training_address " +
+                    "WHERE a.employee = ? and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, "%" + searchValue + "%");
+            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(4, "%" + searchValue + "%");
+            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return total;
+    }
+
+    public static int getdatatotaltrainingbyemid(String id) throws SQLException {
+        List<ET_Training> list = new ArrayList<ET_Training>();
+        int total = 0;
+        try {
+            String sql = "SELECT count(*) FROM et_employee a " +
+                    "INNER JOIN et_training b on a.training_id = b.training_id " +
+                    "INNER JOIN et_group c on c.group_id = b.training_groupid " +
+                    "INNER JOIN et_topicmain e on c.group_topicmain_id = e.topicmain_id " +
+                    "INNER JOIN et_topicminor f on f.topicminor_id = c.group_topicminor_id " +
+                    "INNER JOIN et_address g on g.address_id = b.training_address " +
+                    "WHERE a.employee = ? ";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                total = rs.getInt("COUNT(*)");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return total;
+    }
+
+    public static List<ET_Training> getdatatrainingbyemid(String id, String searchValue) throws SQLException {
+        List<ET_Training> list = new ArrayList<ET_Training>();
+
+        try {
+            String sql = "SELECT e.topicmain_name,f.topicminor_name,c.group_course_name,b.training_company,b.training_year,b.training_hour,b.training_datetraining,b.training_expenses,g.address_name FROM et_employee a " +
+                    "INNER JOIN et_training b on a.training_id = b.training_id " +
+                    "INNER JOIN et_group c on c.group_id = b.training_groupid " +
+                    "INNER JOIN et_topicmain e on c.group_topicmain_id = e.topicmain_id " +
+                    "INNER JOIN et_topicminor f on f.topicminor_id = c.group_topicminor_id " +
+                    "INNER JOIN et_address g on g.address_id = b.training_address " +
+                    "WHERE a.employee = ?  and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
+            conn = ConnectDB.getConnectionMysql();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(1, id);
+            ps.setString(2, "%" + searchValue + "%");
+            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(4, "%" + searchValue + "%");
+            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ET_Training training = new ET_Training();
+
+                training.setTraining_id(rs.getString("training_id"));
+                training.setTraining_company(rs.getString("training_company"));
+                training.setTraining_expenses(rs.getString("training_expenses"));
+                training.setTraining_datetraining(rs.getString("training_datetraining"));
+                training.setTraining_year(rs.getString("training_year"));
+                training.setTraining_hour(rs.getString("training_hour"));
+                training.setTraining_address(rs.getString("address_name"));
+                training.setTraining_topicmain(rs.getString("topicmain_name"));
+                training.setTraining_topminor(rs.getString("topicminor_name"));
+                training.setTraining_course(rs.getString("group_course_name"));
+
+
+                list.add(training);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return list;
+    }
+
     public static Boolean deltraining(String training_id) throws SQLException {
 
         Boolean status = false;
@@ -154,7 +275,7 @@ public class TrainingService {
         return totle;
     }
 
-    public static int getfilteredtabletraining(String searchValue,String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date) throws SQLException {
+    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date) throws SQLException {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
@@ -187,7 +308,7 @@ public class TrainingService {
                 ps.setString(10, "%" + searchValue + "%");
                 ps.setString(11, "%" + searchValue + "%");
                 ps.setString(12, "%" + searchValue + "%");
-                
+
             } else {
                 ps.setString(1, "%" + search_topicmain_id + "%");
                 ps.setString(2, "%" + search_topicminor_id + "%");
@@ -200,7 +321,7 @@ public class TrainingService {
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
                 ps.setString(11, "%" + searchValue + "%");
-                
+
             }
 
             rs = ps.executeQuery();
