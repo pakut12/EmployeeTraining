@@ -40,7 +40,6 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                   
-                    
                     <!-- Modal -->
                     <div class="modal fade" id="modal_addgroup"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

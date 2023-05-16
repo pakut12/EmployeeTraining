@@ -21,11 +21,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">หน้าเเรก</h1>
+                            <h1 class="m-1">ติดต่อ</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
+                                <li class="breadcrumb-item"><a href="#">ติดต่อ</a></li>
                                 
                             </ol>
                         </div><!-- /.col -->
@@ -42,17 +42,12 @@
                         <div class="col-12">
                             <div class="card card-success card-outline shadow-sm">
                                 <div class="card-header">
-                                    <h3 class="card-title">คู่มือระบบฝึกอบรมพนักงาน</h3>
+                                    <h3 class="card-title">ติดต่อ</h3>
                                 </div>
                                 <div class="card-body">
-                                    <%
-            String status = (String) request.getSession().getAttribute("name");
-            out.print(status);
-            if (status == null || status.equals("0")) {
-                
-                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-            }
-                                    %> 
+                                   <div class="text-center h5">
+                                      - หากพบปัญหา ติดต่อ Support
+                                   </div>
                                 </div>
                                 
                             </div>

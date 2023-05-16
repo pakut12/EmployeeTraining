@@ -276,6 +276,9 @@ public class Training extends HttpServlet {
                 try {
 
                     String id = request.getParameter("search_employee_id").trim();
+                    String datestart = request.getParameter("search_datestart");
+                    String dateend = request.getParameter("search_dateend");
+                    
 
                     int draw = Integer.parseInt(request.getParameter("draw"));
                     int start = Integer.parseInt(request.getParameter("start"));
@@ -284,7 +287,7 @@ public class Training extends HttpServlet {
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
 
-                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id,searchValue);
+                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id,searchValue,start,length,datestart,dateend);
 
                     Gson gson = new Gson();
 
@@ -301,8 +304,6 @@ public class Training extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
 
             }
 

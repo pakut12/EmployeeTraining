@@ -192,6 +192,7 @@
                                         })
                                     }
                                     $("#modal_editaddress").modal("hide")
+                                    gettableaddress()
                                 }
                             })
                             
@@ -315,7 +316,7 @@
                                 $("#add_addressname").val("");
                                 $("#add_address").val("");
                             })
-                            gettableaddress()
+                          gettableaddress()
                             $("#listdata").addClass("menu-is-opening menu-open");
                             $("#pagedata").addClass("active");
                             $("#dataaddress").addClass("active");

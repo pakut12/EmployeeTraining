@@ -37,7 +37,16 @@
         <servlet-name>Address</servlet-name>
         <servlet-class>com.pg.lib.Servlet.Address</servlet-class>
     </servlet>
-    <servlet><servlet-name>ET_Address</servlet-name><servlet-class>com.pg.lib.model.ET_Address</servlet-class></servlet><servlet><servlet-name>Report</servlet-name><servlet-class>com.pg.lib.Servlet.Report</servlet-class></servlet><servlet-mapping>
+    <servlet><servlet-name>ET_Address</servlet-name><servlet-class>com.pg.lib.model.ET_Address</servlet-class></servlet><servlet><servlet-name>Report</servlet-name><servlet-class>com.pg.lib.Servlet.Report</servlet-class></servlet>
+    <servlet>
+        <servlet-name>Chkauthen</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.Chkauthen</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AuthenticationService</servlet-name>
+        <servlet-class>com.pg.lib.service.AuthenticationService</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
     </servlet-mapping>
@@ -81,12 +90,20 @@
         <servlet-name>Report</servlet-name>
         <url-pattern>/Report</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Chkauthen</servlet-name>
+        <url-pattern>/Chkauthen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationService</servlet-name>
+        <url-pattern>/AuthenticationService</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
         </welcome-file-list>
     </web-app>

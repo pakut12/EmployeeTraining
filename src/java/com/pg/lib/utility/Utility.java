@@ -23,7 +23,7 @@ public class Utility {
         return coverdate;
     }
 
-    private static String getdatetoday() throws SQLException {
+    public static String getdatetoday() throws SQLException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
         Date date = new Date();
         return formatter.format(date);

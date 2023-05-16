@@ -31,8 +31,8 @@ public class TopicmainService {
 
         try {
 
-            String sql = "UPDATE et_topicmain SET topicmain_name = ?,topicmain_date_modify = ? WHERE topicmain_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "UPDATE et_topicmain SET topicmain_name = ?,topicmain_date_modify = TO_DATE(?, 'yyyy/mm/dd') WHERE topicmain_id = ?";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, formatter.format(date));
@@ -59,8 +59,8 @@ public class TopicmainService {
         int primarykey = 0;
         try {
             Boolean status = false;
-            String sql = "SELECT MAX(topicmain_id) as primarykey FROM et_topicmain";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT MAX(topicmain_id) as primarykey FROM et_topicmain ";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -84,7 +84,7 @@ public class TopicmainService {
 
         try {
             String sql = "DELETE FROM et_topicmain WHERE topicmain_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
 
@@ -113,8 +113,8 @@ public class TopicmainService {
 
         try {
 
-            String sql = "INSERT INTO et_topicmain (topicmain_id, topicmain_name, topicmain_date_create) VALUES (?, ?, ?)";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "INSERT INTO et_topicmain (topicmain_id, topicmain_name, topicmain_date_create) VALUES (?, ?, TO_DATE(?, 'yyyy/mm/dd'))";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, name);
@@ -143,8 +143,8 @@ public class TopicmainService {
         List<ET_Topicmain> list = new ArrayList();
         try {
 
-            String sql = "SELECT * FROM et_topicmain ";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT TO_CHAR(a.topicmain_date_create,'DD/MM/YYYY') as date_create,TO_CHAR(a.topicmain_date_modify,'DD/MM/YYYY') as date_modify,a.* FROM et_topicmain a order by a.TOPICMAIN_ID";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -152,8 +152,8 @@ public class TopicmainService {
                 ET_Topicmain main = new ET_Topicmain();
                 main.setTopicmain_id(rs.getString("topicmain_id"));
                 main.setTopicmain_name(rs.getString("topicmain_name"));
-                main.setTopicmain_date_modify(rs.getString("topicmain_date_modify"));
-                main.setTopicmain_date_create(rs.getString("topicmain_date_create"));
+                main.setTopicmain_date_modify(rs.getString("date_modify"));
+                main.setTopicmain_date_create(rs.getString("date_create"));
                 list.add(main);
             }
         } catch (Exception e) {
@@ -174,8 +174,8 @@ public class TopicmainService {
         List<ET_Topicmain> list = new ArrayList();
         try {
 
-            String sql = "SELECT * FROM et_topicmain where topicmain_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT TO_CHAR(a.topicmain_date_create,'DD/MM/YYYY') as date_create,TO_CHAR(a.topicmain_date_modify,'DD/MM/YYYY') as date_modify,a.* where topicmain_id = ?";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -184,8 +184,8 @@ public class TopicmainService {
                 ET_Topicmain main = new ET_Topicmain();
                 main.setTopicmain_id(rs.getString("topicmain_id"));
                 main.setTopicmain_name(rs.getString("topicmain_name"));
-                main.setTopicmain_date_modify(rs.getString("topicmain_date_modify"));
-                main.setTopicmain_date_create(rs.getString("topicmain_date_create"));
+                main.setTopicmain_date_modify(rs.getString("date_modify"));
+                main.setTopicmain_date_create(rs.getString("date_create"));
                 list.add(main);
             }
         } catch (Exception e) {

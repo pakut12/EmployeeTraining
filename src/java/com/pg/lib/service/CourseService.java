@@ -34,7 +34,7 @@ public class CourseService {
         try {
 
             String sql = "UPDATE et_course SET course_name=? WHERE course_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ps.setString(2, name);
@@ -67,7 +67,7 @@ public class CourseService {
         try {
 
             String sql = "DELETE FROM et_course WHERE course_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
 
@@ -94,7 +94,7 @@ public class CourseService {
         try {
             Boolean status = false;
             String sql = "SELECT MAX(course_id) as primarykey FROM et_course";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -118,7 +118,7 @@ public class CourseService {
         try {
 
             String sql = "SELECT * FROM et_course WHERE course_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -147,7 +147,7 @@ public class CourseService {
         try {
 
             String sql = "SELECT * FROM et_course";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -180,7 +180,7 @@ public class CourseService {
         try {
 
             String sql = "INSERT INTO et_course (course_id, course_name, course_date_create) VALUES (?, ?, ?)";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, name);

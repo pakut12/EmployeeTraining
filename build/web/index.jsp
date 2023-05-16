@@ -45,7 +45,14 @@
                                     <h3 class="card-title">คู่มือระบบฝึกอบรมพนักงาน</h3>
                                 </div>
                                 <div class="card-body">
-                                    
+                                    <%
+            String status = (String) request.getSession().getAttribute("name");
+            out.print(status);
+            if (status == null || status.equals("0")) {
+                
+                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+            }
+                                    %> 
                                 </div>
                                 
                             </div>

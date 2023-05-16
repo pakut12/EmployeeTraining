@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div class="wrapper">
 
 <!-- Preloader -->
@@ -16,10 +17,10 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="index.jsp" class="nav-link">หน้าเเรก</a>
         </li>
-        
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="contact.jsp" class="nav-link">ติดต่อ</a>
+        </li>
     </ul>
-    
-    
 </nav>
 <!-- /.navbar -->
 
@@ -137,7 +138,7 @@
                     </ul>
                 </li>
             </ul>
-           
+            
         </nav>
         <!-- /.sidebar-menu -->
     </div>

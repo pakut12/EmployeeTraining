@@ -46,7 +46,6 @@ public class Topicmain extends HttpServlet {
                     html += "<th>ลำดับ</th>";
                     html += "<th>ชื่อ</th>";
                     html += "<th>วันที่สร้าง</th>";
-                    html += "<th>วันที่เเก้ไข</th>";
                     html += "<th>เเก้ไข</th>";
                     html += "<th>ลบ</th>";
                     html += "</tr>";
@@ -57,7 +56,6 @@ public class Topicmain extends HttpServlet {
                         html += "<td>" + (i + 1) + "</td>";
                         html += "<td>" + list.get(i).getTopicmain_name() + "</td>";
                         html += "<td>" + list.get(i).getTopicmain_date_create() + "</td>";
-                        html += "<td>" + list.get(i).getTopicmain_date_modify() + "</td>";
                         html += "<td><button type='button' class='btn btn-warning btn-sm' onclick='edittopicmain(" + list.get(i).getTopicmain_id() + ")'>เเก้ไข</button></td>";
                         html += "<td><button type='button' class='btn btn-danger btn-sm' onclick='deltopicmain(" + list.get(i).getTopicmain_id() + ")'>ลบ</button></td>";
                         html += "</tr>";

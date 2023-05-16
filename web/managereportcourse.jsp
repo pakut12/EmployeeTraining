@@ -210,14 +210,7 @@
                         
                         const employeelist = [];
                     
-                       pdfMake.fonts = {
-                           THSarabun: {
-                                   normal: 'THSarabunNew.ttf',
-                                   bold: 'THSarabunNew-Bold.ttf',
-                                   italics: 'THSarabunNew-Italic.ttf',
-                                        bolditalics: 'THSarabunNew-BoldItalic.ttf'
-                                        }
-                                    }
+                     
     
                         function ClearInput(){
                             employeelist.length = [];
@@ -491,19 +484,8 @@
                                             {
                                                 extend: 'excel',
                                                 title: 'รายชื่อผู้เข้าอบรมหลักสูตร : ' + js.training_course
-                                            },
-                                            { // กำหนดพิเศษเฉพาะปุ่ม pdf
-                                                extend: 'pdf', // ปุ่มสร้าง pdf ไฟล์
-                                                text: 'PDF', // ข้อความที่แสดง
-                                                pageSize: 'A4',   // ขนาดหน้ากระดาษเป็น A4            
-                                                customize:function(doc){ // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
-                                                  
-                                                    
-                                                    
-                                                                                    
-                                                    console.log(doc); // เอาไว้ debug ดู doc object proptery เพื่ออ้างอิงเพิ่มเติม
-                                                }
-                                            }, // สิ้นสุดกำหนดพิเศษปุ่ม pdf
+                                            }
+                                        
                                         ],
                                         order: [[1, 'asc']]
                                     });
@@ -516,9 +498,6 @@
                             })
         
                         }
-
-
-
 
                         function gettabletraining(num){
                             let search_topicmain_id = $("#search_topicmain_id").val()

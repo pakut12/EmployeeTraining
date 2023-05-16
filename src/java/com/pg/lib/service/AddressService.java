@@ -24,13 +24,16 @@ public class AddressService {
     public static Boolean updateaddress(String address_id, String address_name, String address_address) throws SQLException {
         Boolean status = false;
         try {
-            String sql = "UPDATE et_address SET address_name = ?,address_address = ? WHERE address_address = ?";
+            System.out.println(address_id);
+            System.out.println(address_name);
+            System.out.println(address_address);
+            String sql = "UPDATE et_address SET address_name = ?,address_address = ? WHERE address_id = ?";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, address_id);
-            ps.setString(2, address_name);
-            ps.setString(3, address_address);
+            ps.setString(1, address_name);
+            ps.setString(2, address_address);
+            ps.setString(3, address_id);
 
             if (ps.executeUpdate() > 0) {
                 status = true;
@@ -49,9 +52,9 @@ public class AddressService {
      public static List<ET_Address> getaddress() throws SQLException {
         List<ET_Address> listtraining = new ArrayList<ET_Address>();
         try {
-            String sql = "SELECT * FROM et_address ";
+            String sql = "SELECT * FROM et_address order by address_id";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -80,7 +83,7 @@ public class AddressService {
         try {
             String sql = "SELECT * FROM et_address WHERE address_id = ?";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -109,8 +112,8 @@ public class AddressService {
 
         int primarykey = 0;
         try {
-            String sql = "SELECT MAX(address_id) as primarykey FROM et_address;";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT MAX(address_id) as primarykey FROM et_address";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -132,7 +135,7 @@ public class AddressService {
         int primarykey = getprimarykey() + 1;
         try {
             String sql = "INSERT INTO et_address (address_id, address_name, address_address) VALUES (?, ?, ?)";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, address_name);
@@ -159,7 +162,7 @@ public class AddressService {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_address where address_id > 99";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -183,7 +186,7 @@ public class AddressService {
         try {
             String sql = "SELECT COUNT(*) FROM et_address WHERE (address_id LIKE ? or address_name LIKE ? or address_address LIKE ?) and address_id > 99";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + searchValue + "%");
             ps.setString(2, "%" + searchValue + "%");
@@ -208,9 +211,10 @@ public class AddressService {
     public static List<ET_Address> gettableaddress(int start, int length, String searchValue) throws SQLException {
         List<ET_Address> listtraining = new ArrayList<ET_Address>();
         try {
-            String sql = "SELECT * FROM et_address WHERE (address_id LIKE ? or address_name LIKE ? or address_address LIKE ?) and address_id > 99 LIMIT ?,?";
+            String sql = "SELECT * FROM(select rownum as rnum,r.* from ";
+             sql += "(SELECT * FROM et_address WHERE (address_id LIKE ? or address_name LIKE ? or address_address LIKE ?) and address_id > 99 order by address_id)r) where rnum BETWEEN ? AND ? ";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + searchValue + "%");
             ps.setString(2, "%" + searchValue + "%");
@@ -245,7 +249,7 @@ public class AddressService {
         try {
             String sql = "DELETE FROM et_address WHERE address_id = ?";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
 

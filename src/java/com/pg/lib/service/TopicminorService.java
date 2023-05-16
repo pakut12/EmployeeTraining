@@ -24,16 +24,15 @@ public class TopicminorService {
     private static ResultSet rs;
 
     public static Boolean updatetopic(String name, String id) throws SQLException {
-
-
+        
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         Boolean status = false;
 
         try {
 
-            String sql = "UPDATE et_topicminor SET topicminor_name = ? ,topicminor_date_modify = ? WHERE topicminor_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "UPDATE et_topicminor SET topicminor_name = ? ,topicminor_date_modify = TO_DATE(?, 'yyyy/mm/dd') WHERE topicminor_id = ?";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, formatter.format(date));
@@ -61,7 +60,7 @@ public class TopicminorService {
         try {
             Boolean status = false;
             String sql = "SELECT MAX(topicminor_id) as primarykey FROM et_topicminor";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -83,8 +82,8 @@ public class TopicminorService {
     public static List<ET_Topicminor> getbyidlisttopicminor(String id) throws SQLException {
         List<ET_Topicminor> list = new ArrayList();
         try {
-            String sql = "SELECT * FROM et_topicminor  where topicminor_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT * FROM et_topicminor where topicminor_id = ?";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -111,8 +110,8 @@ public class TopicminorService {
     public static List<ET_Topicminor> listtopicminor() throws SQLException {
         List<ET_Topicminor> list = new ArrayList();
         try {
-            String sql = "SELECT * FROM et_topicminor ";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "SELECT TO_CHAR(a.topicminor_date_create,'DD/MM/YYYY') as date_create,TO_CHAR(a.topicminor_date_modify,'DD/MM/YYYY') as date_modify,a.* FROM et_topicminor a order by a.TOPICMINOR_ID";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -120,9 +119,8 @@ public class TopicminorService {
                 ET_Topicminor minor = new ET_Topicminor();
                 minor.setTopicminor_id(rs.getString("topicminor_id"));
                 minor.setTopicminor_name(rs.getString("topicminor_name"));
-
-                minor.setTopicminor_date_create(rs.getString("topicminor_date_create"));
-                minor.setTopicminor_date_modify(rs.getString("topicminor_date_modify"));
+                minor.setTopicminor_date_create(rs.getString("date_create"));
+                minor.setTopicminor_date_modify(rs.getString("date_modify"));
                 list.add(minor);
             }
         } catch (Exception e) {
@@ -145,8 +143,8 @@ public class TopicminorService {
 
         try {
 
-            String sql = "INSERT INTO et_topicminor (topicminor_id, topicminor_name, topicminor_date_create) VALUES (?, ?, ?)";
-            conn = ConnectDB.getConnectionMysql();
+            String sql = "INSERT INTO et_topicminor (topicminor_id, topicminor_name, topicminor_date_create) VALUES (?, ?, TO_DATE(?, 'yyyy/mm/dd'))";
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, name);
@@ -177,7 +175,7 @@ public class TopicminorService {
 
         try {
             String sql = "DELETE FROM et_topicminor WHERE topicminor_id = ? ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
 

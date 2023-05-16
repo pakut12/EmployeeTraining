@@ -27,7 +27,7 @@ public class GroupService {
 
         try {
             String sql = "UPDATE et_group SET group_topicmain_id = ?,group_topicminor_id=?,group_course_name=? WHERE group_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, topicmain_id);
             ps.setString(2, topicminor_id);
@@ -58,7 +58,7 @@ public class GroupService {
             String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id where a.group_id = ?";
 
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -91,7 +91,7 @@ public class GroupService {
         try {
             String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id";
 
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -120,7 +120,7 @@ public class GroupService {
         int primarykey = 0;
         try {
             String sql = "SELECT MAX(group_id) FROM et_group ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -152,7 +152,7 @@ public class GroupService {
 
         try {
             String sql = "INSERT INTO et_group (group_id,group_topicmain_id,group_topicminor_id ,group_course_name ) VALUES (?,?,?,?)";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, topicmain_id);
@@ -180,7 +180,7 @@ public class GroupService {
         Boolean status = false;
         try {
             String sql = "DELETE FROM et_group WHERE group_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, et_main_id);
 

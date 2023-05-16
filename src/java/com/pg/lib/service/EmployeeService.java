@@ -29,12 +29,10 @@ public class EmployeeService {
         Boolean status = false;
         try {
             String sql = "UPDATE et_employee SET employee_result = ? WHERE employee = ? and training_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
             for (String em : listem) {
-                System.out.println(em);
-
                 ps.setString(1, result);
                 ps.setString(2, em);
                 ps.setString(3, training_id);
@@ -60,7 +58,7 @@ public class EmployeeService {
         int primarykey = 0;
         try {
             String sql = "SELECT MAX(employee_id) FROM et_employee ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -83,7 +81,7 @@ public class EmployeeService {
         int row = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_employee WHERE training_id = ? and employee = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, training_id);
             ps.setString(2, employee);
@@ -116,7 +114,7 @@ public class EmployeeService {
         try {
 
             String sql = "INSERT INTO et_employee (employee_id,training_id , employee, employee_result) VALUES (?, ?, ?,?) ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, primarykey);
             ps.setString(2, training_id);
@@ -147,7 +145,7 @@ public class EmployeeService {
         try {
 
             String sql = "INSERT INTO et_employee (employee_id,training_id , employee,employee_result) VALUES (?, ?, ?,?) ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
             for (String id : listemployeeid) {
@@ -266,7 +264,7 @@ public class EmployeeService {
 
         try {
             String sql = "SELECT * FROM et_employee where training_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, training_id);
 
@@ -292,7 +290,7 @@ public class EmployeeService {
 
         try {
             String sql = "SELECT * FROM et_employee where training_id = ?";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, training_id);
 
@@ -321,7 +319,7 @@ public class EmployeeService {
         Boolean status = false;
         try {
             String sql = "DELETE FROM et_employee WHERE training_id = ? ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, training_id);
 
@@ -345,7 +343,7 @@ public class EmployeeService {
         Boolean status = false;
         try {
             String sql = "DELETE FROM et_employee WHERE training_id = ? and employee = ? ";
-            conn = ConnectDB.getConnectionMysql();
+            conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, training_id);
             ps.setString(2, employee_id);
