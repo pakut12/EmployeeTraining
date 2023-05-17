@@ -14,7 +14,30 @@
     
     <body class="hold-transition login-page animate__animated animate__bounce">
         <div class="login-box">
-            
+            <%
+            String logout = request.getParameter("type");
+            if (logout != null && logout.equalsIgnoreCase("logout")) {
+            %>
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong>ออกจากระบบสำเร็จ</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+            <%            }
+            %>
+            <%
+            String error = (String) request.getAttribute("error");
+            if (error != null && error.equalsIgnoreCase("0")) {
+            %>
+            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                รหัสไม่ถูกต้อง
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+            <%            }
+            %>
             <div class="card card-outline card-success">
                 <div class="card-header text-center">
                     <div class="h3 text-uppercase text-success">Employee &nbsp;Training</div>
@@ -43,19 +66,14 @@
                         </div>
                     </form>
                     
-                    
-                    
                 </div>
-                
             </div>
-            
         </div>
         <script>
             $(document).ready(function(){
                 $("#pagehome").addClass("active");
                 $("#pagedata").addClass("active");
                 $("#listdata").addClass("menu-is-opening menu-open");
-                
             })
         </script>
         

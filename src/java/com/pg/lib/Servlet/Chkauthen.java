@@ -45,13 +45,27 @@ public class Chkauthen extends HttpServlet {
                     String url = "";
                     if (AuthenticationService.Checklogin(username, digestpass)) {
                         session.setAttribute("statuslogin", "1");
+                        session.setAttribute("user", username);
                         session.setAttribute("name", AuthenticationService.GetEmployee(username));
                         url = "/index.jsp";
                     } else {
                         session.setAttribute("statuslogin", "0");
                         url = "/login.jsp?error=0";
+                        request.setAttribute("error", "0");
                     }
                     getServletContext().getRequestDispatcher(url).forward(request, response);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (type.equals("logout")) {
+                try {
+                    HttpSession session = request.getSession();
+                    session.removeAttribute("statuslogin");
+                    session.removeAttribute("name");
+                    session.removeAttribute("user");
+                    session.invalidate();
+                    getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 
                 } catch (Exception e) {
                     e.printStackTrace();

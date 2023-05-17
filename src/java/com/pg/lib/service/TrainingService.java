@@ -24,7 +24,7 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static int getdatafilteredtrainingbyemid(String id, String searchValue) throws SQLException {
+    public static int getdatafilteredtrainingbyemid(String id, String searchValue,String datestart, String dateend) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
         int total = 0;
         try {
@@ -34,17 +34,39 @@ public class TrainingService {
                     "INNER JOIN et_topicmain e on c.group_topicmain_id = e.topicmain_id " +
                     "INNER JOIN et_topicminor f on f.topicminor_id = c.group_topicminor_id " +
                     "INNER JOIN et_address g on g.address_id = b.training_address " +
-                    "WHERE a.employee = ? and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
+                    "WHERE a.employee = ? ";
+             if (!datestart.equals("") && !dateend.equals("")) {
+                sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
+            }
+            sql += "and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
+
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            ps.setString(2, "%" + searchValue + "%");
-            ps.setString(3, "%" + searchValue + "%");
-            ps.setString(4, "%" + searchValue + "%");
-            ps.setString(5, "%" + searchValue + "%");
-            ps.setString(6, "%" + searchValue + "%");
-            ps.setString(7, "%" + searchValue + "%");
-            ps.setString(8, "%" + searchValue + "%");
+            
+            if (!datestart.equals("") && !dateend.equals("")) {
+                ps.setString(1, id);
+                ps.setString(2, datestart);
+                ps.setString(3, dateend);
+                ps.setString(4, "%" + searchValue + "%");
+                ps.setString(5, "%" + searchValue + "%");
+                ps.setString(6, "%" + searchValue + "%");
+                ps.setString(7, "%" + searchValue + "%");
+                ps.setString(8, "%" + searchValue + "%");
+                ps.setString(9, "%" + searchValue + "%");
+                ps.setString(10, "%" + searchValue + "%");
+                
+            } else {
+                ps.setString(1, id);
+                ps.setString(2, "%" + searchValue + "%");
+                ps.setString(3, "%" + searchValue + "%");
+                ps.setString(4, "%" + searchValue + "%");
+                ps.setString(5, "%" + searchValue + "%");
+                ps.setString(6, "%" + searchValue + "%");
+                ps.setString(7, "%" + searchValue + "%");
+                ps.setString(8, "%" + searchValue + "%");
+
+            }
+            
 
             rs = ps.executeQuery();
 
@@ -107,7 +129,7 @@ public class TrainingService {
                     "INNER JOIN et_address g on g.address_id = b.training_address " +
                     "WHERE a.employee = ?  ";
             if (!datestart.equals("") && !dateend.equals("")) {
-                sql += "and b.TRAINING_DATE_CREATE BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
+                sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
             sql += "and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
 
@@ -140,7 +162,6 @@ public class TrainingService {
                 ps.setInt(9, start);
                 ps.setInt(10, length);
             }
-
 
             rs = ps.executeQuery();
 

@@ -62,7 +62,6 @@
                 $("#pagehome").addClass("active");
                 $("#pagedata").addClass("active");
                 $("#listdata").addClass("menu-is-opening menu-open");
-                
             })
         </script>
         <!-- /.content-wrapper -->

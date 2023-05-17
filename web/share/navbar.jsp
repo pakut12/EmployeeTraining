@@ -1,5 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+            String status = (String) request.getSession().getAttribute("statuslogin");
+            String name = (String) request.getSession().getAttribute("name");
+            if (status == null || status.equals("0")) {
+                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+            }
 
+%> 
 <div class="wrapper">
 
 <!-- Preloader -->
@@ -21,6 +28,20 @@
             <a href="contact.jsp" class="nav-link">ติดต่อ</a>
         </li>
     </ul>
+    
+    <ul class="navbar-nav ml-auto">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ชื่อ : <%=name%>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                
+                <a class="dropdown-item text-center text-danger" href="Chkauthen?type=logout">ออกจากระบบ</a>
+            </div>
+        </div>
+        
+    </ul>
+    
 </nav>
 <!-- /.navbar -->
 
@@ -28,22 +49,39 @@
 <aside class="main-sidebar elevation-4 sidebar-light-olive ">
     <!-- Brand Logo -->
     
-    <a href="index.jsp" class="brand-link text-md border-success">
+    <a href="index.jsp" class="brand-link text-md">
         <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image  img-fluid m-0" >
         <span class="brand-text p-1 fw-bold text-uppercase" style="color:#3d9970" >Employee Training</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
         
-        
-        
         <!-- Sidebar Menu -->
         <nav class="mt-2 ">
+            
             <ul class="nav nav-pills nav-sidebar flex-column  nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                
-               
+                <li class="nav-header font-weight-bold  bg-success text-center">จัดการผู้ใช้งาน</li>
+                <li class="nav-item menu-is-opening menu-open" id="listdata">
+                    <a href="#" class="nav-link active" id="pagedata">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            ผู้ใช้งาน
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="managetopic1.jsp" class="nav-link " id="datatopic1">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ข้อมูลผู้ใช้งาน</p>
+                            </a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
                 <li class="nav-header font-weight-bold  bg-success text-center">จัดการข้อมูล</li>
                 <li class="nav-item menu-is-opening menu-open" id="listdata">
                     <a href="#" class="nav-link active" id="pagedata">
@@ -121,8 +159,6 @@
                                     <div class="col-2 mt-1 "><i class="far fa-circle nav-icon"></i></div>
                                     <div class="col-10 px-3"><p class="">แสดงการฝึกอบรมตามหลักสูตร</p></div>
                                 </div>
-                                
-                                
                             </a>
                         </li>
                         <li class="nav-item">
@@ -131,7 +167,6 @@
                                     <div class="col-2 mt-1"><i class="far fa-circle nav-icon"></i></div>
                                     <div class="col-10 px-3"><p class="">แสดงการฝึกอบรมตามรหัสพนักงาน</p></div>
                                 </div>
-                                
                             </a>
                         </li>
                         

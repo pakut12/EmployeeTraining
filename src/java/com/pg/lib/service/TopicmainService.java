@@ -174,7 +174,7 @@ public class TopicmainService {
         List<ET_Topicmain> list = new ArrayList();
         try {
 
-            String sql = "SELECT TO_CHAR(a.topicmain_date_create,'DD/MM/YYYY') as date_create,TO_CHAR(a.topicmain_date_modify,'DD/MM/YYYY') as date_modify,a.* where topicmain_id = ?";
+            String sql = "SELECT TO_CHAR(a.topicmain_date_create,'DD/MM/YYYY') as date_create,TO_CHAR(a.topicmain_date_modify,'DD/MM/YYYY') as date_modify,a.* from ET_TOPICMAIN a where a.topicmain_id = ?";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);

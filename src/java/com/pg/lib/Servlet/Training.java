@@ -294,7 +294,7 @@ public class Training extends HttpServlet {
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.getdatatotaltrainingbyemid(id));
-                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue));
+                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue,datestart,dateend));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
