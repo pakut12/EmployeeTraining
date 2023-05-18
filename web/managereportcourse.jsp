@@ -149,24 +149,28 @@
                         <div class="card-body">
                             <form id="myformsearch">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หมวดหลัก</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicmain_id" name="search_topicmain_id" required>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หมวดย่อย</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicminor_id" name="search_topicminor_id" required>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หลักสูตร</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_course_id" name="search_course_id" required>
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label>วันที่อบรม</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date" name="search_date"></input> 
+                                        <label>วันที่เริ่ม</label>
+                                        <input class="form-control form-control-sm" type="date" id="search_date_start" name="search_date_start"></input> 
+                                    </div>
+                                    <div class="col-3">
+                                        <label>ถึงวันที่</label>
+                                        <input class="form-control form-control-sm" type="date" id="search_date_end" name="search_date_end"></input> 
                                     </div>
                                 </div>
                             </form>
@@ -462,11 +466,8 @@
                                             { 
                                                 title: 'อายุงาน',
                                                 data: "employee_age"
-                                            },
-                                            { 
-                                                title: 'ผลการประเมินผล',
-                                                data: "employee_result"
-                                            },
+                                            }
+                                            
                                         ],
                                         processing: true,
                                         scrollCollapse: true,
@@ -503,7 +504,8 @@
                             let search_topicmain_id = $("#search_topicmain_id").val()
                             let search_topicminor_id = $("#search_topicminor_id").val()
                             let search_course_id = $("#search_course_id").val()
-                            let search_date = $("#search_date").val()
+                            let search_date_start = $("#search_date_start").val()
+                            let search_date_end = $("#search_date_end").val()
         
                             if(num == 1){
                                 search_topicmain_id = null
@@ -521,7 +523,8 @@
                                         search_topicmain_id:search_topicmain_id,
                                         search_topicminor_id:search_topicminor_id,
                                         search_course_id:search_course_id,
-                                        search_date:search_date
+                                        search_date_start:search_date_start,
+                                        search_date_end:search_date_end
                                     },
                                     dataSrc:function(json){
                                         var data = JSON.parse(json.data)

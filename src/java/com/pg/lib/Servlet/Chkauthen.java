@@ -4,12 +4,14 @@
  */
 package com.pg.lib.Servlet;
 
+import com.pg.lib.model.ET_User;
 import com.pg.lib.service.AuthenticationService;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.*;
 
 import java.security.MessageDigest;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -38,15 +40,14 @@ public class Chkauthen extends HttpServlet {
                     String password = request.getParameter("password").trim();
                     HttpSession session = request.getSession();
 
-                    MessageDigest md = MessageDigest.getInstance("MD5");
-                    md.reset();
-                    md.update(password.getBytes());
-                    String digestpass = new BigInteger(1, md.digest()).toString(16).toUpperCase();
+
                     String url = "";
-                    if (AuthenticationService.Checklogin(username, digestpass)) {
+                    if (AuthenticationService.Checklogin(username, password)) {
+                        List<ET_User> listuser = AuthenticationService.GetEmployee(username);
                         session.setAttribute("statuslogin", "1");
                         session.setAttribute("user", username);
-                        session.setAttribute("name", AuthenticationService.GetEmployee(username));
+                        session.setAttribute("name", listuser.get(0).getUser_name());
+                        session.setAttribute("statususer", listuser.get(0).getUser_status());
                         url = "/index.jsp";
                     } else {
                         session.setAttribute("statuslogin", "0");
@@ -64,6 +65,7 @@ public class Chkauthen extends HttpServlet {
                     session.removeAttribute("statuslogin");
                     session.removeAttribute("name");
                     session.removeAttribute("user");
+                    session.removeAttribute("statususer");
                     session.invalidate();
                     getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 

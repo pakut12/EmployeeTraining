@@ -2,6 +2,7 @@
 <%
             String status = (String) request.getSession().getAttribute("statuslogin");
             String name = (String) request.getSession().getAttribute("name");
+            String statususer = (String) request.getSession().getAttribute("statususer");
             if (status == null || status.equals("0")) {
                 getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
             }
@@ -32,7 +33,7 @@
     <ul class="navbar-nav ml-auto">
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ชื่อ : <%=name%>
+                ยินดีต้อนรับ คุณ : <%=name%>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 
@@ -62,9 +63,15 @@
             <ul class="nav nav-pills nav-sidebar flex-column  nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+              <%
+          
+            if (statususer != null && statususer.equalsIgnoreCase("admin")) {
+            %>
+                
+                
                 <li class="nav-header font-weight-bold  bg-success text-center">จัดการผู้ใช้งาน</li>
-                <li class="nav-item menu-is-opening menu-open" id="listdata">
-                    <a href="#" class="nav-link active" id="pagedata">
+                <li class="nav-item menu-is-opening menu-open" id="listuser">
+                    <a href="#" class="nav-link active" id="pageuser">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             ผู้ใช้งาน
@@ -73,7 +80,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="managetopic1.jsp" class="nav-link " id="datatopic1">
+                            <a href="manageuser.jsp" class="nav-link " id="datauser">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ข้อมูลผู้ใช้งาน</p>
                             </a>
@@ -82,6 +89,8 @@
                         
                     </ul>
                 </li>
+                <%            }
+                %>
                 <li class="nav-header font-weight-bold  bg-success text-center">จัดการข้อมูล</li>
                 <li class="nav-item menu-is-opening menu-open" id="listdata">
                     <a href="#" class="nav-link active" id="pagedata">
@@ -135,12 +144,14 @@
                                 <p>ข้อมูลฝึกอบรม</p>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item">
                             <a href="manageevaluation.jsp" class="nav-link" id="dataevaluation">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>ประเมินผลผู้เข้าอบรม</p>
                             </a>
                         </li>
+                        -->
                     </ul>
                 </li>
                 <li class="nav-header font-weight-bold bg-success text-center">ออกรายงาน</li>

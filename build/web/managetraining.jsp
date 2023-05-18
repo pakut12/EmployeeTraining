@@ -170,80 +170,80 @@
                                 </div>
                                 <div class="modal-body ">
                                     <div class="text-center">
-                                    <form id="myformedit" > 
-                                        <input class="" type="hidden" id="edit_training_id" name="edit_training_id" > 
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                                    <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id" name="edit_topicmain_id" required>
-                                                        
-                                                    </select>
+                                        <form id="myformedit" > 
+                                            <input class="" type="hidden" id="edit_training_id" name="edit_training_id" > 
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id" name="edit_topicmain_id" required>
+                                                            
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                                    <select class="form-control form-control-sm text-center" id="edit_topicminor_id" name="edit_topicminor_id" style="width: 100%" required>
-                                                        
-                                                    </select>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                                        <select class="form-control form-control-sm text-center" id="edit_topicminor_id" name="edit_topicminor_id" style="width: 100%" required>
+                                                            
+                                                        </select>
+                                                    </div>
                                                 </div>
+                                                <div class="col-4">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                                        <select class="form-control form-control-sm text-center" id="edit_course_id" name="edit_course_id" style="width: 100%" required>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                
                                             </div>
-                                            <div class="col-4">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                                    <select class="form-control form-control-sm text-center" id="edit_course_id" name="edit_course_id" style="width: 100%" required>
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">บริษัท</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="edit_company" name="edit_company" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ค่าใช้จ่าย</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="edit_expenses" name="edit_expenses" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">วันที่อบรม</label>
+                                                        <input class="form-control form-control-sm text-center" type="date" id="edit_date" name="edit_date" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ปี</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="edit_year" name="edit_year" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                        <select class="form-control form-control-sm text-center" id="edit_address" name="edit_address" style="width: 100%" required>
+                                                            
+                                                        </select>
                                                         
-                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">ชั่วโมง</label>
+                                                        <input class="form-control form-control-sm text-center" type="text" id="edit_hour" name="edit_hour" required> 
+                                                    </div>
                                                 </div>
                                             </div>
                                             
-                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">บริษัท</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_company" name="edit_company" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ค่าใช้จ่าย</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_expenses" name="edit_expenses" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">วันที่อบรม</label>
-                                                    <input class="form-control form-control-sm text-center" type="date" id="edit_date" name="edit_date" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ปี</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_year" name="edit_year" required> 
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">สถานที่จัดอบรม</label>
-                                                    <select class="form-control form-control-sm text-center" id="edit_address" name="edit_address" style="width: 100%" required>
-                                                        
-                                                    </select>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">ชั่วโมง</label>
-                                                    <input class="form-control form-control-sm text-center" type="text" id="edit_hour" name="edit_hour" required> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
+                                        </form>
+                                    </div>
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="text-right col-form-label ">รายชื่อพนักงาน</div>
@@ -284,24 +284,28 @@
                         <div class="card-body">
                             <form id="myformsearch">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หมวดหลัก</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicmain_id" name="search_topicmain_id" required>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หมวดย่อย</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicminor_id" name="search_topicminor_id" required>
                                         </select>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <label>หลักสูตร</label>
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_course_id" name="search_course_id" required>
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label>วันที่อบรม</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date" name="search_date"></input> 
+                                        <label>วันที่เริ่ม</label>
+                                        <input class="form-control form-control-sm" type="date" id="search_date_start" name="search_date_start"></input> 
+                                    </div>
+                                    <div class="col-3">
+                                        <label>ถึงวันที่</label>
+                                        <input class="form-control form-control-sm" type="date" id="search_date_end" name="search_date_end"></input> 
                                     </div>
                                 </div>
                             </form>
@@ -1112,7 +1116,8 @@
                             let search_topicmain_id = $("#search_topicmain_id").val()
                             let search_topicminor_id = $("#search_topicminor_id").val()
                             let search_course_id = $("#search_course_id").val()
-                            let search_date = $("#search_date").val()
+                            let search_date_start = $("#search_date_start").val()
+                            let search_date_end = $("#search_date_end").val()
         
                             if(!search_topicmain_id || !search_topicminor_id || !search_course_id ){
                                 search_topicmain_id = null
@@ -1120,9 +1125,7 @@
                                 search_course_id = null
                                 
                             }
-                            console.log(search_topicmain_id)
-                            console.log(search_topicminor_id)
-                            console.log(search_course_id)
+                            
                             
         
                             var table = $("#table_training").DataTable({
@@ -1135,7 +1138,8 @@
                                         search_topicmain_id:search_topicmain_id,
                                         search_topicminor_id:search_topicminor_id,
                                         search_course_id:search_course_id,
-                                        search_date:search_date
+                                        search_date_start:search_date_start,
+                                        search_date_end:search_date_end
                                     },
                                     dataSrc:function(json){
                                         var data = JSON.parse(json.data)
@@ -1274,12 +1278,69 @@
    
                         $(document).ready(function(){
                         
-                            gettabletraining(1)
+        
+                            $("#table_training").DataTable({
+                                
+                                columns: [
+                                    { 
+                                        title: 'รหัส',
+                                        data: "training_id"
+                                    },
+                                    { 
+                                        title: 'บริษัท',
+                                        data: "training_company"
+                                    },
+                                    { 
+                                        title: 'ปี', 
+                                        data: "training_year"
+                                    },
+                                    { 
+                                        title: 'ชั้วโมง', 
+                                        data: "training_hour"
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" },
+                                    { 
+                                        title: 'ค่าใช้จ่าย',
+                                        data: "training_expenses" },
+                                    { 
+                                        title: 'สถานที่จัดอบรม', 
+                                        data:"training_address"
+                                                 
+                                    },
+                                    { 
+                                        title: 'หมวดหลัก', 
+                                        data: "training_topicmain"
+                                    },
+                                    { 
+                                        title: 'หมวดย่อย',
+                                        data: "training_topminor" 
+                                    },
+                                    {
+                                        title: 'หลักสูตร',
+                                        data: "training_course" 
+                                    },
+                                    { 
+                                        title: 'เเก้ไข',
+                                        data: "btn_edit"
+                                    },
+                                    { 
+                                        title: 'ลบ',
+                                        data: "btn_del"
+                                    }
+                                    
+                                ]
+                               
+                                  
+                            })
+        
+                            //gettabletraining(1)
                             gettopicmain(1)
                              
                             $(document).on('shown.bs.modal', '#modal_edittraining', function () {
-                                  $("#table_employee_edit").DataTable().columns.adjust().draw();
-                             });
+                                $("#table_employee_edit").DataTable().columns.adjust().draw();
+                            });
                             
                             $("#adddata").click(function (){
                                 gettopicmain(2)

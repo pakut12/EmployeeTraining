@@ -128,7 +128,16 @@
                                 <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
-                                
+                                <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_course" >
+                                    <thead>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -306,24 +315,76 @@
                             })
                         }	
                         
+
                         function gettablegroup(){
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"gettablegroup"
+                        
+                            var table = $("#table_course").DataTable({
+                                serverSide: true,
+                                ajax: {
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"gettablegroup" 
+                                    },
+                                    dataSrc:function(json){
+                                        var data = JSON.parse(json.data)
+                                        console.log(data)
+                                        var arr = []
+                                        
+                                        $.each(data,function(k,v){
+                                          
+                                            var result = {
+                                                group_id  :   v.group_id,
+                                                main_course_name :  v.main_course_name,
+                                                main_topicmain_id :  v.main_topicmain_id,
+                                                main_topicmain_name :  v.main_topicmain_name,
+                                                main_topicminor_id :  v.main_topicminor_id,
+                                                main_topicminor_name :  v.main_topicminor_name,
+                                                btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="editgroup('+v.group_id+')" id="bt_edit">เเก้ไข</button>',
+                                                btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="delgroup('+v.group_id+')" id="bt_del">ลบ</button>'
+                                            }
+                                            arr.push(result);
+                             
+                                        })
+                                        return arr
+                                    }
                                 },
-                                success:function(msg){
+                                columns: [
+                                    { 
+                                        title: 'เลขที่',
+                                        data: "group_id"
+                                    },
+                                    { 
+                                        title: 'ชื่อผู้ใช้',
+                                        data: "main_topicmain_name"
+                                    },
+                                    { 
+                                        title: 'ตำเเหน่ง',
+                                        data: "main_topicminor_name"
+                                    },
+                                    { 
+                                        title: 'ตำเเหน่ง',
+                                        data: "main_course_name"
+                                    },
+                                    { 
+                                        title: 'เเก้ไข', 
+                                        data: "btn_edit"
+                                    },
+                                    { 
+                                        title: 'ลบ', 
+                                        data: "btn_del"
+                                    }
                                     
-        
-                                    
-                                    $("#mytable").empty();
-                                    $("#mytable").html(msg);
-                                    $("#table_group").DataTable();
-                                    
-                                }
+                                ],
+                                scrollCollapse: true,
+                                scrollX:true, 
+                                bDestroy: true
+                                  
                             })
-                        }
+
+                        }    
+
+                       
 
                         function addgroup(){
                             $.ajax({

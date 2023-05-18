@@ -4,6 +4,7 @@
  */
 package com.pg.lib.Servlet;
 
+import com.google.gson.Gson;
 import com.pg.lib.model.*;
 import java.io.*;
 import java.net.*;
@@ -76,40 +77,32 @@ public class Group extends HttpServlet {
                 }
 
             } else if (type.equals("gettablegroup")) {
+                
                 try {
-                    List<ET_Group> list = GroupService.getlistgroupall();
+                    int draw = Integer.parseInt(request.getParameter("draw"));
+                    int start = Integer.parseInt(request.getParameter("start"));
+                    int length = Integer.parseInt(request.getParameter("length"));
+                    String searchValue = request.getParameter("search[value]");
+                    String orderColumn = request.getParameter("order[0][column]");
+                    String orderDir = request.getParameter("order[0][dir]");
 
-                    String html = "";
-                    html += "<div class='table-responsive'>";
-                    html += "<table class='table  table-sm text-center text-nowrap' id='table_group'>";
-                    html += "<thead>";
-                    html += "<tr>";
-                    html += "<th>ลำดับ</th>";
-                    html += "<th>หมวดหลัก</th>";
-                    html += "<th>หมวดย่อย</th>";
-                    html += "<th>หลักสูตร</th>";
-                    html += "<th>เเก้ไข</th>";
-                    html += "<th>ลบ</th>";
-                    html += "</tr>";
-                    html += "</thead>";
-                    html += "<tbody>";
-                    for (int i = 0; i < list.size(); i++) {
-                        html += "<tr>";
-                        html += "<td>" + (i + 1) + "</td>";
-                        html += "<td>" + list.get(i).getMain_topicmain_name() + "</td>";
-                        html += "<td>" + list.get(i).getMain_topicminor_name() + "</td>";
-                        html += "<td>" + list.get(i).getMain_course_name() + "</td>";
-                        html += "<td><button type='button' class='btn btn-warning btn-sm' onclick='editgroup(" + list.get(i).getGroup_id() + "," + list.get(i).getMain_topicmain_id() + "," + list.get(i).getMain_topicminor_id() + "," + list.get(i).getMain_course_id() + ")'>เเก้ไข</button></td>";
-                        html += "<td><button type='button' class='btn btn-danger btn-sm' onclick='delgroup(" + list.get(i).getGroup_id() + ")'>ลบ</button></td>";
-                        html += "</tr>";
-                    }
-                    html += "</tbody>";
-                    html += "</table>";
-                    html += "</div>";
-                    out.print(html);
+                    List<ET_Group> list = GroupService.getlistgroupall(searchValue,start,length);
+
+                    Gson gson = new Gson();
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("draw", draw);
+                    obj.put("recordsTotal", UserService.gettotletableuser());
+                    obj.put("recordsFiltered", UserService.getfilteredtableuser(searchValue));
+                    obj.put("data", gson.toJsonTree(list));
+
+                    response.setContentType("application/json");
+                    response.getWriter().write(obj.toString());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+               
 
             } else if (type.equals("delgroup")) {
                 try {

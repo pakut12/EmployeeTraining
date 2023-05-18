@@ -46,6 +46,10 @@
         <servlet-name>AuthenticationService</servlet-name>
         <servlet-class>com.pg.lib.service.AuthenticationService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>com.pg.lib.Servlet.User</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Topicmain</servlet-name>
         <url-pattern>/Topicmain</url-pattern>
@@ -97,6 +101,10 @@
     <servlet-mapping>
         <servlet-name>AuthenticationService</servlet-name>
         <url-pattern>/AuthenticationService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/User</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -129,16 +129,17 @@ public class Training extends HttpServlet {
                     String search_topicmain_id = request.getParameter("search_topicmain_id").trim();
                     String search_topicminor_id = request.getParameter("search_topicminor_id").trim();
                     String search_course_id = request.getParameter("search_course_id").trim();
-                    String search_date = request.getParameter("search_date").trim();
+                    String search_date_start = request.getParameter("search_date_start").trim();
+                    String search_date_end = request.getParameter("search_date_end").trim();
 
-                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date);
+                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start,search_date_end);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.gettotletabletraining());
-                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date));
+                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start,search_date_end));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
@@ -278,7 +279,7 @@ public class Training extends HttpServlet {
                     String id = request.getParameter("search_employee_id").trim();
                     String datestart = request.getParameter("search_datestart");
                     String dateend = request.getParameter("search_dateend");
-                    
+
 
                     int draw = Integer.parseInt(request.getParameter("draw"));
                     int start = Integer.parseInt(request.getParameter("start"));
@@ -287,14 +288,14 @@ public class Training extends HttpServlet {
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
 
-                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id,searchValue,start,length,datestart,dateend);
+                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id, searchValue, start, length, datestart, dateend);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.getdatatotaltrainingbyemid(id));
-                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue,datestart,dateend));
+                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue, datestart, dateend));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");

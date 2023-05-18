@@ -4,8 +4,11 @@
  */
 package com.pg.lib.service;
 
+import com.pg.lib.model.ET_User;
 import com.pg.lib.utility.ConnectDB;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -48,14 +51,19 @@ public class AuthenticationService {
 
         boolean statusLogin = false;
         try {
-            conn = ConnectDB.getConnection();
-            ps = conn.prepareStatement("SELECT count(passwd) as statuslogin from pgusertab where userid = ? and passwd = ? ");
+            conn = ConnectDB.getConnectionhr();
+            ps = conn.prepareStatement("SELECT count(*) as statuslogin from ET_USER where user_user = ? and user_pass = ? ");
             ps.setString(1, username);
             ps.setString(2, digestpass);
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                statusLogin = rs.getBoolean("statuslogin") ? true : false;
+                if (rs.getInt("statuslogin") > 0) {
+
+                    statusLogin = true;
+                } else {
+                    statusLogin = false;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,18 +79,21 @@ public class AuthenticationService {
         return statusLogin;
     }
 
-    public static String GetEmployee(String userid) {
-        String name = "";
+    public static  List<ET_User> GetEmployee(String userid) {
+        List<ET_User> list = new ArrayList<ET_User>();
         try {
-            conn = ConnectDB.getConnection();
-            ps = conn.prepareStatement("" +
-                    "SELECT prefixdesc, pwfname, pwlname " +
-                    "FROM v_pwemployee " +
-                    "WHERE pwemployee = ? ");
+            conn = ConnectDB.getConnectionhr();
+            ps = conn.prepareStatement("SELECT * from ET_USER where user_user = ? ");
             ps.setString(1, userid);
             rs = ps.executeQuery();
             while (rs.next()) {
-                name = rs.getString("prefixdesc") + " " + rs.getString("pwfname") + " " + rs.getString("pwlname");
+                ET_User user = new ET_User();
+                user.setUser_id(rs.getString("user_id"));
+                user.setUser_user(rs.getString("user_user"));
+                user.setUser_pass(rs.getString("user_pass"));
+                user.setUser_name(rs.getString("user_name"));
+                user.setUser_status(rs.getString("user_status"));
+                list.add(user);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,6 +106,6 @@ public class AuthenticationService {
                 ex.printStackTrace();
             }
         }
-        return name;
+        return list;
     }
 }
