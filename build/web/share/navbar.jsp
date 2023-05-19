@@ -23,21 +23,36 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index.jsp" class="nav-link">หน้าเเรก</a>
+            <a href="index.jsp" class="nav-link">
+                <i class="fas fa-home"></i>
+                
+                หน้าเเรก
+            </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="contact.jsp" class="nav-link">ติดต่อ</a>
+            <a href="contact.jsp" class="nav-link">
+                <i class="fas fa-phone-alt"></i>
+                
+                ติดต่อ
+            </a>
         </li>
     </ul>
     
     <ul class="navbar-nav ml-auto">
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ยินดีต้อนรับ คุณ : <%=name%>
+                คุณ : <%=name%>
             </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                
-                <a class="dropdown-item text-center text-danger" href="Chkauthen?type=logout">ออกจากระบบ</a>
+            <div class="dropdown-menu dropdown-menu-right ">
+               
+               
+                <div class="text-center pt-2 pl-3 pr-3 pb-3">
+                    <div class="mb-3"><strong>ยินดีต้อนรับ</strong>  </div>
+                    <div class="mb-3"><strong>  คุณ : </strong> <%=name%></div>
+                    <div class="text-uppercase"><strong>  สถานะ : </strong> <%=statususer%></div>
+                </div>
+                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-center text-danger " href="Chkauthen?type=logout"> <i class="fas fa-door-open"></i> ออกจากระบบ</a>
             </div>
         </div>
         
@@ -64,7 +79,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
               <%
-          
+
             if (statususer != null && statususer.equalsIgnoreCase("admin")) {
             %>
                 
@@ -72,11 +87,13 @@
                 <li class="nav-header font-weight-bold  bg-success text-center">จัดการผู้ใช้งาน</li>
                 <li class="nav-item menu-is-opening menu-open" id="listuser">
                     <a href="#" class="nav-link active" id="pageuser">
-                        <i class="nav-icon fas fa-database"></i>
+                        <i class="fas fa-users nav-icon" ></i>
                         <p>
+                            
                             ผู้ใช้งาน
                             <i class="right fas fa-angle-left"></i>
                         </p>
+                        
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">

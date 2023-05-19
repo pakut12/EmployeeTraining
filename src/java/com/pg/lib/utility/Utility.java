@@ -16,7 +16,8 @@ import javax.naming.NamingException;
  * @author pakutsing
  */
 public class Utility {
-
+    
+    
     public static String CoverDate(String txt) {
         String[] date = txt.split("-");
         String coverdate = date[2] + "/" + date[1] + "/" + date[0];

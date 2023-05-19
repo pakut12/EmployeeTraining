@@ -20,8 +20,6 @@ public class GroupService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    
-
     public static Boolean updategroup(String group_id, String topicmain_id, String topicminor_id, String group_course_name) throws SQLException {
 
         Boolean status = false;
@@ -85,19 +83,40 @@ public class GroupService {
         return listgroup;
     }
 
-    
-    public static int getfilteredtableuser(String searchValue) throws SQLException {
-        int totle = 0;
+    private static String Checkidgroup(String topicmain_id, String topicminor_id, String course_id) throws SQLException {
+        String groupid = "";
         try {
-            String sql = "select count(*) from et_group WHERE (a.group_id LIKE ? or b.topicmain_id LIKE ? or b.topicmain_name LIKE ? or c.topicminor_id LIKE ? or c.topicminor_name LIKE ? or a.group_course_name LIKE ? ) and a.group_id > 99 order by a.group_id ";
-
+            String sql = "SELECT * FROM et_group WHERE group_topicmain_id = ? and group_topicminor_id = ? and group_course_name = ?";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + searchValue + "%");
-            ps.setString(2, "%" + searchValue + "%");
-            ps.setString(3, "%" + searchValue + "%");
-            ps.setString(4, "%" + searchValue + "%");
-            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(1, topicmain_id);
+            ps.setString(2, topicminor_id);
+            ps.setString(3, course_id);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                groupid = rs.getString("group_id");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+        return groupid;
+    }
+
+    public static int gettotaltablegroup(String searchValue, String topicmain_id, String topicminor_id) throws SQLException {
+        int totle = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.GROUP_TOPICMAIN_ID = ? and a.GROUP_TOPICMINOR_ID = ? and a.group_id > 99 order by a.group_id ";
+            
+            conn = ConnectDB.getConnectionhr();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, topicmain_id);
+            ps.setString(2, topicminor_id);
 
             rs = ps.executeQuery();
 
@@ -115,29 +134,64 @@ public class GroupService {
 
         return totle;
     }
-    
-    public static List<ET_Group> getlistgroupall(String searchValue, int start, int length) throws SQLException {
+
+    public static int getfilteredtablegroup(String searchValue, String topicmain_id, String topicminor_id) throws SQLException {
+        int totle = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.GROUP_TOPICMAIN_ID = ? and a.GROUP_TOPICMINOR_ID = ? and (a.group_id LIKE ? or b.topicmain_id LIKE ? or b.topicmain_name LIKE ? or c.topicminor_id LIKE ? or c.topicminor_name LIKE ? or a.group_course_name LIKE ? ) and a.group_id > 99 order by a.group_id ";
+           
+            conn = ConnectDB.getConnectionhr();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, topicmain_id);
+            ps.setString(2, topicminor_id);
+            ps.setString(3, "%" + searchValue + "%");
+            ps.setString(4, "%" + searchValue + "%");
+            ps.setString(5, "%" + searchValue + "%");
+            ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+            ps.setString(8, "%" + searchValue + "%");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                totle = rs.getInt("COUNT(*)");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+
+        return totle;
+    }
+
+    public static List<ET_Group> getlistgroupall(String searchValue, int start, int length, String topicmain_id, String topicminor_id) throws SQLException {
 
         List<ET_Group> listgroup = new ArrayList<ET_Group>();
 
         try {
 
-
             String sql = "SELECT * FROM(select rownum as rnum,r.* from ";
             sql += "(SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id " +
-                    "WHERE (a.group_id LIKE ? or b.topicmain_id LIKE ? or b.topicmain_name LIKE ? or c.topicminor_id LIKE ? or c.topicminor_name LIKE ? or a.group_course_name LIKE ? ) and a.group_id > 99 order by a.group_id )r) where rnum BETWEEN ? AND ? ";
+                    "WHERE a.GROUP_TOPICMAIN_ID = ? and a.GROUP_TOPICMINOR_ID = ? and" +
+                    " (a.group_id LIKE ? or b.topicmain_id LIKE ? or b.topicmain_name LIKE ? or c.topicminor_id LIKE ? or c.topicminor_name LIKE ? or a.group_course_name LIKE ? ) and a.group_id > 99 order by a.group_id )r) where rnum BETWEEN ? AND ? ";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + searchValue + "%");
-            ps.setString(2, "%" + searchValue + "%");
+            ps.setString(1, topicmain_id);
+            ps.setString(2, topicminor_id);
             ps.setString(3, "%" + searchValue + "%");
             ps.setString(4, "%" + searchValue + "%");
             ps.setString(5, "%" + searchValue + "%");
             ps.setString(6, "%" + searchValue + "%");
+            ps.setString(7, "%" + searchValue + "%");
+            ps.setString(8, "%" + searchValue + "%");
 
-            ps.setInt(7, start);
-            ps.setInt(8, start + length);
+            ps.setInt(9, start);
+            ps.setInt(10, start + length);
             rs = ps.executeQuery();
 
             while (rs.next()) {

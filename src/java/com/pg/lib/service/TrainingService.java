@@ -562,7 +562,7 @@ public class TrainingService {
         List<ET_Topicminor> listminor = new ArrayList<ET_Topicminor>();
 
         try {
-            String sql = "SELECT b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.group_topicmain_id = ? GROUP BY b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name";
+            String sql = "SELECT b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.group_topicmain_id = ? GROUP BY b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name order by c.topicminor_id";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, topicmain_id);

@@ -85,15 +85,19 @@ public class Group extends HttpServlet {
                     String searchValue = request.getParameter("search[value]");
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
-
-                    List<ET_Group> list = GroupService.getlistgroupall(searchValue,start,length);
+                    
+                    String search_topicmain_id = request.getParameter("search_topicmain_id").trim();
+                    String search_topicminor_id = request.getParameter("search_topicminor_id").trim();
+                    
+                    
+                    List<ET_Group> list = GroupService.getlistgroupall(searchValue,start,length,search_topicmain_id,search_topicminor_id);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
-                    obj.put("recordsTotal", UserService.gettotletableuser());
-                    obj.put("recordsFiltered", UserService.getfilteredtableuser(searchValue));
+                    obj.put("recordsTotal", GroupService.gettotaltablegroup(searchValue, search_topicmain_id, search_topicminor_id));
+                    obj.put("recordsFiltered", GroupService.getfilteredtablegroup(searchValue, search_topicmain_id, search_topicminor_id));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");

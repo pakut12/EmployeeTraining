@@ -321,13 +321,13 @@
                             จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
-                            
                             <div class="text-right mb-3">
                                 <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
                                 <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
                                     <thead>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -497,9 +497,14 @@
                         }                        
 
                         function getemployeebyid(){
+                     
                             var table = $("#table_employee_add").DataTable({
                                 data:employeelist,
                                 columns: [
+                                    { 
+                                        title: 'สาขา',
+                                        data: "employee_company"
+                                    },
                                     { 
                                         title: 'รหัส',
                                         data: "employee_id"
@@ -581,9 +586,10 @@
                                 },
                                 success:function(msg){
                                     
-                                    var js = JSON.parse(msg)
+                                    let js = JSON.parse(msg)
                                     //console.log(js)
                                     var employee = {
+                                        employee_company:js.employee_company,
                                         employee_id:js.employee_id,
                                         employee_idcard:js.employee_idcard,
                                         employee_prefixdesc:js.employee_prefixdesc,
@@ -671,13 +677,17 @@
                                             training_id:t_id
                                         },
                                         success:function(msg){
-                                            var js =  JSON.parse(msg);
+                                            let js =  JSON.parse(msg);
                                             console.log(js)
                                             
         
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
+                                                    { 
+                                                        title: 'สาขา',
+                                                        data: "employee_company"
+                                                    },
                                                     { 
                                                         title: 'รหัส',
                                                         data: "employee_id"
@@ -769,8 +779,8 @@
                                             training_id:training_id
                                         },
                                         success:function(msg){
-                                            var js =  JSON.parse(msg);
-                                            
+                                            let js =  JSON.parse(msg);
+                                         
                                             $("#table_employee_edit").DataTable({
                                                 data:js.listem,
                                                 columns: [
@@ -985,7 +995,7 @@
                                     training_id:id
                                 },
                                 success:function(msg){
-                                    var js =  JSON.parse(msg);
+                                    let js =  JSON.parse(msg);
                                     
                                     
                                     edit_getaddress(js.training_address_id,js.training_address)
@@ -1126,8 +1136,6 @@
                                 
                             }
                             
-                            
-        
                             var table = $("#table_training").DataTable({
                                 serverSide: true,
                                 ajax: {

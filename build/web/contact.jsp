@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="card-body">
                                    <div class="text-center h5">
-                                      - หากพบปัญหา ติดต่อ Support
+                                      - หากพบปัญหา ติดต่อ Support / 6636
                                    </div>
                                 </div>
                                 

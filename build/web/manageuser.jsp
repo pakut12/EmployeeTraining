@@ -25,7 +25,12 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">
+                                       
+                                        หน้าเเรก
+                                    </a>
+                                </li>
                                 <li class="breadcrumb-item"><a href="#">ข้อมูล</a></li>
                                 <li class="breadcrumb-item active">จัดการข้อมูลผู้ใช้</li>
                             </ol>
@@ -83,7 +88,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลหมวดหลัก</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลผู้ใช้</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -286,66 +291,66 @@
                                                 status = '<span class="badge badge-pill badge-primary ">'+v.user_status+'</span>'
                                             }
                                             
-                                                var result = {
-                                                    user_id  :   v.user_id,
-                                                    user_user :  v.user_user,
-                                                    user_pass :  v.user_pass,
-                                                    user_name :  v.user_name,
-                                                    user_status :  status,
-                                                    btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="edit_user('+v.user_id+')" id="bt_edit">เเก้ไข</button>',
-                                                    btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="del_user('+v.user_id+')" id="bt_del">ลบ</button>'
-                                                }
-                                                arr.push(result);
+                                            var result = {
+                                                user_id  :   v.user_id,
+                                                user_user :  v.user_user,
+                                                user_pass :  v.user_pass,
+                                                user_name :  v.user_name,
+                                                user_status :  status,
+                                                btn_edit : '<button class="btn btn-warning btn-sm" type="button" onclick="edit_user('+v.user_id+')" id="bt_edit">เเก้ไข</button>',
+                                                btn_del : '<button class="btn btn-danger btn-sm" type="button" onclick="del_user('+v.user_id+')" id="bt_del">ลบ</button>'
+                                            }
+                                            arr.push(result);
                              
-                                            })
-                                            return arr
-                                        }
+                                        })
+                                        return arr
+                                    }
+                                },
+                                columns: [
+                                    { 
+                                        title: 'เลขที่',
+                                        data: "user_id"
                                     },
-                                    columns: [
-                                        { 
-                                            title: 'เลขที่',
-                                            data: "user_id"
-                                        },
-                                        { 
-                                            title: 'ชื่อผู้ใช้',
-                                            data: "user_user"
-                                        },
-                                        { 
-                                            title: 'ตำเเหน่ง',
-                                            data: "user_status"
-                                        },
-                                        { 
-                                            title: 'เเก้ไข', 
-                                            data: "btn_edit"
-                                        },
-                                        { 
-                                            title: 'ลบ', 
-                                            data: "btn_del"
-                                        }
+                                    { 
+                                        title: 'ชื่อผู้ใช้',
+                                        data: "user_user"
+                                    },
+                                    { 
+                                        title: 'ตำเเหน่ง',
+                                        data: "user_status"
+                                    },
+                                    { 
+                                        title: 'เเก้ไข', 
+                                        data: "btn_edit"
+                                    },
+                                    { 
+                                        title: 'ลบ', 
+                                        data: "btn_del"
+                                    }
                                     
-                                    ],
-                                    scrollCollapse: true,
-                                    scrollX:true, 
-                                    bDestroy: true
+                                ],
+                                scrollCollapse: true,
+                                scrollX:true, 
+                                bDestroy: true
                                   
-                                })
-
-                            }
-
-
-                            $(document).ready(function(){
-                                $("#adddata").click(function (){
-                                    $("#add_user").val("")
-                                    $("#add_pass").val("")
-                                    $("#add_name").val("")
-                                    $("#modal_adduser").modal('show')
-                                })
-                                gettableuser()
-                                $("#listuser").addClass("menu-is-opening menu-open");
-                                $("#pageuser").addClass("active");
-                                $("#datauser").addClass("active");
-                            
                             })
+
+                        }
+
+
+                        $(document).ready(function(){
+                            $("#adddata").click(function (){
+                                $("#add_user").val("")
+                                $("#add_pass").val("")
+                                $("#add_name").val("")
+                                $("#modal_adduser").modal('show')
+                            })
+                            gettableuser()
+                            $("#listuser").addClass("menu-is-opening menu-open");
+                            $("#pageuser").addClass("active");
+                            $("#datauser").addClass("active");
+                            
+                        })
                     </script>
                 </div><!-- /.container-fluid -->
             </section>

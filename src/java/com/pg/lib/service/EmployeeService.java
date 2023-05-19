@@ -199,6 +199,7 @@ public class EmployeeService {
                 em.setEmployee_startdate(Utility.CoverDate(rs.getString("PWSTARTDATE")));
                 em.setEmployee_birthday(Utility.CoverDate(rs.getString("PWBIRTHDAY")));
                 em.setEmployee_pwgroup(rs.getString("PWGROUP"));
+                em.setEmployee_company(rs.getString("PWCOMPANY"));
                 listemployee.add(em);
             }
 
@@ -244,6 +245,7 @@ public class EmployeeService {
                 em.setEmployee_startdate(Utility.CoverDate(rs.getString("PWSTARTDATE")));
                 em.setEmployee_birthday(Utility.CoverDate(rs.getString("PWBIRTHDAY")));
                 em.setEmployee_pwgroup(rs.getString("PWGROUP"));
+                em.setEmployee_company(rs.getString("PWCOMPANY"));
 
                 listemployee.add(em);
             }
@@ -259,8 +261,8 @@ public class EmployeeService {
         return listemployee;
     }
 
-    public static HashMap<String,String> getemployeeresult(String training_id) throws SQLException {
-         HashMap<String,String> listresult = new HashMap<String, String>();
+    public static HashMap<String, String> getemployeeresult(String training_id) throws SQLException {
+        HashMap<String, String> listresult = new HashMap<String, String>();
 
         try {
             String sql = "SELECT * FROM et_employee where training_id = ?";

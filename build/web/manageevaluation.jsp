@@ -42,8 +42,6 @@
                   
                     
                     <!-- Modal -->
-                 
-                    
                     <div class="modal fade" id="modal_evaluation"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">

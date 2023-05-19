@@ -132,14 +132,14 @@ public class Training extends HttpServlet {
                     String search_date_start = request.getParameter("search_date_start").trim();
                     String search_date_end = request.getParameter("search_date_end").trim();
 
-                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start,search_date_end);
+                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.gettotletabletraining());
-                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start,search_date_end));
+                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
@@ -193,6 +193,7 @@ public class Training extends HttpServlet {
                         objem.put("employee_result", result);
 
                         objem.put("employee_age", Utility.GetWorkTime(l.getEmployee_startdate()));
+                        objem.put("employee_company", l.getEmployee_company());
                         objem.put("btn_del", "<button class='btn btn-danger btn-sm' type='button' onclick='del_employee_edit(" + id + "," + l.getEmployee_id() + ")' >ลบ</button>");
 
                         arr.put(objem);
@@ -203,7 +204,7 @@ public class Training extends HttpServlet {
                     obj.put("training_id", list.get(0).getTraining_id());
                     obj.put("training_company", list.get(0).getTraining_company());
                     obj.put("training_expenses", list.get(0).getTraining_expenses());
-                    obj.put("training_datetraining", list.get(0).getTraining_datetraining());
+                    obj.put("training_datetraining", list.get(0).getTraining_datetraining().replaceAll(" 00:00:00.0", ""));
                     obj.put("training_year", list.get(0).getTraining_year());
                     obj.put("training_hour", list.get(0).getTraining_hour());
                     obj.put("training_address", list.get(0).getTraining_address());
@@ -265,7 +266,7 @@ public class Training extends HttpServlet {
                             out.print("false2");
                         }
                     } else {
-                        out.print("false1");
+                        out.print("true");
                     }
 
 

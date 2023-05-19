@@ -82,7 +82,7 @@ public class TopicminorService {
     public static List<ET_Topicminor> getbyidlisttopicminor(String id) throws SQLException {
         List<ET_Topicminor> list = new ArrayList();
         try {
-            String sql = "SELECT * FROM et_topicminor where topicminor_id = ?";
+            String sql = "SELECT * FROM et_topicminor where topicminor_id = ? order by TOPICMINOR_ID";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);

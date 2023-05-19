@@ -22,7 +22,16 @@ public class ET_Employee {
     private String employee_agework;
     private String employee_birthday;
     private String employee_pwgroup;
-    private String employee_result;
+    private String employee_result; 
+    private String employee_company;
+
+    public String getEmployee_company() {
+        return employee_company;
+    }
+
+    public void setEmployee_company(String employee_company) {
+        this.employee_company = employee_company;
+    }
 
     public String getEmployee_result() {
         return employee_result;

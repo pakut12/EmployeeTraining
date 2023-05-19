@@ -59,6 +59,7 @@ public class Employee extends HttpServlet {
                     obj.put("employee_employment", employee_group);
                     obj.put("employee_birthday", list.get(0).getEmployee_birthday());
                     obj.put("employee_age", Utility.GetWorkTime(list.get(0).getEmployee_startdate()));
+                    obj.put("employee_company", list.get(0).getEmployee_company());
 
                     out.print(obj);
                 } catch (Exception e) {
