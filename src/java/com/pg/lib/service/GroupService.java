@@ -83,7 +83,7 @@ public class GroupService {
         return listgroup;
     }
 
-    private static String Checkidgroup(String topicmain_id, String topicminor_id, String course_id) throws SQLException {
+    public  static String Checkidgroup(String topicmain_id, String topicminor_id, String course_id) throws SQLException {
         String groupid = "";
         try {
             String sql = "SELECT * FROM et_group WHERE group_topicmain_id = ? and group_topicminor_id = ? and group_course_name = ?";
@@ -215,7 +215,7 @@ public class GroupService {
         return listgroup;
     }
 
-    private static int getprimarykey() throws SQLException {
+    public static int getprimarykey() throws SQLException {
         int primarykey = 0;
         try {
             String sql = "SELECT MAX(group_id) FROM et_group ";

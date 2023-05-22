@@ -470,7 +470,7 @@ public class TrainingService {
         return listtraining;
     }
 
-    private static int getprimarykey() throws SQLException {
+    public static int getprimarykey() throws SQLException {
         int primarykey = 0;
         try {
             String sql = "SELECT MAX(training_id) FROM et_training ";

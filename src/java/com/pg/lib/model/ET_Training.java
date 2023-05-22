@@ -27,6 +27,15 @@ public class ET_Training {
     private String training_topicmain_id;
     private String training_topminor_id;
     private String address_id;
+    private String training_type;
+
+    public String getTraining_type() {
+        return training_type;
+    }
+
+    public void setTraining_type(String training_type) {
+        this.training_type = training_type;
+    }
 
     public String getAddress_id() {
         return address_id;

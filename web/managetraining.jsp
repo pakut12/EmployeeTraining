@@ -263,7 +263,22 @@
                                         
                                         <div class="col-12">
                                             <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_employee_edit" >
-                                                
+                                                 <thead>
+                                                     <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </thead>
                                             </table>
                                         </div>
                                     </div>
@@ -327,7 +342,7 @@
                             <div class="" id="mytable">
                                 <table class="table text-nowrap text-center table-bordered table-sm w-100" id="table_training" >
                                     <thead>
-                                        <th></th>
+                                        
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -640,6 +655,95 @@
                             })
                         }
                         
+                        function get_employee_edit(t_id){
+                            $("#employee_id_edit").val("");
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"getdatatrainingbyid",
+                                    training_id:t_id
+                                },
+                                success:function(msg){
+                                    let js =  JSON.parse(msg);
+                                    console.log(js)
+                                            
+        
+                                    $("#table_employee_edit").DataTable({
+                                        data:js.listem,
+                                        columns: [
+                                           { 
+                                               title: 'สาขา',
+                                               data:"employee_company"
+                                           },
+                                            { 
+                                                title: 'รหัส',
+                                                data: "employee_id"
+                                            },
+                                            { 
+                                                title: 'การจ้าง',
+                                                data: "employee_employment"
+                                            },
+                                            { 
+                                                title: 'เลขบัตรประชาชน',
+                                                data: "employee_idcard"
+                                            },
+                                            { 
+                                                title: 'คำหน้า', 
+                                                data: "employee_prefixdesc"
+                                            },
+                                            { 
+                                                title: 'ชื่อ', 
+                                                data: "employee_fname"
+                                            },
+                                            { 
+                                                title: 'สกุล', 
+                                                data: "employee_lname" },
+                                            { 
+                                                title: 'ตำเเหน่ง',
+                                                data: "employee_posiddesc"
+                                            },
+                                            { 
+                                                title: 'หน่วยงาน', 
+                                                data: "employee_deptdesc"
+                                            },
+                                            { 
+                                                title: 'CT',
+                                                data: "employee_ct" 
+                                            },
+                                            {
+                                                title: 'วัน/เดือน/ปี เกิด',
+                                                data: "employee_birthday" 
+                                            },
+                                            { 
+                                                title: 'วันเริ่มงาน',
+                                                data: "employee_startdate"
+                                            },
+                                            { 
+                                                title: 'อายุงาน',
+                                                data: "employee_age"
+                                            },
+                                            { 
+                                                title: 'ลบ',
+                                                data: "btn_del"
+                                            },
+                                          
+                                        ],
+                                        scrollCollapse: true,
+                                        scrollX:true,  
+                                        bDestroy: true,
+                                        fixedColumns:   {
+                                            right: 1
+                                        }
+                                    })
+                                           
+                                }
+                            })
+                            
+
+                        }
+
+
                         function add_employee_edit(){
                             var t_id = $("#edit_training_id").val();
                             var e_id = $("#employee_id_edit").val();
@@ -666,91 +770,9 @@
                                             icon:"error"
                                         }) 
                                     }
-                                    
+                                    get_employee_edit(t_id)
         
-                                    $("#employee_id_edit").val("");
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Training",
-                                        data:{
-                                            type:"getdatatrainingbyid",
-                                            training_id:t_id
-                                        },
-                                        success:function(msg){
-                                            let js =  JSON.parse(msg);
-                                            console.log(js)
-                                            
-        
-                                            $("#table_employee_edit").DataTable({
-                                                data:js.listem,
-                                                columns: [
-                                                    { 
-                                                        title: 'สาขา',
-                                                        data: "employee_company"
-                                                    },
-                                                    { 
-                                                        title: 'รหัส',
-                                                        data: "employee_id"
-                                                    },
-                                                    { 
-                                                        title: 'การจ้าง',
-                                                        data: "employee_employment"
-                                                    },
-                                                    { 
-                                                        title: 'เลขบัตรประชาชน',
-                                                        data: "employee_idcard"
-                                                    },
-                                                    { 
-                                                        title: 'คำหน้า', 
-                                                        data: "employee_prefixdesc"
-                                                    },
-                                                    { 
-                                                        title: 'ชื่อ', 
-                                                        data: "employee_fname"
-                                                    },
-                                                    { 
-                                                        title: 'สกุล', 
-                                                        data: "employee_lname" },
-                                                    { 
-                                                        title: 'ตำเเหน่ง',
-                                                        data: "employee_posiddesc"
-                                                    },
-                                                    { 
-                                                        title: 'หน่วยงาน', 
-                                                        data: "employee_deptdesc"
-                                                    },
-                                                    { 
-                                                        title: 'CT',
-                                                        data: "employee_ct" 
-                                                    },
-                                                    {
-                                                        title: 'วัน/เดือน/ปี เกิด',
-                                                        data: "employee_birthday" 
-                                                    },
-                                                    { 
-                                                        title: 'วันเริ่มงาน',
-                                                        data: "employee_startdate"
-                                                    },
-                                                    { 
-                                                        title: 'อายุงาน',
-                                                        data: "employee_age"
-                                                    },
-                                                    { 
-                                                        title: 'ลบ',
-                                                        data: "btn_del"
-                                                    },
-                                          
-                                                ],
-                                                scrollCollapse: true,
-                                                scrollX:true,  
-                                                bDestroy: true,
-                                                fixedColumns:   {
-                                                    right: 1
-                                                }
-                                            })
-                                           
-                                        }
-                                    })
+                                  
                                    
                                 }
                             })
@@ -770,84 +792,8 @@
                                     employee_id:employee_id
                                 },
                                 success:function(msg){
+                                    get_employee_edit(training_id)
                                     
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Training",
-                                        data:{
-                                            type:"getdatatrainingbyid",
-                                            training_id:training_id
-                                        },
-                                        success:function(msg){
-                                            let js =  JSON.parse(msg);
-                                         
-                                            $("#table_employee_edit").DataTable({
-                                                data:js.listem,
-                                                columns: [
-                                                    { 
-                                                        title: 'รหัส',
-                                                        data: "employee_id"
-                                                    },
-                                                    { 
-                                                        title: 'การจ้าง',
-                                                        data: "employee_employment"
-                                                    },
-                                                    { 
-                                                        title: 'เลขบัตรประชาชน',
-                                                        data: "employee_idcard"
-                                                    },
-                                                    { 
-                                                        title: 'คำหน้า', 
-                                                        data: "employee_prefixdesc"
-                                                    },
-                                                    { 
-                                                        title: 'ชื่อ', 
-                                                        data: "employee_fname"
-                                                    },
-                                                    { 
-                                                        title: 'สกุล', 
-                                                        data: "employee_lname" },
-                                                    { 
-                                                        title: 'ตำเเหน่ง',
-                                                        data: "employee_posiddesc"
-                                                    },
-                                                    { 
-                                                        title: 'หน่วยงาน', 
-                                                        data: "employee_deptdesc"
-                                                    },
-                                                    { 
-                                                        title: 'CT',
-                                                        data: "employee_ct" 
-                                                    },
-                                                    {
-                                                        title: 'วัน/เดือน/ปี เกิด',
-                                                        data: "employee_birthday" 
-                                                    },
-                                                    { 
-                                                        title: 'วันเริ่มงาน',
-                                                        data: "employee_startdate"
-                                                    },
-                                                    { 
-                                                        title: 'อายุงาน',
-                                                        data: "employee_age"
-                                                    },
-                                                    { 
-                                                        title: 'ลบ',
-                                                        data: "btn_del"
-                                                    },
-                                          
-                                                ],
-                                     
-                                                scrollCollapse: true,
-                                                scrollX:true, 
-                                                bDestroy: true,
-                                                fixedColumns:   {
-                                                    right: 1
-                                                }
-                                            })
-                                        }
-                                    })
-                                   
                                 }
                             })
                             
@@ -1009,70 +955,8 @@
                                     $("#edit_address").val(js.training_address);
                                     $("#edit_hour").val(js.training_hour);
                                     
-                                    $("#table_employee_edit").DataTable({
-                                        data:js.listem,
-                                        columns: [
-                                            { 
-                                                title: 'รหัส',
-                                                data: "employee_id"
-                                            },
-                                            { 
-                                                title: 'การจ้าง',
-                                                data: "employee_employment"
-                                            },
-                                            { 
-                                                title: 'เลขบัตรประชาชน',
-                                                data: "employee_idcard"
-                                            },
-                                            { 
-                                                title: 'คำหน้า', 
-                                                data: "employee_prefixdesc"
-                                            },
-                                            { 
-                                                title: 'ชื่อ', 
-                                                data: "employee_fname"
-                                            },
-                                            { 
-                                                title: 'สกุล', 
-                                                data: "employee_lname" },
-                                            { 
-                                                title: 'ตำเเหน่ง',
-                                                data: "employee_posiddesc"
-                                            },
-                                            { 
-                                                title: 'หน่วยงาน', 
-                                                data: "employee_deptdesc"
-                                            },
-                                            { 
-                                                title: 'CT',
-                                                data: "employee_ct" 
-                                            },
-                                            {
-                                                title: 'วัน/เดือน/ปี เกิด',
-                                                data: "employee_birthday" 
-                                            },
-                                            { 
-                                                title: 'วันเริ่มงาน',
-                                                data: "employee_startdate"
-                                            },
-                                            { 
-                                                title: 'อายุงาน',
-                                                data: "employee_age"
-                                            },
-                                            { 
-                                                title: 'ลบ',
-                                                data: "btn_del"
-                                            },
-                                          
-                                        ],
-                                        scrollCollapse: true,
-                                        scrollX:true, 
-                                        bDestroy: true,
-                                        fixedColumns:{
-                                            right: 1
-                                        }
-                                        
-                                    })
+                                    get_employee_edit(id)
+                                   
                                 }
                             })
         
