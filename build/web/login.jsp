@@ -13,7 +13,7 @@
     </head>
     
     <body class="hold-transition login-page animate__animated animate__bounce">
-        
+       
         <div class="login-box">
             <%
             String logout = request.getParameter("type");

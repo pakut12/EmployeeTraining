@@ -54,7 +54,7 @@ public class EmployeeService {
 
     }
 
-    private static int getprimarykey() throws SQLException {
+    public static int getprimarykey() throws SQLException {
         int primarykey = 0;
         try {
             String sql = "SELECT MAX(employee_id) FROM et_employee ";

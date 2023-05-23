@@ -24,7 +24,7 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static int getdatafilteredtrainingbyemid(String id, String searchValue,String datestart, String dateend) throws SQLException {
+    public static int getdatafilteredtrainingbyemid(String id, String searchValue, String datestart, String dateend) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
         int total = 0;
         try {
@@ -35,14 +35,14 @@ public class TrainingService {
                     "INNER JOIN et_topicminor f on f.topicminor_id = c.group_topicminor_id " +
                     "INNER JOIN et_address g on g.address_id = b.training_address " +
                     "WHERE a.employee = ? ";
-             if (!datestart.equals("") && !dateend.equals("")) {
+            if (!datestart.equals("") && !dateend.equals("")) {
                 sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
             sql += "and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
-            
+
             if (!datestart.equals("") && !dateend.equals("")) {
                 ps.setString(1, id);
                 ps.setString(2, datestart);
@@ -54,7 +54,7 @@ public class TrainingService {
                 ps.setString(8, "%" + searchValue + "%");
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
-                
+
             } else {
                 ps.setString(1, id);
                 ps.setString(2, "%" + searchValue + "%");
@@ -66,7 +66,7 @@ public class TrainingService {
                 ps.setString(8, "%" + searchValue + "%");
 
             }
-            
+
 
             rs = ps.executeQuery();
 
@@ -131,7 +131,8 @@ public class TrainingService {
             if (!datestart.equals("") && !dateend.equals("")) {
                 sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
-            sql += "and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
+            sql += "and (b.training_id like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
+            sql += "order by training_year,training_datetraining";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
@@ -146,9 +147,10 @@ public class TrainingService {
                 ps.setString(8, "%" + searchValue + "%");
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
+                ps.setString(11, "%" + searchValue + "%");
 
-                ps.setInt(11, start);
-                ps.setInt(12, length);
+                ps.setInt(12, start);
+                ps.setInt(13, start + length);
             } else {
                 ps.setString(1, id);
                 ps.setString(2, "%" + searchValue + "%");
@@ -158,9 +160,10 @@ public class TrainingService {
                 ps.setString(6, "%" + searchValue + "%");
                 ps.setString(7, "%" + searchValue + "%");
                 ps.setString(8, "%" + searchValue + "%");
+                ps.setString(9, "%" + searchValue + "%");
 
-                ps.setInt(9, start);
-                ps.setInt(10, length);
+                ps.setInt(10, start);
+                ps.setInt(11, start + length);
             }
 
             rs = ps.executeQuery();
@@ -322,12 +325,12 @@ public class TrainingService {
         return totle;
     }
 
-    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start,String search_date_end) throws SQLException {
+    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end) throws SQLException {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
                     "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and ";
-           if (!search_date_start.equals("") && !search_date_end.equals("")) {
+            if (!search_date_start.equals("") && !search_date_end.equals("")) {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
             }
             sql += " (a.training_company LIKE ? OR " +
@@ -388,7 +391,7 @@ public class TrainingService {
         return totle;
     }
 
-    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start,String search_date_end) throws SQLException {
+    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end) throws SQLException {
         List<ET_Training> listtraining = new ArrayList<ET_Training>();
         try {
             String idgroup = Checkidgroup(search_topicmain_id, search_topicminor_id, search_course_id);
@@ -399,6 +402,7 @@ public class TrainingService {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
             }
             sql += " (a.training_company LIKE ? OR " +
+                    "a.training_id LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
                     "a.training_expenses LIKE ? OR " +
@@ -406,7 +410,7 @@ public class TrainingService {
                     "c.topicmain_name LIKE ? OR " +
                     "d.topicminor_name LIKE ? OR " +
                     "b.group_course_name LIKE ?))r) where rnum BETWEEN ? AND ?";
-
+            sql += " order by training_year,training_datetraining";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
@@ -424,8 +428,9 @@ public class TrainingService {
                 ps.setString(11, "%" + searchValue + "%");
                 ps.setString(12, "%" + searchValue + "%");
                 ps.setString(13, "%" + searchValue + "%");
-                ps.setInt(14, start);
-                ps.setInt(15, start + length);
+                ps.setString(14, "%" + searchValue + "%");
+                ps.setInt(15, start);
+                ps.setInt(16, start + length);
             } else {
                 ps.setString(1, "%" + search_topicmain_id + "%");
                 ps.setString(2, "%" + search_topicminor_id + "%");
@@ -438,8 +443,9 @@ public class TrainingService {
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
                 ps.setString(11, "%" + searchValue + "%");
-                ps.setInt(12, start);
-                ps.setInt(13, start + length);
+                ps.setString(12, "%" + searchValue + "%");
+                ps.setInt(13, start);
+                ps.setInt(14, start + length);
             }
 
             rs = ps.executeQuery();

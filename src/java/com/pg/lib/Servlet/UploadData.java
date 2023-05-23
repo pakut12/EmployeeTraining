@@ -7,10 +7,15 @@ package com.pg.lib.Servlet;
 import com.pg.lib.model.ET_Training;
 import com.pg.lib.service.GroupService;
 import com.pg.lib.utility.UploadFile;
+import com.pg.lib.utility.Utility;
 import java.io.*;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.*;
@@ -33,28 +38,42 @@ public class UploadData extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             try {
+
                 List<ET_Training> list = UploadFile.ReadFile();
 
-                for (ET_Training l : list) {
+                Boolean status = UploadFile.addemployeebyid(list);
+                out.print(status);
 
-                    out.print("----------------------------------------------------------------------<br>");
-
-                    out.print("บริษัท : " + l.getTraining_company() + "<br>");
-                    out.print("ประจำปี : " + l.getTraining_year() + "<br>");
-                    out.print("วันที่อบรม : " + l.getTraining_datetraining() + "<br>");
-                    out.print("ชั่วโมง : " + l.getTraining_hour() + "<br>");
-                   
-                    out.print("ประเภท : " + l.getTraining_type() + "<br>");
-                    out.print("ค่าใช้จ่าย  : " + l.getTraining_expenses() + "<br>");
-                    out.print("สถาบันที่จัดอบรม : " + l.getAddress_id() + "<br>");
-                    out.print("รหัสพนักงาน : " + l.getTraining_employee() + "<br>");
-
-                    out.print("รหัสหลักสูตร : " + l.getTraining_groupid() + "<br>");
-
-                    out.print("----------------------------------------------------------------------");
-
-
-                }
+            /*
+            HashMap<String, String> ReadGroup = UploadFile.ReadGroup();
+            HashMap<String, String> ReadTraining = UploadFile.ReadTraining();
+            int n = 0;
+            for (ET_Training l : list) {
+            
+            String type = Utility.ChackType(l.getTraining_type());
+            String tid = l.getTraining_company() + "#" + l.getTraining_year() + "#" + l.getTraining_hour() + "#" + l.getTraining_datetraining() + "#" + l.getTraining_expenses() + "#" + l.getAddress_id() + "#" + ReadGroup.get(l.getTraining_topicmain_id() + "#" + l.getTraining_topminor_id() + "#" + l.getTraining_course());
+            
+            out.print(l.getTraining_company() + "#" + l.getTraining_year() + "#" + l.getTraining_hour() + "#" + l.getTraining_datetraining() + "#" + l.getTraining_expenses() + "#" + l.getAddress_id() + "#" + ReadGroup.get(l.getTraining_topicmain_id() + "#" + l.getTraining_topminor_id() + "#" + l.getTraining_course()));
+            out.print("----------------------------------------------------------------------<br>");
+            
+            out.print("tid : " + ReadTraining.get(tid));
+            out.print("บริษัท : " + l.getTraining_company() + "<br>");
+            out.print("ประจำปี : " + l.getTraining_year() + "<br>");
+            out.print("วันที่อบรม : " + l.getTraining_datetraining() + "<br>");
+            out.print("ชั่วโมง : " + l.getTraining_hour() + "<br>");
+            out.print("หลักสูตร : " + l.getTraining_course() + "<br>");
+            out.print("รหัสกลุ่ม : " + ReadGroup.get(l.getTraining_topicmain_id() + "#" + l.getTraining_topminor_id() + "#" + l.getTraining_course()) + "<br>");
+            out.print("ประเภท : " + type + "<br>");
+            out.print("ค่าใช้จ่าย  : " + l.getTraining_expenses() + "<br>");
+            out.print("สถาบันที่จัดอบรม : " + l.getAddress_id() + "<br>");
+            out.print("รหัสพนักงาน : " + l.getTraining_employee() + "<br>");
+            
+            out.print("----------------------------------------------------------------------<br>");
+            n++;
+            
+            }
+            out.print("ยอด" + n);
+             */
             } catch (Exception e) {
                 e.printStackTrace();
             }
