@@ -62,10 +62,6 @@ public class Chkauthen extends HttpServlet {
             } else if (type.equals("logout")) {
                 try {
                     HttpSession session = request.getSession();
-                    session.removeAttribute("statuslogin");
-                    session.removeAttribute("name");
-                    session.removeAttribute("user");
-                    session.removeAttribute("statususer");
                     session.invalidate();
                     getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 

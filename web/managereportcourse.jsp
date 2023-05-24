@@ -161,7 +161,7 @@
                         <div class="card-header ">
                             ค้นหา
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <form id="myformsearch">
                                 <div class="row">
                                     <div class="col-2">
@@ -179,13 +179,18 @@
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_course_id" name="search_course_id" required>
                                         </select>
                                     </div>
-                                    <div class="col-3">
-                                        <label>วันที่เริ่ม</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date_start" name="search_date_start"></input> 
+                                    <div class="col-2">
+                                        <label>ปี</label>
+                                        <input class="form-control form-control-sm text-center" id="search_year" name="search_year">
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
+                                        <label>วันที่เริ่ม</label>
+                                        <input class="form-control form-control-sm text-center" type="date" id="search_date_start" name="search_date_start"></input> 
+                                    </div>
+                                    
+                                    <div class="col-2">
                                         <label>ถึงวันที่</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date_end" name="search_date_end"></input> 
+                                        <input class="form-control form-control-sm text-center" type="date" id="search_date_end" name="search_date_end"></input> 
                                     </div>
                                 </div>
                             </form>
@@ -524,7 +529,7 @@
                                                                 let search_course_id = $("#search_course_id").val()
                                                                 let search_date_start = $("#search_date_start").val()
                                                                 let search_date_end = $("#search_date_end").val()
-        
+                                                                let search_year = $("#search_year").val()
                                                                 if(num == 1){
                                                                     search_topicmain_id = null
                                                                     search_topicminor_id = null
@@ -542,7 +547,8 @@
                                                                             search_topicminor_id:search_topicminor_id,
                                                                             search_course_id:search_course_id,
                                                                             search_date_start:search_date_start,
-                                                                            search_date_end:search_date_end
+                                                                            search_date_end:search_date_end,
+                                                                            search_year:search_year
                                                                         },
                                                                         dataSrc:function(json){
                                                                             var data = JSON.parse(json.data)

@@ -90,12 +90,12 @@ public class Training extends HttpServlet {
                     String address = request.getParameter("add_address").trim();
                     String hour = request.getParameter("add_hour").trim();
                     String[] listemployeeid = request.getParameter("listemployeeid").trim().split(",");
+                    String type_id = request.getParameter("add_type").trim();
 
-
-                    Boolean CheckTraining = TrainingService.CheckTraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour);
+                    Boolean CheckTraining = TrainingService.CheckTraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, type_id);
 
                     if (CheckTraining) {
-                        HashMap statusaddtraining = TrainingService.addtraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid);
+                        HashMap statusaddtraining = TrainingService.addtraining(topicmain_id, topicminor_id, course_id, company, expenses, date, year, address, hour, listemployeeid, type_id);
                         if (statusaddtraining.get("status").equals("true")) {
                             Boolean statusem = EmployeeService.addemployee(listemployeeid, statusaddtraining.get("id").toString());
                             if (statusem) {
@@ -131,15 +131,16 @@ public class Training extends HttpServlet {
                     String search_course_id = request.getParameter("search_course_id").trim();
                     String search_date_start = request.getParameter("search_date_start").trim();
                     String search_date_end = request.getParameter("search_date_end").trim();
+                    String search_year = request.getParameter("search_year").trim();
 
-                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end);
+                    List<ET_Training> list = TrainingService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end,search_year);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.gettotletabletraining());
-                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end));
+                    obj.put("recordsFiltered", TrainingService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end,search_year));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");
@@ -161,6 +162,20 @@ public class Training extends HttpServlet {
 
                     JSONArray arr = new JSONArray();
                     int n = 0;
+                    String typehtml = "";
+                    if (list.get(0).getTraining_type().equals("0")) {
+                        typehtml += "<option value='0'>-</option>";
+                        typehtml += "<option value='1'>ภายใน</option>";
+                        typehtml += "<option value='2'>ภายนอก</option>";
+                    } else if (list.get(0).getTraining_type().equals("1")) {
+                        typehtml += "<option value='1'>ภายใน</option>";
+                        typehtml += "<option value='0'>-</option>";
+                        typehtml += "<option value='2'>ภายนอก</option>";
+                    } else if (list.get(0).getTraining_type().equals("2")) {
+                        typehtml += "<option value='2'>ภายนอก</option>";
+                        typehtml += "<option value='0'>-</option>";
+                        typehtml += "<option value='1'>ภายใน</option>";
+                    }
                     for (ET_Employee l : listem) {
 
                         String employee_group = "";
@@ -214,6 +229,7 @@ public class Training extends HttpServlet {
                     obj.put("training_topicminor_id", list.get(0).getTraining_topminor_id());
                     obj.put("training_topicminor_name", list.get(0).getTraining_topminor());
                     obj.put("training_course", list.get(0).getTraining_course());
+                    obj.put("training_type", typehtml);
 
                     obj.put("listem", arr);
 
@@ -256,10 +272,10 @@ public class Training extends HttpServlet {
                     String edit_year = request.getParameter("edit_year").trim();
                     String edit_address = request.getParameter("edit_address").trim();
                     String edit_hour = request.getParameter("edit_hour").trim();
+                    String edit_type = request.getParameter("edit_type").trim();
 
-
-                    if (TrainingService.CheckTraining(edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour)) {
-                        Boolean statusupdate = TrainingService.updatetraining(edit_training_id, edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour);
+                    if (TrainingService.CheckTraining(edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour, edit_type)) {
+                        Boolean statusupdate = TrainingService.updatetraining(edit_training_id, edit_topicmain_id, edit_topicminor_id, edit_course_id, edit_company, edit_expenses, edit_date, edit_year, edit_address, edit_hour, edit_type);
                         if (statusupdate) {
                             out.print("true");
                         } else {
@@ -280,7 +296,7 @@ public class Training extends HttpServlet {
                     String id = request.getParameter("search_employee_id").trim();
                     String datestart = request.getParameter("search_datestart");
                     String dateend = request.getParameter("search_dateend");
-
+                    String search_year = request.getParameter("search_year");
 
                     int draw = Integer.parseInt(request.getParameter("draw"));
                     int start = Integer.parseInt(request.getParameter("start"));
@@ -289,14 +305,14 @@ public class Training extends HttpServlet {
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
 
-                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id, searchValue, start, length, datestart, dateend);
+                    List<ET_Training> list = TrainingService.getdatatrainingbyemid(id, searchValue, start, length, datestart, dateend,search_year);
 
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", TrainingService.getdatatotaltrainingbyemid(id));
-                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue, datestart, dateend));
+                    obj.put("recordsFiltered", TrainingService.getdatafilteredtrainingbyemid(id, searchValue, datestart, dateend,search_year));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");

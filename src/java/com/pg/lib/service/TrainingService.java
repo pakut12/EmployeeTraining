@@ -24,7 +24,7 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static int getdatafilteredtrainingbyemid(String id, String searchValue, String datestart, String dateend) throws SQLException {
+    public static int getdatafilteredtrainingbyemid(String id, String searchValue, String datestart, String dateend,String search_year) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
         int total = 0;
         try {
@@ -38,7 +38,11 @@ public class TrainingService {
             if (!datestart.equals("") && !dateend.equals("")) {
                 sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
-            sql += "and (e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
+             if (!search_year.equals("")) {
+                sql += "and b.training_year = '" + search_year + "' ";
+            }
+            
+            sql += "and (b.training_year like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
@@ -54,6 +58,7 @@ public class TrainingService {
                 ps.setString(8, "%" + searchValue + "%");
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
+                ps.setString(11, "%" + searchValue + "%");
 
             } else {
                 ps.setString(1, id);
@@ -64,6 +69,7 @@ public class TrainingService {
                 ps.setString(6, "%" + searchValue + "%");
                 ps.setString(7, "%" + searchValue + "%");
                 ps.setString(8, "%" + searchValue + "%");
+                ps.setString(9, "%" + searchValue + "%");
 
             }
 
@@ -116,7 +122,7 @@ public class TrainingService {
         return total;
     }
 
-    public static List<ET_Training> getdatatrainingbyemid(String id, String searchValue, int start, int length, String datestart, String dateend) throws SQLException {
+    public static List<ET_Training> getdatatrainingbyemid(String id, String searchValue, int start, int length, String datestart, String dateend,String search_year) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
 
         try {
@@ -131,9 +137,13 @@ public class TrainingService {
             if (!datestart.equals("") && !dateend.equals("")) {
                 sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
-            sql += "and (b.training_id like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
+            if (!search_year.equals("")) {
+                sql += "and b.training_year = '" + search_year + "' ";
+            }
+            sql += "and (b.training_year like ? or b.training_id like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
             sql += "order by training_year,training_datetraining";
 
+            
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             if (!datestart.equals("") && !dateend.equals("")) {
@@ -148,9 +158,10 @@ public class TrainingService {
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
                 ps.setString(11, "%" + searchValue + "%");
-
-                ps.setInt(12, start);
-                ps.setInt(13, start + length);
+                ps.setString(12, "%" + searchValue + "%");
+                
+                ps.setInt(13, start);
+                ps.setInt(14, start + length);
             } else {
                 ps.setString(1, id);
                 ps.setString(2, "%" + searchValue + "%");
@@ -161,9 +172,10 @@ public class TrainingService {
                 ps.setString(7, "%" + searchValue + "%");
                 ps.setString(8, "%" + searchValue + "%");
                 ps.setString(9, "%" + searchValue + "%");
-
-                ps.setInt(10, start);
-                ps.setInt(11, start + length);
+                ps.setString(10, "%" + searchValue + "%");
+                
+                ps.setInt(11, start);
+                ps.setInt(12, start + length);
             }
 
             rs = ps.executeQuery();
@@ -246,7 +258,7 @@ public class TrainingService {
                 training.setTraining_topminor_id(rs.getString("topicminor_id"));
                 training.setTraining_topminor(rs.getString("topicminor_name"));
                 training.setTraining_course(rs.getString("group_course_name"));
-
+                training.setTraining_type(rs.getString("training_type"));
 
                 list.add(training);
             }
@@ -262,11 +274,11 @@ public class TrainingService {
         return list;
     }
 
-    public static Boolean CheckTraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour) throws SQLException {
+    public static Boolean CheckTraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour, String type_id) throws SQLException {
         Boolean status = false;
         String groupid = Checkidgroup(topicmain_id, topicminor_id, course_id);
         try {
-            String sql = "SELECT COUNT(*) FROM et_training WHERE training_company = ? AND training_year = ? AND training_hour = ? AND training_datetraining =  TO_DATE(?, 'yyyy/mm/dd') AND training_expenses = ? AND training_address = ? AND training_groupid = ? ";
+            String sql = "SELECT COUNT(*) FROM et_training WHERE training_company = ? AND training_year = ? AND training_hour = ? AND training_datetraining =  TO_DATE(?, 'yyyy/mm/dd') AND training_expenses = ? AND training_address = ? AND training_groupid = ? AND training_type = ? ";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, company);
@@ -276,6 +288,7 @@ public class TrainingService {
             ps.setString(5, expenses);
             ps.setString(6, address);
             ps.setString(7, groupid);
+            ps.setString(8, type_id);
 
             rs = ps.executeQuery();
 
@@ -325,13 +338,16 @@ public class TrainingService {
         return totle;
     }
 
-    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end) throws SQLException {
+    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end,String search_year) throws SQLException {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
                     "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and ";
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
+            }
+            if (!search_year.equals("")) {
+                sql += "a.training_year = '" + search_year + "' and";
             }
             sql += " (a.training_company LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
@@ -391,7 +407,7 @@ public class TrainingService {
         return totle;
     }
 
-    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end) throws SQLException {
+    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end, String search_year) throws SQLException {
         List<ET_Training> listtraining = new ArrayList<ET_Training>();
         try {
             String idgroup = Checkidgroup(search_topicmain_id, search_topicminor_id, search_course_id);
@@ -400,6 +416,10 @@ public class TrainingService {
                     "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and ";
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
+            }
+
+            if (!search_year.equals("")) {
+                sql += "a.training_year = '" + search_year + "' and";
             }
             sql += " (a.training_company LIKE ? OR " +
                     "a.training_id LIKE ? OR " +
@@ -411,6 +431,8 @@ public class TrainingService {
                     "d.topicminor_name LIKE ? OR " +
                     "b.group_course_name LIKE ?))r) where rnum BETWEEN ? AND ?";
             sql += " order by training_year,training_datetraining";
+            
+           
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
@@ -523,13 +545,13 @@ public class TrainingService {
         return groupid;
     }
 
-    public static HashMap addtraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour, String[] listemployeeid) throws SQLException {
+    public static HashMap addtraining(String topicmain_id, String topicminor_id, String course_id, String company, String expenses, String datetraining, String year, String address, String hour, String[] listemployeeid, String type_id) throws SQLException {
         int primarykey = getprimarykey() + 1;
 
         HashMap status = new HashMap();
         try {
             String groupid = Checkidgroup(topicmain_id, topicminor_id, course_id);
-            String sql = "INSERT INTO et_training (training_id,training_company, training_year, training_hour, training_datetraining, training_expenses, training_address, training_groupid, training_date_create) VALUES (?, ?, ?, ?, TO_DATE(?, 'yyyy/mm/dd'), ?, ?, ?, TO_DATE(?, 'yyyy/mm/dd')) ";
+            String sql = "INSERT INTO et_training (training_id,training_company, training_year, training_hour, training_datetraining, training_expenses, training_address, training_groupid, training_date_create,training_type) VALUES (?, ?, ?, ?, TO_DATE(?, 'yyyy/mm/dd'), ?, ?, ?, TO_DATE(?, 'yyyy/mm/dd'),?) ";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
@@ -542,6 +564,7 @@ public class TrainingService {
             ps.setString(7, address);
             ps.setString(8, groupid);
             ps.setString(9, Utility.getdatetoday());
+            ps.setString(10, type_id);
 
             if (ps.executeUpdate() > 0) {
                 status.put("status", "true");
@@ -619,11 +642,11 @@ public class TrainingService {
         return listcourse;
     }
 
-    public static Boolean updatetraining(String edit_training_id, String edit_topicmain_id, String edit_topicminor_id, String edit_course_id, String edit_company, String edit_expenses, String edit_date, String edit_year, String edit_address, String edit_hour) throws SQLException {
+    public static Boolean updatetraining(String edit_training_id, String edit_topicmain_id, String edit_topicminor_id, String edit_course_id, String edit_company, String edit_expenses, String edit_date, String edit_year, String edit_address, String edit_hour, String edit_type) throws SQLException {
         Boolean status = false;
         try {
             String groupid = Checkidgroup(edit_topicmain_id, edit_topicminor_id, edit_course_id);
-            String sql = "UPDATE et_training SET training_company = ?,training_year = ?,training_hour = ?, training_datetraining = TO_DATE(?, 'yyyy/mm/dd'),training_expenses = ?,training_address = ?,training_groupid = ?,training_date_modify = TO_DATE(?, 'yyyy/mm/dd') WHERE training_id = ?";
+            String sql = "UPDATE et_training SET training_company = ?,training_year = ?,training_hour = ?, training_datetraining = TO_DATE(?, 'yyyy/mm/dd'),training_expenses = ?,training_address = ?,training_groupid = ?,training_date_modify = TO_DATE(?, 'yyyy/mm/dd'),training_type = ? WHERE training_id = ?";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, edit_company);
@@ -634,7 +657,8 @@ public class TrainingService {
             ps.setString(6, edit_address);
             ps.setString(7, groupid);
             ps.setString(8, Utility.getdatetoday());
-            ps.setString(9, edit_training_id);
+            ps.setString(9, edit_type);
+            ps.setString(10, edit_training_id);
 
             if (ps.executeUpdate() > 0) {
                 status = true;

@@ -147,15 +147,21 @@
                         <div class="card-body">
                             <form id="myformsearch">
                                 <div class="row mx-auto text-center">
-                                    <div class="col-sm-12 col-md-4"> 
+                                    <div class="col-sm-12 col-md-3"> 
                                         <label for="search_employee_id">รหัสพนักงาน</label>
                                         <input class="form-control form-control-sm w-100 text-center" type="text" id="search_employee_id" name="search_employee_id">
                                     </div>
-                                    <div class="col-sm-12 col-md-4"> 
+                                    
+                                    <div class="col-sm-12 col-md-3">
+                                        <label for="" class="form-label">ปี</label>
+                                        <input class="form-control form-control-sm text-center" type="text" id="search_year" name="search_year" > 
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-md-3"> 
                                         <label for="search_employee_id">วันที่เริ่ม</label>
                                         <input class="form-control form-control-sm w-100 text-center" type="date" id="search_datestart" name="search_dateend">
                                     </div>
-                                    <div class="col-sm-12 col-md-4"> 
+                                    <div class="col-sm-12 col-md-3"> 
                                         <label for="search_employee_id">ถึงวันที่</label>
                                         <input class="form-control form-control-sm w-100 text-center" type="date" id="search_dateend" name="search_dateend">
                                     </div>
@@ -386,7 +392,8 @@
                             let search_employee_id = $("#search_employee_id").val()
                             let search_datestart = $("#search_datestart").val()
                             let search_dateend = $("#search_dateend").val()
-                            
+                            let search_year = $("#search_year").val()
+                           
                             if(num == 1){
                                 search_employee_id = null
                             }
@@ -401,7 +408,8 @@
                                         type:"getdatatrainingbyemid",
                                         search_employee_id:search_employee_id,
                                         search_datestart:search_datestart,
-                                        search_dateend:search_dateend
+                                        search_dateend:search_dateend,
+                                        search_year:search_year
                                     },
                                     dataSrc:function(json){
                                         console.log(json)
