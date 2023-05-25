@@ -16,6 +16,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import com.pg.lib.service.*;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -30,7 +32,7 @@ public class Group extends HttpServlet {
      * @param response servlet response
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -77,7 +79,7 @@ public class Group extends HttpServlet {
                 }
 
             } else if (type.equals("gettablegroup")) {
-                
+
                 try {
                     int draw = Integer.parseInt(request.getParameter("draw"));
                     int start = Integer.parseInt(request.getParameter("start"));
@@ -85,12 +87,12 @@ public class Group extends HttpServlet {
                     String searchValue = request.getParameter("search[value]");
                     String orderColumn = request.getParameter("order[0][column]");
                     String orderDir = request.getParameter("order[0][dir]");
-                    
+
                     String search_topicmain_id = request.getParameter("search_topicmain_id").trim();
                     String search_topicminor_id = request.getParameter("search_topicminor_id").trim();
-                    
-                    
-                    List<ET_Group> list = GroupService.getlistgroupall(searchValue,start,length,search_topicmain_id,search_topicminor_id);
+
+
+                    List<ET_Group> list = GroupService.getlistgroupall(searchValue, start, length, search_topicmain_id, search_topicminor_id);
 
                     Gson gson = new Gson();
 
@@ -106,7 +108,7 @@ public class Group extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-               
+
 
             } else if (type.equals("delgroup")) {
                 try {
@@ -164,6 +166,23 @@ public class Group extends HttpServlet {
                     e.printStackTrace();
                 }
 
+            } else if (type.equals("test12")) {
+                List<ET_Group> listgroup = GroupService.getlistgroupall();
+
+                JSONArray arr = new JSONArray();
+                for (ET_Group l : listgroup) {
+                    JSONObject obj = new JSONObject();
+                    obj.put("group_id", l.getGroup_id());
+                    obj.put("topicmain_id", l.getMain_topicmain_id());
+                    obj.put("topicmain_name", l.getMain_topicmain_name());
+                    obj.put("topicminor_id", l.getMain_topicminor_id());
+                    obj.put("topicminor_name", l.getMain_topicminor_name());
+                    obj.put("course_name", l.getMain_course_name());
+                    arr.put(obj);
+                }
+                out.print(arr);
+                
+
             }
 
         } finally {
@@ -180,7 +199,11 @@ public class Group extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (JSONException ex) {
+                Logger.getLogger(Group.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Group.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,7 +217,11 @@ public class Group extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (JSONException ex) {
+                Logger.getLogger(Group.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Group.class.getName()).log(Level.SEVERE, null, ex);
         }

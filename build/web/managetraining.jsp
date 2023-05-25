@@ -334,15 +334,15 @@
                                     </div>
                                     <div class="col-2">
                                         <label>ปี</label>
-                                        <input class="form-control form-control-sm" id="search_year" name="search_year">
+                                        <input class="form-control form-control-sm text-center" id="search_year" name="search_year">
                                     </div>
                                     <div class="col-2">
                                         <label>วันที่เริ่ม</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date_start" name="search_date_start"></input> 
+                                        <input class="form-control form-control-sm text-center" type="date" id="search_date_start" name="search_date_start"></input> 
                                     </div>
                                     <div class="col-2">
                                         <label>ถึงวันที่</label>
-                                        <input class="form-control form-control-sm" type="date" id="search_date_end" name="search_date_end"></input> 
+                                        <input class="form-control form-control-sm text-center" type="date" id="search_date_end" name="search_date_end"></input> 
                                     </div>
                                 </div>
                             </form>
@@ -395,13 +395,203 @@
                             $("#add_topicminor_id").empty(); 
                             $("#add_course_id").empty();
                              
-                            gettopicmain()
+                            getdropdown(2)
                             $("#table_employee_add").empty();
                             $("#add_type").empty();
                             $("#add_type").html("<option value='0'>-</option><option value='1'>ภายใน</option><option value='2'>ภายนอก</option>")
                            
                         }
     
+    
+    
+                        function getdropdown(num){
+                            if(num == 1){
+                                $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"test12"
+                                },
+                                success:function(msg){
+                                    let arr = JSON.parse(msg); 
+                                    $("#search_topicmain_id").html("<option id=''>โปรดเลือก</option>")
+                                    $("#search_topicminor_id").html('<option id="">โปรดเลือก</option>')
+                                    $("#search_course_id").html('<option id="">โปรดเลือก</option>')
+                                   
+                                   
+                      
+                                    $(arr).each(function(index,value){
+                                        if($("#search_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
+                                            $("#search_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
+                                        }
+                                    })
+                         
+                                    $("#search_topicmain_id").change(function(){
+                                        var companyId = $(this).val()
+                                        $("#search_topicminor_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(companyId != ''){
+                                            $(arr).each(function(index,value){
+                                                if(value.topicmain_id == companyId){
+                                                    if($("#search_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#search_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                  
+                                        }
+                            
+                                    })
+                                    
+                                    $("#search_topicminor_id").change(function(){
+                                    
+                                        var courseId = $(this).val()
+                                        $("#search_course_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(courseId != ''){
+                                            $(arr).each(function(index,value){
+                                                console.log(courseId+"&"+value.topicmain_id)
+                                                if(value.topicminor_id == courseId && value.topicmain_id == $("#search_topicmain_id").val()){
+                                                    
+                                                    if($("#search_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#search_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                 
+                                        }
+                            
+                                    })
+                     
+                        
+                                }
+                            })
+                            }else if(num == 2){
+                                $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"test12"
+                                },
+                                success:function(msg){
+                                    let arr = JSON.parse(msg); 
+                                    $("#add_topicmain_id").html("<option id=''>โปรดเลือก</option>")
+                                    $("#add_topicminor_id").html('<option id="">โปรดเลือก</option>')
+                                    $("#add_course_id").html('<option id="">โปรดเลือก</option>')
+                                   
+                                   
+                      
+                                    $(arr).each(function(index,value){
+                                        if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
+                                            $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
+                                        }
+                                    })
+                         
+                                    $("#add_topicmain_id").change(function(){
+                                        var companyId = $(this).val()
+                                        $("#add_topicminor_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(companyId != ''){
+                                            $(arr).each(function(index,value){
+                                                if(value.topicmain_id == companyId){
+                                                    if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                  
+                                        }
+                            
+                                    })
+                                    
+                                    $("#add_topicminor_id").change(function(){
+                                    
+                                        var courseId = $(this).val()
+                                        $("#add_course_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(courseId != ''){
+                                            $(arr).each(function(index,value){
+                                                console.log(courseId+"&"+value.topicmain_id)
+                                                if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
+                                                    
+                                                    if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                 
+                                        }
+                            
+                                    })
+                     
+                        
+                                }
+                            })
+                            }else if(num == 3){
+                                $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"test12"
+                                },
+                                success:function(msg){
+                                    let arr = JSON.parse(msg); 
+                                    $("#add_topicmain_id").html("<option id=''>โปรดเลือก</option>")
+                                    $("#add_topicminor_id").html('<option id="">โปรดเลือก</option>')
+                                    $("#add_course_id").html('<option id="">โปรดเลือก</option>')
+                                   
+                                    $(arr).each(function(index,value){
+                                        if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
+                                            $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
+                                        }
+                                    })
+                         
+                                    $("#add_topicmain_id").change(function(){
+                                        var companyId = $(this).val()
+                                        $("#add_topicminor_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(companyId != ''){
+                                            $(arr).each(function(index,value){
+                                                if(value.topicmain_id == companyId){
+                                                    if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                  
+                                        }
+                            
+                                    })
+                                    
+                                    $("#add_topicminor_id").change(function(){
+                                    
+                                        var courseId = $(this).val()
+                                        $("#add_course_id").html("<option id=''>โปรดเลือก</option>")
+                            
+                                        if(courseId != ''){
+                                            $(arr).each(function(index,value){
+                                                console.log(courseId+"&"+value.topicmain_id)
+                                                if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
+                                                    
+                                                    if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                        $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
+                                                    }
+                                                }
+                                            })
+                                 
+                                        }
+                            
+                                    })
+                     
+                        
+                                }
+                            })
+                            }
+                            
+            
+                        }
+    
+                        /*
                         function getcourse(num){
                             if(num == 1){
                                 var topicmain_id = $("#search_topicmain_id").val(); 
@@ -420,25 +610,6 @@
                                         $("#search_course_id").empty();
                                         $("#search_course_id").append(msg);
                                         $("#search_course_id").select2();
-                                    }
-                                })
-                            }else if(num == 2){
-                                var topicmain_id = $("#add_topicmain_id").val(); 
-                                var topicminor_id = $("#add_topicminor_id").val(); 
-                     
-                                $.ajax({
-                                    type:"post",
-                                    url:"Training",
-                                    data:{
-                                        type:"getcoursebytopicminor_id",
-                                        topicmain_id:topicmain_id,
-                                        topicminor_id:topicminor_id
-                                    },
-                                    success:function(msg){
-                                  
-                                        $("#add_course_id").empty();
-                                        $("#add_course_id").append(msg);
-                                        $("#add_course_id").select2();
                                     }
                                 })
                             }else if(num == 2){
@@ -536,7 +707,7 @@
                                 })
                             }	
                         }
-                        
+                         */
                         function getaddress(){
                                          
                             $.ajax({
@@ -1225,7 +1396,7 @@
 
    
                         $(document).ready(function(){
-                        
+                            
         
                             $("#table_training").DataTable({
                                 
@@ -1282,16 +1453,16 @@
                                
                                   
                             })
-        
+                            getdropdown(1)
                             //gettabletraining(1)
-                            gettopicmain(1)
+                            //gettopicmain(1)
                              
                             $(document).on('shown.bs.modal', '#modal_edittraining', function () {
                                 $("#table_employee_edit").DataTable().columns.adjust().draw();
                             });
                             
                             $("#adddata").click(function (){
-                                gettopicmain(2)
+                               
                                 ClearInput()
                                 $("#modal_addtraining").modal('show')
                                 getaddress()
@@ -1300,27 +1471,8 @@
                             $("#listtraining").addClass("menu-is-opening menu-open");
                             $("#pagetraining").addClass("active");
                             $("#datatraining").addClass("active");
+                           
                             
-                            
-                            $("#search_topicmain_id").on('input', function() {
-                                gettopicminor(1)
-                                 
-                            });
-                            
-                            $("#search_topicminor_id").on('input', function() {
-                                getcourse(1)
-                            });
-                            
-    
-                            $("#add_topicmain_id").on('input', function() {
-                                gettopicminor(2)
-                            });
-                            
-                            $("#add_topicminor_id").on('input', function() {
-                                getcourse(2)
-                            });
-                            
-    
     
                             $("#edit_topicmain_id").on('input', function() {
                                 edit_gettopicminor()

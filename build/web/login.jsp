@@ -69,7 +69,9 @@
                     
                 </div>
             </div>
+            
         </div>
+        <div class="text-center text-success mt-3">Copyright © People's garment public Co.Ltd. </div>
         <script>
             $(document).ready(function(){
                 $("#pagehome").addClass("active");

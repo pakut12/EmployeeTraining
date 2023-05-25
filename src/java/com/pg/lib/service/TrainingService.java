@@ -342,7 +342,7 @@ public class TrainingService {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
-                    "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and ";
+                    "c.topicmain_id = ? AND d.topicminor_id = ? AND b.group_course_name = ? and ";
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
             }
@@ -362,9 +362,9 @@ public class TrainingService {
             ps = conn.prepareStatement(sql);
 
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
-                ps.setString(1, "%" + search_topicmain_id + "%");
-                ps.setString(2, "%" + search_topicminor_id + "%");
-                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(1, search_topicmain_id );
+                ps.setString(2, search_topicminor_id );
+                ps.setString(3, search_course_id );
                 ps.setString(4, search_date_start);
                 ps.setString(5, search_date_end);
                 ps.setString(6, "%" + searchValue + "%");
@@ -377,9 +377,9 @@ public class TrainingService {
                 ps.setString(13, "%" + searchValue + "%");
 
             } else {
-                ps.setString(1, "%" + search_topicmain_id + "%");
-                ps.setString(2, "%" + search_topicminor_id + "%");
-                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(1, search_topicmain_id );
+                ps.setString(2, search_topicminor_id );
+                ps.setString(3, search_course_id );
                 ps.setString(4, "%" + searchValue + "%");
                 ps.setString(5, "%" + searchValue + "%");
                 ps.setString(6, "%" + searchValue + "%");
@@ -413,7 +413,7 @@ public class TrainingService {
             String idgroup = Checkidgroup(search_topicmain_id, search_topicminor_id, search_course_id);
             String sql = "SELECT * FROM(select rownum as rnum,r.*,TO_CHAR(r.training_datetraining,'DD/MM/YYYY') as datetraining from ";
             sql += "(SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
-                    "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and ";
+                    "c.topicmain_id = ? AND d.topicminor_id = ? AND b.group_course_name = ? and ";
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
                 sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
             }
@@ -437,9 +437,9 @@ public class TrainingService {
             ps = conn.prepareStatement(sql);
 
             if (!search_date_start.equals("")) {
-                ps.setString(1, "%" + search_topicmain_id + "%");
-                ps.setString(2, "%" + search_topicminor_id + "%");
-                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(1,  search_topicmain_id );
+                ps.setString(2,  search_topicminor_id );
+                ps.setString(3,  search_course_id );
                 ps.setString(4, search_date_start);
                 ps.setString(5, search_date_end);
                 ps.setString(6, "%" + searchValue + "%");
@@ -454,9 +454,9 @@ public class TrainingService {
                 ps.setInt(15, start);
                 ps.setInt(16, start + length);
             } else {
-                ps.setString(1, "%" + search_topicmain_id + "%");
-                ps.setString(2, "%" + search_topicminor_id + "%");
-                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(1,  search_topicmain_id );
+                ps.setString(2,  search_topicminor_id );
+                ps.setString(3,  search_course_id );
                 ps.setString(4, "%" + searchValue + "%");
                 ps.setString(5, "%" + searchValue + "%");
                 ps.setString(6, "%" + searchValue + "%");

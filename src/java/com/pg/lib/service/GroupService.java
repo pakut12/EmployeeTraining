@@ -49,6 +49,38 @@ public class GroupService {
         return status;
     }
 
+    public static List<ET_Group> getlistgroupall() throws SQLException {
+
+        List<ET_Group> listgroup = new ArrayList<ET_Group>();
+
+        try {
+            String sql = "SELECT a.group_id,b.topicmain_id,b.topicmain_name,c.topicminor_id,c.topicminor_name,a.group_course_name FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id order by b.TOPICMAIN_ID";
+
+            conn = ConnectDB.getConnectionhr();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ET_Group list = new ET_Group();
+                list.setGroup_id(rs.getString("group_id"));
+                list.setMain_topicmain_id(rs.getString("topicmain_id"));
+                list.setMain_topicmain_name(rs.getString("topicmain_name"));
+                list.setMain_topicminor_id(rs.getString("topicminor_id"));
+                list.setMain_topicminor_name(rs.getString("topicminor_name"));
+                list.setMain_course_name(rs.getString("group_course_name"));
+                listgroup.add(list);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectDB.closeConnection(conn);
+            ps.close();
+            rs.close();
+        }
+        return listgroup;
+    }
+
     public static List<ET_Group> getlistgroupallbyid(String id) throws SQLException {
 
         List<ET_Group> listgroup = new ArrayList<ET_Group>();
@@ -83,7 +115,7 @@ public class GroupService {
         return listgroup;
     }
 
-    public  static String Checkidgroup(String topicmain_id, String topicminor_id, String course_id) throws SQLException {
+    public static String Checkidgroup(String topicmain_id, String topicminor_id, String course_id) throws SQLException {
         String groupid = "";
         try {
             String sql = "SELECT * FROM et_group WHERE group_topicmain_id = ? and group_topicminor_id = ? and group_course_name = ?";
@@ -112,7 +144,7 @@ public class GroupService {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.GROUP_TOPICMAIN_ID = ? and a.GROUP_TOPICMINOR_ID = ? and a.group_id > 99 order by a.group_id ";
-            
+
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, topicmain_id);
@@ -139,7 +171,7 @@ public class GroupService {
         int totle = 0;
         try {
             String sql = "SELECT COUNT(*) FROM et_group a INNER JOIN et_topicmain b ON a.group_topicmain_id = b.topicmain_id INNER JOIN et_topicminor c ON c.topicminor_id = a.group_topicminor_id WHERE a.GROUP_TOPICMAIN_ID = ? and a.GROUP_TOPICMINOR_ID = ? and (a.group_id LIKE ? or b.topicmain_id LIKE ? or b.topicmain_name LIKE ? or c.topicminor_id LIKE ? or c.topicminor_name LIKE ? or a.group_course_name LIKE ? ) and a.group_id > 99 order by a.group_id ";
-           
+
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, topicmain_id);
