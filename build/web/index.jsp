@@ -11,7 +11,7 @@
         <%@ include file="share/header.jsp" %>
     </head>
     
-    <body class="sidebar-mini layout-fixed text-sm layout-navbar-fixed accent-olive">
+    <body class="sidebar-mini layout-fixed text-sm layout-navbar-fixed accent-olive ">
         <%@ include file="share/navbar.jsp" %>
         
         <!-- Content Wrapper. Contains page content -->

@@ -432,6 +432,7 @@ public class TrainingService {
                     "b.group_course_name LIKE ?))r) where rnum BETWEEN ? AND ?";
             sql += " order by training_year,training_datetraining";
             
+            System.out.println(sql);
            
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);

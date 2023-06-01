@@ -15,9 +15,18 @@
         <%@ include file="share/header.jsp" %>
     </head>
     <body>
-        <select id="company"></select>
-        <select id="product"></select>
-        <select id="test"></select>
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <select id="company" class="w-100"></select>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <select id="product" class="w-100"></select>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                 <select id="test" class="w-100"></select>
+            </div>
+        </div>
+       
         <button id="asd" onclick="bt()">asdasd</button>
         <script>
             
@@ -27,7 +36,9 @@
                 console.log($("#test").val())   
             }
             
-            
+            $('#company').select2();
+            $('#product').select2();
+            $('#test').select2();
             
             function getdropdown(){
                 $.ajax({

@@ -44,14 +44,14 @@
                 คุณ : <%=name%>
             </button>
             <div class="dropdown-menu dropdown-menu-right ">
-               
-               
+                
+                
                 <div class="text-center pt-2 pl-3 pr-3 pb-3">
                     <div class="mb-3"><strong>ยินดีต้อนรับ</strong>  </div>
                     <div class="mb-3"><strong>  คุณ : </strong> <%=name%></div>
                     <div class="text-uppercase"><strong>  สถานะ : </strong> <%=statususer%></div>
                 </div>
-                 <div class="dropdown-divider"></div>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item text-center text-danger " href="Chkauthen?type=logout"> <i class="fas fa-door-open"></i> ออกจากระบบ</a>
             </div>
         </div>
@@ -181,6 +181,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="managereporttopic.jsp" class="nav-link " id="datareporttopic">
+                                <div class="row">
+                                    <div class="col-2 mt-1 "><i class="far fa-circle nav-icon"></i></div>
+                                    <div class="col-10 px-3"><p class="">แสดงการฝึกอบรมตามหมวด</p></div>
+                                </div>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="managereportcourse.jsp" class="nav-link " id="datareportcourse">
                                 <div class="row">

@@ -415,6 +415,39 @@
                             })
                         }
     
+
+
+                        function gettopicmain(){
+                            $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"gettopicmain"
+                                },
+                                success:function(msg){
+                                    $("#add_topicmain_id").empty();
+                                    $("#add_topicmain_id").append(msg);
+                                    $("#add_topicmain_id").select2();
+                                }
+                            })
+                
+                        }	
+                        
+                        function gettopicminor(){
+                            $.ajax({
+                                type:"post",
+                                url:"Group",
+                                data:{
+                                    type:"gettopicminor"
+                                },
+                                success:function(msg){
+                                    $("#add_topicminor_id").empty();
+                                    $("#add_topicminor_id").append(msg);
+                                    $("#add_topicminor_id").select2();
+                                }
+                            })
+                        }	
+
                         function updategroup(){
                             var main_id = $("#edit_main_id").val()
                             var topicmain_id = $("#edit_topicmain_id").val()
@@ -611,8 +644,8 @@
 
                         $(document).ready(function(){
                             $("#adddata").click(function (){
-                                gettopicmain(2)
-                                gettopicminor(2)
+                                gettopicmain()
+                                gettopicminor()
                                 $("#add_course_name").val("");
                                 $("#modal_addgroup").modal('show')
                             })
@@ -651,7 +684,7 @@
                                 ]
                             })
                             // gettablegroup()
-                             getdropdown(1)
+                            getdropdown(1)
                             
                         })
                     </script>
