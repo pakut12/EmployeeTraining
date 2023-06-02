@@ -132,7 +132,8 @@ public class Address extends HttpServlet {
                 try {
                     List<ET_Address> listaddress = AddressService.getaddress();
                     String html = "";
-
+                    
+                    html += "<option value=''>โปรดเลือก</option>";
                     for (ET_Address l : listaddress) {
                         html += "<option value='" + l.getAddress_id() + "'>" + l.getAddress_name() + "</option>";
                     }

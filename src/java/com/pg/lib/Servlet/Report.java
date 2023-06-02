@@ -49,15 +49,18 @@ public class Report extends HttpServlet {
                     String search_date_start = request.getParameter("search_date_start").trim();
                     String search_date_end = request.getParameter("search_date_end").trim();
                     String search_year = request.getParameter("search_year").trim();
+                    String search_address = request.getParameter("search_address").trim();
 
-                    List<ET_Training> list = ReportService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end, search_year);
+                    List<ET_Training> list = ReportService.gettabletraining(start, length, searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end, search_year, search_address);
 
+                    System.out.println(search_address);
+                    System.out.println(list.size());
                     Gson gson = new Gson();
 
                     JSONObject obj = new JSONObject();
                     obj.put("draw", draw);
                     obj.put("recordsTotal", ReportService.gettotletabletraining());
-                    obj.put("recordsFiltered", ReportService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end, search_year));
+                    obj.put("recordsFiltered", ReportService.getfilteredtabletraining(searchValue, search_topicmain_id, search_topicminor_id, search_course_id, search_date_start, search_date_end, search_year, search_address));
                     obj.put("data", gson.toJsonTree(list));
 
                     response.setContentType("application/json");

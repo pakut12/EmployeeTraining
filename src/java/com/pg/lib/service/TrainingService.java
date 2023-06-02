@@ -24,7 +24,7 @@ public class TrainingService {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static int getdatafilteredtrainingbyemid(String id, String searchValue, String datestart, String dateend,String search_year) throws SQLException {
+    public static int getdatafilteredtrainingbyemid(String id, String searchValue, String datestart, String dateend, String search_year) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
         int total = 0;
         try {
@@ -38,10 +38,10 @@ public class TrainingService {
             if (!datestart.equals("") && !dateend.equals("")) {
                 sql += "and b.training_datetraining BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
             }
-             if (!search_year.equals("")) {
+            if (!search_year.equals("")) {
                 sql += "and b.training_year = '" + search_year + "' ";
             }
-            
+
             sql += "and (b.training_year like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?)";
 
             conn = ConnectDB.getConnectionhr();
@@ -122,7 +122,7 @@ public class TrainingService {
         return total;
     }
 
-    public static List<ET_Training> getdatatrainingbyemid(String id, String searchValue, int start, int length, String datestart, String dateend,String search_year) throws SQLException {
+    public static List<ET_Training> getdatatrainingbyemid(String id, String searchValue, int start, int length, String datestart, String dateend, String search_year) throws SQLException {
         List<ET_Training> list = new ArrayList<ET_Training>();
 
         try {
@@ -143,7 +143,7 @@ public class TrainingService {
             sql += "and (b.training_year like ? or b.training_id like ? or e.topicmain_name like ? or f.topicminor_name like ? or c.group_course_name like ? or b.training_hour like ? or b.training_datetraining LIKE ? or b.training_expenses like ? OR g.address_name like ?))r) where rnum BETWEEN ? AND ?";
             sql += "order by training_year,training_datetraining";
 
-            
+
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             if (!datestart.equals("") && !dateend.equals("")) {
@@ -159,7 +159,7 @@ public class TrainingService {
                 ps.setString(10, "%" + searchValue + "%");
                 ps.setString(11, "%" + searchValue + "%");
                 ps.setString(12, "%" + searchValue + "%");
-                
+
                 ps.setInt(13, start);
                 ps.setInt(14, start + length);
             } else {
@@ -173,7 +173,7 @@ public class TrainingService {
                 ps.setString(8, "%" + searchValue + "%");
                 ps.setString(9, "%" + searchValue + "%");
                 ps.setString(10, "%" + searchValue + "%");
-                
+
                 ps.setInt(11, start);
                 ps.setInt(12, start + length);
             }
@@ -338,35 +338,57 @@ public class TrainingService {
         return totle;
     }
 
-    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end,String search_year) throws SQLException {
+    public static int getfilteredtabletraining(String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end, String search_year, String search_address) throws SQLException {
         int totle = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
-                    "c.topicmain_id = ? AND d.topicminor_id = ? AND b.group_course_name = ? and ";
+            String sql = "SELECT count(*) FROM(select rownum as rnum,r.*,TO_CHAR(r.training_datetraining,'DD/MM/YYYY') as datetraining from ";
+            sql += "(SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE ";
+            sql += "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ? and a.training_year like ? and  e.address_id LIKE ? and ";
+
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
-                sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
+                sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and ";
             }
-            if (!search_year.equals("")) {
-                sql += "a.training_year = '" + search_year + "' and";
-            }
+
             sql += " (a.training_company LIKE ? OR " +
+                    "a.training_id LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
                     "a.training_hour LIKE ? OR " +
                     "a.training_expenses LIKE ? OR " +
                     "e.address_name LIKE ? OR " +
                     "c.topicmain_name LIKE ? OR " +
                     "d.topicminor_name LIKE ? OR " +
-                    "b.group_course_name LIKE ?) ";
+                    "b.group_course_name LIKE ?))r) ";
+            sql += " order by training_year,training_datetraining";
+
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
-                ps.setString(1, search_topicmain_id );
-                ps.setString(2, search_topicminor_id );
-                ps.setString(3, search_course_id );
-                ps.setString(4, search_date_start);
-                ps.setString(5, search_date_end);
+
+                ps.setString(1, "%" + search_topicmain_id + "%");
+                ps.setString(2, "%" + search_topicminor_id + "%");
+                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(4, "%" + search_year + "%");
+                ps.setString(5, "%" + search_address + "%");
+                ps.setString(6, search_date_start);
+                ps.setString(7, search_date_end);
+                ps.setString(8, "%" + searchValue + "%");
+                ps.setString(9, "%" + searchValue + "%");
+                ps.setString(10, "%" + searchValue + "%");
+                ps.setString(11, "%" + searchValue + "%");
+                ps.setString(12, "%" + searchValue + "%");
+                ps.setString(13, "%" + searchValue + "%");
+                ps.setString(14, "%" + searchValue + "%");
+                ps.setString(15, "%" + searchValue + "%");
+                ps.setString(16, "%" + searchValue + "%");
+
+            } else {
+                ps.setString(1, "%" + search_topicmain_id + "%");
+                ps.setString(2, "%" + search_topicminor_id + "%");
+                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(4, "%" + search_year + "%");
+                ps.setString(5, "%" + search_address + "%");
                 ps.setString(6, "%" + searchValue + "%");
                 ps.setString(7, "%" + searchValue + "%");
                 ps.setString(8, "%" + searchValue + "%");
@@ -375,21 +397,10 @@ public class TrainingService {
                 ps.setString(11, "%" + searchValue + "%");
                 ps.setString(12, "%" + searchValue + "%");
                 ps.setString(13, "%" + searchValue + "%");
-
-            } else {
-                ps.setString(1, search_topicmain_id );
-                ps.setString(2, search_topicminor_id );
-                ps.setString(3, search_course_id );
-                ps.setString(4, "%" + searchValue + "%");
-                ps.setString(5, "%" + searchValue + "%");
-                ps.setString(6, "%" + searchValue + "%");
-                ps.setString(7, "%" + searchValue + "%");
-                ps.setString(8, "%" + searchValue + "%");
-                ps.setString(9, "%" + searchValue + "%");
-                ps.setString(10, "%" + searchValue + "%");
-                ps.setString(11, "%" + searchValue + "%");
+                ps.setString(14, "%" + searchValue + "%");
 
             }
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -407,20 +418,18 @@ public class TrainingService {
         return totle;
     }
 
-    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end, String search_year) throws SQLException {
+    public static List<ET_Training> gettabletraining(int start, int length, String searchValue, String search_topicmain_id, String search_topicminor_id, String search_course_id, String search_date_start, String search_date_end, String search_year, String search_address) throws SQLException {
         List<ET_Training> listtraining = new ArrayList<ET_Training>();
         try {
-            String idgroup = Checkidgroup(search_topicmain_id, search_topicminor_id, search_course_id);
+
             String sql = "SELECT * FROM(select rownum as rnum,r.*,TO_CHAR(r.training_datetraining,'DD/MM/YYYY') as datetraining from ";
-            sql += "(SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE " +
-                    "c.topicmain_id = ? AND d.topicminor_id = ? AND b.group_course_name = ? and ";
+            sql += "(SELECT * FROM et_training a INNER JOIN et_group b on a.training_groupid = b.group_id INNER JOIN et_topicmain c on c.topicmain_id = b.group_topicmain_id INNER JOIN et_topicminor d on d.topicminor_id = b.group_topicminor_id  INNER JOIN et_address e ON e.address_id = a.training_address WHERE ";
+            sql += "c.topicmain_id like ? AND d.topicminor_id like ? AND b.group_course_name like ?  and a.training_year like ? and e.address_id LIKE ? and ";
+
             if (!search_date_start.equals("") && !search_date_end.equals("")) {
-                sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and";
+                sql += "a.training_datetraining BETWEEN  TO_DATE(?, 'yyyy/mm/dd') and TO_DATE(?, 'yyyy/mm/dd') and ";
             }
 
-            if (!search_year.equals("")) {
-                sql += "a.training_year = '" + search_year + "' and";
-            }
             sql += " (a.training_company LIKE ? OR " +
                     "a.training_id LIKE ? OR " +
                     "a.training_year LIKE ? OR " +
@@ -430,19 +439,41 @@ public class TrainingService {
                     "c.topicmain_name LIKE ? OR " +
                     "d.topicminor_name LIKE ? OR " +
                     "b.group_course_name LIKE ?))r) where rnum BETWEEN ? AND ?";
-            sql += " order by training_year,training_datetraining";
-            
-            System.out.println(sql);
+            sql += " order by address_name ,training_year,training_datetraining,group_id  ";
+
            
+
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
 
-            if (!search_date_start.equals("")) {
-                ps.setString(1,  search_topicmain_id );
-                ps.setString(2,  search_topicminor_id );
-                ps.setString(3,  search_course_id );
-                ps.setString(4, search_date_start);
-                ps.setString(5, search_date_end);
+
+
+            if (!search_date_start.equals("") && !search_date_end.equals("")) {
+
+                ps.setString(1, "%" + search_topicmain_id + "%");
+                ps.setString(2, "%" + search_topicminor_id + "%");
+                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(4, "%" + search_year + "%");
+                ps.setString(5, "%" + search_address + "%");
+                ps.setString(6, search_date_start);
+                ps.setString(7, search_date_end);
+                ps.setString(8, "%" + searchValue + "%");
+                ps.setString(9, "%" + searchValue + "%");
+                ps.setString(10, "%" + searchValue + "%");
+                ps.setString(11, "%" + searchValue + "%");
+                ps.setString(12, "%" + searchValue + "%");
+                ps.setString(13, "%" + searchValue + "%");
+                ps.setString(14, "%" + searchValue + "%");
+                ps.setString(15, "%" + searchValue + "%");
+                ps.setString(16, "%" + searchValue + "%");
+                ps.setInt(17, start);
+                ps.setInt(18, start + length);
+            } else {
+                ps.setString(1, "%" + search_topicmain_id + "%");
+                ps.setString(2, "%" + search_topicminor_id + "%");
+                ps.setString(3, "%" + search_course_id + "%");
+                ps.setString(4, "%" + search_year + "%");
+                ps.setString(5, "%" + search_address + "%");
                 ps.setString(6, "%" + searchValue + "%");
                 ps.setString(7, "%" + searchValue + "%");
                 ps.setString(8, "%" + searchValue + "%");
@@ -454,21 +485,6 @@ public class TrainingService {
                 ps.setString(14, "%" + searchValue + "%");
                 ps.setInt(15, start);
                 ps.setInt(16, start + length);
-            } else {
-                ps.setString(1,  search_topicmain_id );
-                ps.setString(2,  search_topicminor_id );
-                ps.setString(3,  search_course_id );
-                ps.setString(4, "%" + searchValue + "%");
-                ps.setString(5, "%" + searchValue + "%");
-                ps.setString(6, "%" + searchValue + "%");
-                ps.setString(7, "%" + searchValue + "%");
-                ps.setString(8, "%" + searchValue + "%");
-                ps.setString(9, "%" + searchValue + "%");
-                ps.setString(10, "%" + searchValue + "%");
-                ps.setString(11, "%" + searchValue + "%");
-                ps.setString(12, "%" + searchValue + "%");
-                ps.setInt(13, start);
-                ps.setInt(14, start + length);
             }
 
             rs = ps.executeQuery();
@@ -496,6 +512,8 @@ public class TrainingService {
             ps.close();
             rs.close();
         }
+
+
         return listtraining;
     }
 

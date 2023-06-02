@@ -109,7 +109,7 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="mb-3">
-                                                        <label for="" class="form-label">สถานที่จัดอบรม</label>
+                                                        <label for="" class="form-label">สาขา</label>
                                                         <input class="form-control form-control-sm text-center" type="text" id="evaluation_address" name="evaluation_address" disabled>  
                                                     </div>
                                                 </div>
@@ -668,7 +668,7 @@
                                         title: 'ค่าใช้จ่าย',
                                         data: "training_expenses" },
                                     { 
-                                        title: 'สถานที่จัดอบรม', 
+                                        title: 'สาขา', 
                                         data:"training_address"
                                                  
                                     },
@@ -726,7 +726,7 @@
                                         title: 'ค่าใช้จ่าย',
                                         data: "training_expenses" },
                                     { 
-                                        title: 'สถานที่จัดอบรม', 
+                                        title: 'สาขา', 
                                         data:"training_address"
                                                  
                                     },

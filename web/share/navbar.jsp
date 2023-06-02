@@ -139,7 +139,7 @@
                         <li class="nav-item">
                             <a href="manageaddress.jsp" class="nav-link"  id="dataaddress">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>ข้อมูลสถานที่จัดอบรม</p>
+                                <p>ข้อมูลสาขา</p>
                             </a>
                         </li>
                         
@@ -189,6 +189,7 @@
                                 </div>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item">
                             <a href="managereportcourse.jsp" class="nav-link " id="datareportcourse">
                                 <div class="row">
@@ -197,6 +198,7 @@
                                 </div>
                             </a>
                         </li>
+                        -->
                         <li class="nav-item">
                             <a href="managereportemployee.jsp" class="nav-link " id="datareportemployee">
                                 <div class="row">

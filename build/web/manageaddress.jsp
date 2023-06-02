@@ -21,13 +21,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-1">จัดการข้อมูลสถานที่จัดอบรม</h1>
+                            <h1 class="m-1">จัดการข้อมูลสาขา</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">หน้าเเรก</a></li>
                                 <li class="breadcrumb-item"><a href="#">ข้อมูล</a></li>
-                                <li class="breadcrumb-item active">จัดการข้อมูลสถานที่จัดอบรม</li>
+                                <li class="breadcrumb-item active">จัดการข้อมูลสาขา</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -46,14 +46,14 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลสถานที่จัดอบรม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลสาขา</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อสถานที่</label>
+                                        <label for="" class="form-label">ชื่อสาขา</label>
                                         <input type="text" class="form-control form-control-sm text-center " style="width: 100%" id="add_addressname">
                                     </div>
                                     <div class="mb-3">
@@ -74,7 +74,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลสถานที่จัดอบรม</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">เเก้ไขข้อมูลสาขา</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -85,7 +85,7 @@
                                         <input type="text" class="form-control form-control-sm text-center " style="width: 100%" id="edit_addressid" disabled>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อสถานที่</label>
+                                        <label for="" class="form-label">ชื่อสาขา</label>
                                         <input type="text" class="form-control form-control-sm text-center " style="width: 100%" id="edit_addressname">
                                     </div>
                                     <div class="mb-3">
@@ -105,7 +105,7 @@
                     
                     <div class="card card-success card-outline shadow-sm">
                         <div class="card-header ">
-                            จัดการข้อมูลหลักสูตร
+                            จัดการข้อมูลสาขา
                         </div>
                         <div class="card-body">
                             <div class="text-right mb-3">
@@ -284,7 +284,7 @@
                                         data: "address_id"
                                     },
                                     { 
-                                        title: 'ชื่อสถานที่จัดอบรม',
+                                        title: 'ชื่อสาขา',
                                         data: "address_name"
                                     },
                                     { 
