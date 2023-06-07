@@ -66,14 +66,14 @@
     <!-- Brand Logo -->
     
     <a href="index.jsp" class="brand-link text-md">
-        <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image  img-fluid m-0" >
+        <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image  img-fluid " >
         <span class="brand-text p-1 fw-bold text-uppercase" style="color:#3d9970" >Employee Training</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
         
         <!-- Sidebar Menu -->
-        <nav class="mt-2 ">
+        <nav class="mt-1 ">
             
             <ul class="nav nav-pills nav-sidebar flex-column  nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class

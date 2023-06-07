@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="addTraining()">Save</button>
+                                    <button type="button" class="btn btn-primary" onclick="addTraining()" type="submit">Save</button>
                                     
                                 </div>
                             </div>
@@ -357,7 +357,7 @@
                             </form>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <button class="btn btn-primary btn-sm w-100" onclick="gettabletraining()"> ค้นหา</button>
+                                    <button class="btn btn-primary btn-sm w-100" onclick="gettabletraining()" > ค้นหา</button>
                                 </div>
                             </div>
                         </div>
@@ -408,7 +408,7 @@
                             $("#table_employee_add").empty();
                             $("#add_type").empty();
                             $("#add_type").html("<option value='0'>-</option><option value='1'>ภายใน</option><option value='2'>ภายนอก</option>")
-                           
+                            $("#myformadd").removeClass("was-validated")
                         }
     
     
@@ -426,8 +426,6 @@
                                         $("#search_topicminor_id").html("<option id='' value=''>โปรดเลือก</option>")
                                         $("#search_course_id").html("<option id='' value=''>โปรดเลือก</option>")
                                    
-                                   
-                      
                                         $(arr).each(function(index,value){
                                             if($("#search_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
                                                 $("#search_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
@@ -458,7 +456,7 @@
                             
                                             if(courseId != ''){
                                                 $(arr).each(function(index,value){
-                                                    console.log(courseId+"&"+value.topicmain_id)
+                                                    
                                                     if(value.topicminor_id == courseId && value.topicmain_id == $("#search_topicmain_id").val()){
                                                     
                                                         if($("#search_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
@@ -519,7 +517,7 @@
                             
                                             if(courseId != ''){
                                                 $(arr).each(function(index,value){
-                                                    console.log(courseId+"&"+value.topicmain_id)
+                                                    
                                                     if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
                                                     
                                                         if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
@@ -1382,51 +1380,74 @@
 
 
                         function addTraining(){
-                            var form = $("#myformadd").serialize()
-                            var numlist = employeelist.length-1
-                            var listemployeeid = []
-                            for(var n = 0;n<=numlist;n++){
-                                listemployeeid.push(employeelist[n].employee_id)
-                            }
-                            form += "&listemployeeid=" + listemployeeid
-                            form += "&type=addtraining"
+                            $("#myformadd").addClass("was-validated")
                             
-                            $.ajax({
-                                type:"post",
-                                url:"Training",
-                                data:form,
-                                success:function(msg){
-                                    if(msg == "true"){
-                                        Swal.fire({
-                                            icon:"success",
-                                            title:"บันทึก",
-                                            text:"บันทึกสำเร็จ"
-                                        })
-                                    }else if(msg == "false1"){
-                                        Swal.fire({
-                                            icon:"error",
-                                            title:"บันทึก",
-                                            text:"บันทึกไม่สำเร็จ : มีข้อมูลเเล้ว "
-                                        })
-                                    }else if(msg == "false2"){
-                                        Swal.fire({
-                                            icon:"error",
-                                            title:"บันทึก",
-                                            text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลฝึกอบรมไม่สำเร็จ"
-                                        })
-                                    }else if(msg == "false3"){
-                                        Swal.fire({
-                                            icon:"error",
-                                            title:"บันทึก",
-                                            text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
-                                        })
-                                    }
-                                    gettabletraining()
-                                    ClearInput()
-                                    $("#modal_addtraining").modal('hide')
+                            empty = $('form#myformadd').find("input").filter(function() {
+                                return this.value === "";
+                            });
+                            
+                            if(empty.length) {
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"บันทึกไม่สำเร็จ : กรุณากรอกข้อมูลให้ถูกต้อง"
+                                })
+                            }else{
+                               
+                            if($("#add_topicmain_id").val() == "" || $("#add_topicminor_id").val() == ""  || $("#add_course_id").val() == "" ){
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"บันทึกไม่สำเร็จ : กรุณาเลือกหมวดให้ถูกต้อง"
+                                })
+                            } else{
+                                
+                                var form = $("#myformadd").serialize()
+                                var numlist = employeelist.length-1
+                                var listemployeeid = []
+                                for(var n = 0;n<=numlist;n++){
+                                    listemployeeid.push(employeelist[n].employee_id)
                                 }
-                            })
-        
+                                form += "&listemployeeid=" + listemployeeid
+                                form += "&type=addtraining"
+                            
+                                $.ajax({
+                                    type:"post",
+                                    url:"Training",
+                                    data:form,
+                                    success:function(msg){
+                                        if(msg == "true"){
+                                            Swal.fire({
+                                                icon:"success",
+                                                title:"บันทึก",
+                                                text:"บันทึกสำเร็จ"
+                                            })
+                                        }else if(msg == "false1"){
+                                            Swal.fire({
+                                                icon:"error",
+                                                title:"บันทึก",
+                                                text:"บันทึกไม่สำเร็จ : มีข้อมูลเเล้ว "
+                                            })
+                                        }else if(msg == "false2"){
+                                            Swal.fire({
+                                                icon:"error",
+                                                title:"บันทึก",
+                                                text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลฝึกอบรมไม่สำเร็จ"
+                                            })
+                                        }else if(msg == "false3"){
+                                            Swal.fire({
+                                                icon:"error",
+                                                title:"บันทึก",
+                                                text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
+                                            })
+                                        }
+                                        gettabletraining()
+                                        ClearInput()
+                                        $("#modal_addtraining").modal('hide')
+                                    }
+                                })
+                            }
+                            }
                           
                         }
 

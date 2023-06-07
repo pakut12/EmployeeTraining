@@ -49,10 +49,11 @@ public class AddressService {
         }
         return status;
     }
-     public static List<ET_Address> getaddress() throws SQLException {
+
+    public static List<ET_Address> getaddress() throws SQLException {
         List<ET_Address> listtraining = new ArrayList<ET_Address>();
         try {
-            String sql = "SELECT * FROM et_address order by address_id";
+            String sql = "SELECT * FROM et_address where address_id > 99 order by address_id";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
@@ -161,7 +162,7 @@ public class AddressService {
     public static int gettotletableaddress() throws SQLException {
         int totle = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM et_address where address_id > 99";
+            String sql = "SELECT COUNT(*) FROM et_address where address_id > 99 ";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -212,7 +213,7 @@ public class AddressService {
         List<ET_Address> listtraining = new ArrayList<ET_Address>();
         try {
             String sql = "SELECT * FROM(select rownum as rnum,r.* from ";
-             sql += "(SELECT * FROM et_address WHERE (address_id LIKE ? or address_name LIKE ? or address_address LIKE ?) and address_id > 99 order by address_id)r) where rnum BETWEEN ? AND ? ";
+            sql += "(SELECT * FROM et_address WHERE address_id > 99 and (address_id LIKE ? or address_name LIKE ? or address_address LIKE ?) and address_id > 99 order by address_id)r) where rnum BETWEEN ? AND ? ";
 
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);

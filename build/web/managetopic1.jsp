@@ -51,11 +51,12 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <input type="text" class="form-control form-control-sm text-center" id="add_name">
-                                    </div>
+                                    <form id="formadd">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                            <input type="text" class="form-control form-control-sm text-center" id="add_name" required>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -74,14 +75,16 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">เลขที่</label>
-                                        <input type="text" class="form-control form-control-sm text-center" id="edit_id" disabled> 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <input type="text" class="form-control form-control-sm text-center" id="edit_name">
-                                    </div>
+                                    <form id="formedit">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">เลขที่</label>
+                                            <input type="text" class="form-control form-control-sm text-center" id="edit_id" disabled> 
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                            <input type="text" class="form-control form-control-sm text-center" id="edit_name">
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -99,11 +102,11 @@
                             <div class="text-right mb-3">
                                 <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
-                           
-                                <div class="" id="mytable">
-                                    
-                                </div>
-                           
+                            
+                            <div class="" id="mytable">
+                                
+                            </div>
+                            
                         </div>
                     </div>
                     
@@ -156,32 +159,46 @@
             
     
                         function addtopicmain(){
-                            $.ajax({
-                                type:"post",
-                                url:"Topicmain",
-                                data:{
-                                    type:"addtopicmain",
-                                    name:$("#add_name").val()
-                                },
-                                success:function(msg){
-                                    if(msg == "true"){
-                                        Swal.fire({
-                                            icon:"success",
-                                            title:"บันทึก",
-                                            text:"บันทึกสำเร็จ"
-                                        })
-                                    }else{
-                                        Swal.fire({
-                                            icon:"error",
-                                            title:"บันทึก",
-                                            text:"บันทึกไม่สำเร็จ"
-                                        })
+                            $("#formadd").addClass("was-validated")
+         
+                            empty = $('form#formadd').find("input").filter(function() {
+                                return this.value === "";
+                            });
+                            
+                            if(!empty.length) {
+                                $.ajax({
+                                    type:"post",
+                                    url:"Topicmain",
+                                    data:{
+                                        type:"addtopicmain",
+                                        name:$("#add_name").val()
+                                    },
+                                    success:function(msg){
+                                        if(msg == "true"){
+                                            Swal.fire({
+                                                icon:"success",
+                                                title:"บันทึก",
+                                                text:"บันทึกสำเร็จ"
+                                            })
+                                        }else{
+                                            Swal.fire({
+                                                icon:"error",
+                                                title:"บันทึก",
+                                                text:"บันทึกไม่สำเร็จ"
+                                            })
+                                        }
+                                        $("#add_name").val("");
+                                        $("#modal_addtopicmain").modal('hide');
+                                        gettopicmain();
                                     }
-                                    $("#add_name").val("");
-                                    $("#modal_addtopicmain").modal('hide');
-                                    gettopicmain();
-                                }
-                            })
+                                })
+                            }else{
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"กรุณากรอกข้อมูลให้ครบ"
+                                })
+                            }
                         }
             
                         function edittopicmain(id){
@@ -204,33 +221,48 @@
                         }
             
                         function updatetopicmain(){
-                            $.ajax({
-                                type:"post",
-                                url:"Topicmain",
-                                data:{
-                                    type:"updatetopicmainbyid",
-                                    id:$("#edit_id").val(),
-                                    name:$("#edit_name").val()
-                                },
-                                success:function(msg){
-                                    if(msg == "true"){
-                                        Swal.fire({
-                                            icon:"success",
-                                            title:"บันทึก",
-                                            text:"บันทึกสำเร็จ"
-                                        })
-                                    }else{
-                                        Swal.fire({
-                                            icon:"error",
-                                            title:"บันทึก",
-                                            text:"บันทึกไม่สำเร็จ"
-                                        })
-                                    }
+                            $("#formedit").addClass("was-validated")
+         
+                            empty = $('form#formedit').find("input").filter(function() {
+                                return this.value === "";
+                            });
+                            
+                            if(!empty.length) {      
+                                $.ajax({
+                                    type:"post",
+                                    url:"Topicmain",
+                                    data:{
+                                        type:"updatetopicmainbyid",
+                                        id:$("#edit_id").val(),
+                                        name:$("#edit_name").val()
+                                    },
+                                    success:function(msg){
+                                        if(msg == "true"){
+                                            Swal.fire({
+                                                icon:"success",
+                                                title:"บันทึก",
+                                                text:"บันทึกสำเร็จ"
+                                            })
+                                        }else{
+                                            Swal.fire({
+                                                icon:"error",
+                                                title:"บันทึก",
+                                                text:"บันทึกไม่สำเร็จ"
+                                            })
+                                        }
                        
-                                    $("#modal_edittopicmain").modal('hide');
-                                    gettopicmain();
-                                }
-                            })
+                                        $("#modal_edittopicmain").modal('hide');
+                                        gettopicmain();
+                                    }
+                                })
+                            }else{
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"กรุณากรอกข้อมูลให้ครบ"
+                                })
+
+                            }
                         }
                         function deltopicmain(id){
                             Swal.fire({
@@ -276,6 +308,7 @@
             
                         $(document).ready(function(){
                             $("#adddata").click(function (){
+                                $("#formadd").removeClass("was-validated")
                                 $("#add_name").val("")
                                 $("#modal_addtopicmain").modal('show')
                             })

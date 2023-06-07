@@ -485,7 +485,7 @@
                                     'pageLength',
                                     {
                                         extend: 'excel',
-                                        title: 'รายชื่อหลักของผู้อบรม : '+ $("#search_employee_id").val()
+                                        title: 'รายชื่อหลักสูตรของผู้อบรม : '+ $("#search_employee_id").val()
                                     },
                                     
                                 ],
@@ -556,8 +556,6 @@
                             });
         
         
-                          
-                            
                             $("#listreport").addClass("menu-is-opening menu-open");
                             $("#pagereport").addClass("active");
                             $("#datareportemployee").addClass("active");

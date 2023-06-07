@@ -51,23 +51,22 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id">
-                                            
-                                        </select>
-                                        
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                        <select class="form-control form-control-sm text-center" id="add_topicminor_id" style="width: 100%">
-                                            
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control form-control-sm text-center" id="add_course_name" style="width: 100%">
-                                    </div>
+                                    <form id="formadd">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                            <select class="form-control form-control-sm text-center " style="width: 100%" id="add_topicmain_id" required>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                            <select class="form-control form-control-sm text-center" id="add_topicminor_id" style="width: 100%" required>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                            <input type="text" class="form-control form-control-sm text-center" id="add_course_name" style="width: 100%" required>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -86,30 +85,28 @@
                                     </button>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">เลขที่</label>
-                                        <input class="form-control form-control-sm text-center" id="edit_main_id" disabled>
-                                        
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดหลัก</label>
-                                        <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id">
+                                    <form id="formedit">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">เลขที่</label>
+                                            <input class="form-control form-control-sm text-center" id="edit_main_id" disabled>
                                             
-                                        </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดหลัก</label>
+                                            <select class="form-control form-control-sm text-center " style="width: 100%" id="edit_topicmain_id">
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหมวดย่อย</label>
+                                            <select class="form-control form-control-sm text-center" id="edit_topicminor_id" style="width: 100%">
+                                            </select>
+                                        </div>
                                         
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหมวดย่อย</label>
-                                        <select class="form-control form-control-sm text-center" id="edit_topicminor_id" style="width: 100%">
-                                            
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">ชื่อหลักสูตร</label>
-                                        <input type="text" class="form-control form-control-sm text-center" id="edit_course_name" style="width: 100%">
-                                        
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">ชื่อหลักสูตร</label>
+                                            <input type="text" class="form-control form-control-sm text-center" id="edit_course_name" style="width: 100%">
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -126,6 +123,7 @@
                             ค้นหา
                         </div>
                         <div class="card-body">
+                           
                             <form id="myformsearch">
                                 <div class="row text-center">
                                     <div class="col-6">
@@ -138,16 +136,16 @@
                                         <select class="form-control form-control-sm text-center " style="width: 100%" id="search_topicminor_id" name="search_topicminor_id" required>
                                         </select>
                                     </div>
-                                    
                                 </div>
                             </form>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <button class="btn btn-primary btn-sm w-100" onclick="gettablegroup()"> ค้นหา</button>
+                                    <button class="btn btn-primary btn-sm w-100" onclick="gettablegroup($('#search_topicmain_id').val(),$('#search_topicminor_id').val())"> ค้นหา</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="card card-success card-outline shadow-sm">
                         <div class="card-header">
                             จัดการข้อมูลหลักสูตร
@@ -454,36 +452,50 @@
                             var topicminor_id = $("#edit_topicminor_id").val()
                             var course_name = $("#edit_course_name").val()
 
+                            $("#formedit").addClass("was-validated")
+         
+                            empty = $('form#formedit').find("input").filter(function() {
+                                return this.value === "";
+                            });
                             
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"updategroup",
-                                    main_id:main_id,
-                                    topicmain_id:topicmain_id,
-                                    topicminor_id:topicminor_id,
-                                    course_name:course_name
-                                },
-                                success:function(msg){
-                                    if(msg == 'true'){
-                                        Swal.fire({
-                                            title:"เเก้ไข",
-                                            icon:"success",
-                                            text:"เเก้ไขสำเร็จ"
-                                        })
-                                    }else{
-                                        Swal.fire({
-                                            title:"เเก้ไข",
-                                            icon:"error",
-                                            text:"เเก้ไขไม่สำเร็จ"
-                                        })
+                            if(!empty.length) {
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"updategroup",
+                                        main_id:main_id,
+                                        topicmain_id:topicmain_id,
+                                        topicminor_id:topicminor_id,
+                                        course_name:course_name
+                                    },
+                                    success:function(msg){
+                                        if(msg == 'true'){
+                                            Swal.fire({
+                                                title:"เเก้ไข",
+                                                icon:"success",
+                                                text:"เเก้ไขสำเร็จ"
+                                            })
+                                        }else{
+                                            Swal.fire({
+                                                title:"เเก้ไข",
+                                                icon:"error",
+                                                text:"เเก้ไขไม่สำเร็จ"
+                                            })
+                                        }
+                                        $("#modal_editgroup").modal('hide')
+                                        gettablegroup($('#edit_topicmain_id').val(),$('#edit_topicminor_id').val())
+                                        getdropdown(1)
                                     }
-                                    gettablegroup()
-                                   
-                                }
-                            })
-                             
+                                })
+                            }else{
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"กรุณากรอกข้อมูลให้ครบ"
+                                })
+
+                            }
                         }
 
                         function delgroup(id){
@@ -520,7 +532,8 @@
                                                     text:"ลบไม่สำเร็จ"
                                                 })
                                             }
-                                            gettablegroup()
+                                            gettablegroup($('#search_topicmain_id').val(),$('#search_topicminor_id').val())
+                                            getdropdown(1)
                                    
                                         }
                                     })
@@ -534,12 +547,13 @@
                         
                         
 
-                        function gettablegroup(){
+                        function gettablegroup(idmain,idminor){
                         
-                            let search_topicmain_id = $("#search_topicmain_id").val()
-                            let search_topicminor_id = $("#search_topicminor_id").val()
-                            let search_course_id = $("#search_course_id").val()
-                        
+                            let search_topicmain_id = idmain
+                            let search_topicminor_id = idminor
+                            
+                            //let search_course_id = $("#search_course_id").val()
+                            
                             var table = $("#table_course").DataTable({
                                 serverSide: true,
                                 ajax: {
@@ -548,8 +562,8 @@
                                     data:{
                                         type:"gettablegroup",
                                         search_topicmain_id:search_topicmain_id,
-                                        search_topicminor_id:search_topicminor_id,
-                                        search_course_id:search_course_id
+                                        search_topicminor_id:search_topicminor_id
+                                        //search_course_id:search_course_id
                                     },
                                     dataSrc:function(json){
                                         var data = JSON.parse(json.data)
@@ -606,42 +620,55 @@
                                 bDestroy: true
                                   
                             })
-
                         }    
 
                        
 
                         function addgroup(){
-                            $.ajax({
-                                type:"post",
-                                url:"Group",
-                                data:{
-                                    type:"addgroup",
-                                    topicmain_id :$("#add_topicmain_id").val(),
-                                    topicminor_id :$("#add_topicminor_id").val(),
-                                    course_name:$("#add_course_name").val()
-                                },
-                                success:function(msg){
-                                    if(msg == 'true'){
-                                        Swal.fire({
-                                            title:"บันทึก",
-                                            icon:"success",
-                                            text:"บันทึกสำเร็จ"
-                                        })
-                                    }else{
-                                        Swal.fire({
-                                            title:"บันทึก",
-                                            icon:"error",
-                                            text:"บันทึกไม่สำเร็จ"
-                                        })
+                            $("#formadd").addClass("was-validated")
+         
+                            empty = $('form#formadd').find("input").filter(function() {
+                                return this.value === "";
+                            });
+                            
+                            if(!empty.length) {
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"addgroup",
+                                        topicmain_id :$("#add_topicmain_id").val(),
+                                        topicminor_id :$("#add_topicminor_id").val(),
+                                        course_name:$("#add_course_name").val()
+                                    },
+                                    success:function(msg){
+                                        if(msg == 'true'){
+                                            Swal.fire({
+                                                title:"บันทึก",
+                                                icon:"success",
+                                                text:"บันทึกสำเร็จ"
+                                            })
+                                        }else{
+                                            Swal.fire({
+                                                title:"บันทึก",
+                                                icon:"error",
+                                                text:"บันทึกไม่สำเร็จ"
+                                            })
+                                        }
+                                        $("#modal_addgroup").modal("hide");
+                                        gettablegroup($("#add_topicmain_id").val(),$("#add_topicminor_id").val())
+                                        getdropdown(1)
                                     }
-                                    
-                                    $("#modal_addgroup").modal("hide");
-                                    gettablegroup()
-                                }
-                            })
+                                })
+                            }else{
+                                Swal.fire({
+                                    icon:"error",
+                                    title:"บันทึก",
+                                    text:"กรุณากรอกข้อมูลให้ครบ"
+                                })
+                            }
                         }
-
+                        
                         $(document).ready(function(){
                             $("#adddata").click(function (){
                                 gettopicmain()
@@ -683,7 +710,7 @@
                                     
                                 ]
                             })
-                            // gettablegroup()
+                           // gettablegroup()
                             getdropdown(1)
                             
                         })
