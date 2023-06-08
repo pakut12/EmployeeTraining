@@ -331,463 +331,475 @@
                                  
                                             }
                             
-                                            })
+                                        })
                      
                         
-                                        }
-                                    })
-                                }else if(num == 2){
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Group",
-                                        data:{
-                                            type:"test12"
-                                        },
-                                        success:function(msg){
-                                            let arr = JSON.parse(msg); 
-                                            $("#search_topicmain_id").html("<option id='' value=''>โปรดเลือก</option>")
-                                            $("#search_topicminor_id").html("<option id='' value=''>โปรดเลือก</option>")
-                                            $("#search_course_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                    }
+                                })
+                            }else if(num == 2){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"test12"
+                                    },
+                                    success:function(msg){
+                                        let arr = JSON.parse(msg); 
+                                        $("#search_topicmain_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                        $("#search_topicminor_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                        $("#search_course_id").html("<option id='' value=''>โปรดเลือก</option>")
                                    
                       
-                                            $(arr).each(function(index,value){
-                                                if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
-                                                    $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
-                                                }
-                                            })
+                                        $(arr).each(function(index,value){
+                                            if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
+                                                $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
+                                            }
+                                        })
                          
-                                            $("#add_topicmain_id").change(function(){
-                                                var companyId = $(this).val()
-                                                $("#add_topicminor_id").html("<option id=''  value=''>โปรดเลือก</option>")
+                                        $("#add_topicmain_id").change(function(){
+                                            var companyId = $(this).val()
+                                            $("#add_topicminor_id").html("<option id=''  value=''>โปรดเลือก</option>")
                             
-                                                if(companyId != ''){
-                                                    $(arr).each(function(index,value){
-                                                        if(value.topicmain_id == companyId){
-                                                            if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
-                                                                $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
-                                                            }
+                                            if(companyId != ''){
+                                                $(arr).each(function(index,value){
+                                                    if(value.topicmain_id == companyId){
+                                                        if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                            $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
                                                         }
-                                                    })
+                                                    }
+                                                })
                                   
-                                                }
+                                            }
                             
-                                            })
+                                        })
                                     
-                                            $("#add_topicminor_id").change(function(){
+                                        $("#add_topicminor_id").change(function(){
                                     
-                                                var courseId = $(this).val()
-                                                $("#add_course_id").html("<option id=''  value=''>โปรดเลือก</option>")
+                                            var courseId = $(this).val()
+                                            $("#add_course_id").html("<option id=''  value=''>โปรดเลือก</option>")
                             
-                                                if(courseId != ''){
-                                                    $(arr).each(function(index,value){
-                                                        console.log(courseId+"&"+value.topicmain_id)
-                                                        if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
+                                            if(courseId != ''){
+                                                $(arr).each(function(index,value){
+                                                    console.log(courseId+"&"+value.topicmain_id)
+                                                    if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
                                                     
-                                                            if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
-                                                                $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
-                                                            }
+                                                        if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                            $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
                                                         }
-                                                    })
+                                                    }
+                                                })
                                  
-                                                }
+                                            }
                             
-                                            })
+                                        })
                      
                         
-                                        }
-                                    })
-                                }else if(num == 3){
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Group",
-                                        data:{
-                                            type:"test12"
-                                        },
-                                        success:function(msg){
-                                            let arr = JSON.parse(msg); 
-                                            $("#search_topicmain_id").html("<option id='' value=''>โปรดเลือก</option>")
-                                            $("#search_topicminor_id").html("<option id='' value=''>โปรดเลือก</option>")
-                                            $("#search_course_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                    }
+                                })
+                            }else if(num == 3){
+                                $.ajax({
+                                    type:"post",
+                                    url:"Group",
+                                    data:{
+                                        type:"test12"
+                                    },
+                                    success:function(msg){
+                                        let arr = JSON.parse(msg); 
+                                        $("#search_topicmain_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                        $("#search_topicminor_id").html("<option id='' value=''>โปรดเลือก</option>")
+                                        $("#search_course_id").html("<option id='' value=''>โปรดเลือก</option>")
                                     
-                                            $(arr).each(function(index,value){
-                                                if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
-                                                    $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
-                                                }
-                                            })
+                                        $(arr).each(function(index,value){
+                                            if($("#add_topicmain_id").find('option[id="'+ value.topicmain_id +'"]').length == 0){
+                                                $("#add_topicmain_id").append('<option id="'+ value.topicmain_id +'" value='+value.topicmain_id+'>'+value.topicmain_name+'</option>')
+                                            }
+                                        })
                          
-                                            $("#add_topicmain_id").change(function(){
-                                                var companyId = $(this).val()
-                                                $("#add_topicminor_id").html("<option id=''  value=''>โปรดเลือก</option>")
+                                        $("#add_topicmain_id").change(function(){
+                                            var companyId = $(this).val()
+                                            $("#add_topicminor_id").html("<option id=''  value=''>โปรดเลือก</option>")
                             
-                                                if(companyId != ''){
-                                                    $(arr).each(function(index,value){
-                                                        if(value.topicmain_id == companyId){
-                                                            if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
-                                                                $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
-                                                            }
+                                            if(companyId != ''){
+                                                $(arr).each(function(index,value){
+                                                    if(value.topicmain_id == companyId){
+                                                        if($("#add_topicminor_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                            $("#add_topicminor_id").append('<option id="'+value.topicminor_id+'" value='+value.topicminor_id+'>'+ value.topicminor_name+'</option>')
                                                         }
-                                                    })
+                                                    }
+                                                })
                                   
-                                                }
+                                            }
                             
-                                            })
+                                        })
                                     
-                                            $("#add_topicminor_id").change(function(){
+                                        $("#add_topicminor_id").change(function(){
                                     
-                                                var courseId = $(this).val()
-                                                $("#add_course_id").html("<option id=''  value=''>โปรดเลือก</option>")
+                                            var courseId = $(this).val()
+                                            $("#add_course_id").html("<option id=''  value=''>โปรดเลือก</option>")
                             
-                                                if(courseId != ''){
-                                                    $(arr).each(function(index,value){
-                                                        console.log(courseId+"&"+value.topicmain_id)
-                                                        if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
+                                            if(courseId != ''){
+                                                $(arr).each(function(index,value){
+                                                    console.log(courseId+"&"+value.topicmain_id)
+                                                    if(value.topicminor_id == courseId && value.topicmain_id == $("#add_topicmain_id").val()){
                                                     
-                                                            if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
-                                                                $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
-                                                            }
+                                                        if($("#add_course_id").find('option[id="'+ value.topicminor_id +'"]').length == 0){
+                                                            $("#add_course_id").append('<option id="'+value.course_name+' value='+value.course_name+'">'+ value.course_name+'</option>')
                                                         }
-                                                    })
+                                                    }
+                                                })
                                  
-                                                }
+                                            }
                             
-                                            })
+                                        })
                      
                         
-                                        }
-                                    })
-                                }
+                                    }
+                                })
+                            }
                             
             
-                            }
+                        }
                         
                         
-                            function updateevaluation(result){
+                        function updateevaluation(result){
                         
-                                let idt = $("#evaluation_training_id").val();
-                                let table = $("#table_employee_evaluation").DataTable()
-                                let list = table.rows('.selected').data()
+                            let idt = $("#evaluation_training_id").val();
+                            let table = $("#table_employee_evaluation").DataTable()
+                            let list = table.rows('.selected').data()
                             
-                                if(list.length > 0){
-                                    let arrlist = [];
-                                    $.each(list,function(k,v){
-                                        arrlist.push(v.employee_id)
-                                    })
+                            if(list.length > 0){
+                                let arrlist = [];
+                                $.each(list,function(k,v){
+                                    arrlist.push(v.employee_id)
+                                })
                           
-                                    let input = "type=updateresult&listem="+arrlist+"&result="+result+"&idt="+idt
+                                let input = "type=updateresult&listem="+arrlist+"&result="+result+"&idt="+idt
                             
-                                    console.log(input)
-                                    $.ajax({
-                                        type:"post",
-                                        url:"Employee",
-                                        data:input,
-                                        success:function(msg){
-                                            if(msg == "true"){
-                                                Swal.fire({
-                                                    title:"บันทึก",
-                                                    icon:"success",
-                                                    text:"บันทึกสำเร็จ "
-                                                })
-                                            }else if(msg == "false"){
-                                                Swal.fire({
-                                                    title:"บันทึก",
-                                                    icon:"error",
-                                                    text:"บันทึกไม่สำเร็จ"
-                                                })
-                                            }
-                                            $("#modal_evaluation").modal("hide")
-                                        }
-                                    })
-                                }else{
-                                    Swal.fire({
-                                        title:"บันทึก",
-                                        icon:"error",
-                                        text:"บันทึกไม่สำเร็จ : กรุณาเลือกรายชื่อให้ถูกต้อง"
-                                    })
-                                }
-                           
-                            }
-
-
-                            function evaluation(id){
-                                $("#modal_report").modal('show')
-                           
+                                console.log(input)
                                 $.ajax({
+                                    type:"post",
+                                    url:"Employee",
+                                    data:input,
+                                    success:function(msg){
+                                        if(msg == "true"){
+                                            Swal.fire({
+                                                title:"บันทึก",
+                                                icon:"success",
+                                                text:"บันทึกสำเร็จ "
+                                            })
+                                        }else if(msg == "false"){
+                                            Swal.fire({
+                                                title:"บันทึก",
+                                                icon:"error",
+                                                text:"บันทึกไม่สำเร็จ"
+                                            })
+                                        }
+                                        $("#modal_evaluation").modal("hide")
+                                    }
+                                })
+                            }else{
+                                Swal.fire({
+                                    title:"บันทึก",
+                                    icon:"error",
+                                    text:"บันทึกไม่สำเร็จ : กรุณาเลือกรายชื่อให้ถูกต้อง"
+                                })
+                            }
+                           
+                        }
+
+
+                        function evaluation(id){
+                            $("#modal_report").modal('show')
+                           
+                            $.ajax({
+                                type:"post",
+                                url:"Training",
+                                data:{
+                                    type:"getdatatrainingbyid",
+                                    training_id:id
+                                },
+                                success:function(msg){
+                                    var js =  JSON.parse(msg);
+                                    console.log(js)
+                                    $("#evaluation_training_id").val(js.training_id);
+                                    $("#evaluation_topicmain_id").val(js.training_topicmain_name);
+                                    $("#evaluation_topicminor_id").val(js.training_topicminor_name);
+                                    $("#evaluation_course_id").val(js.training_course);
+                                    $("#evaluation_company").val(js.training_company);
+                                    $("#evaluation_expenses").val(js.training_expenses);
+                                    $("#evaluation_date").val(js.training_datetraining);
+                                    $("#evaluation_year").val(js.training_year);
+                                    $("#evaluation_address").val(js.training_address);
+                                    $("#evaluation_hour").val(js.training_hour);
+                                    $("#evaluation_type").html(js.training_type);
+                                    var table = $("#table_employee_evaluation").DataTable({
+                                        data: js.listem,
+                                        columns: [
+                                            { 
+                                                title: 'สาขา',
+                                                data: "employee_company"
+                                            },
+                                            { 
+                                                title: 'รหัส',
+                                                data: "employee_id"
+                                            },
+                                            { 
+                                                title: 'การจ้าง',
+                                                data: "employee_employment"
+                                            },
+                                            { 
+                                                title: 'เลขบัตรประชาชน',
+                                                data: "employee_idcard"
+                                            },
+                                            { 
+                                                title: 'คำหน้า', 
+                                                data: "employee_prefixdesc"
+                                            },
+                                            { 
+                                                title: 'ชื่อ', 
+                                                data: "employee_fname"
+                                            },
+                                            { 
+                                                title: 'สกุล', 
+                                                data: "employee_lname" 
+                                            },
+                                            { 
+                                                title: 'ตำเเหน่ง',
+                                                data: "employee_posiddesc"
+                                            },
+                                            { 
+                                                title: 'หน่วยงาน', 
+                                                data: "employee_deptdesc"
+                                            },
+                                            { 
+                                                title: 'CT',
+                                                data: "employee_ct" 
+                                            },
+                                            {
+                                                title: 'วัน/เดือน/ปี เกิด',
+                                                data: "employee_birthday" 
+                                            },
+                                            { 
+                                                title: 'วันเริ่มงาน',
+                                                data: "employee_startdate"
+                                            },
+                                            { 
+                                                title: 'อายุงาน',
+                                                data: "employee_age"
+                                            }
+                                            
+                                        ],
+                                        processing: true,
+                                        scrollCollapse: true,
+                                        scrollX: true, 
+                                        bDestroy: true,
+                                        fixedColumns:{
+                                            left: 2,
+                                            right: 1
+                                        },
+                                       
+                                        dom: 'Bfrtip',
+                                        lengthMenu: [[10, 25, 50,100,9999999], [10, 25, 50,100 ,"All"]],
+                                        buttons: [
+                                            'pageLength',
+                                            {
+                                                extend: 'excel',
+                                                title: 'รายชื่อผู้เข้าอบรมหลักสูตร : ' + js.training_course
+                                            }
+                                        
+                                        ],
+                                        order: [[1, 'asc']]
+                                    });
+                                    
+                                    $(document).on('shown.bs.modal', '#modal_report', function () {
+                                        table.columns.adjust().draw();
+                                    });
+       
+                                }
+                            })
+        
+                        }
+
+                        function gettabletraining(num){
+                            let search_topicmain_id = $("#search_topicmain_id").val()
+                            let search_topicminor_id = $("#search_topicminor_id").val()
+                            let search_date_start = $("#search_date_start").val()
+                            let search_date_end = $("#search_date_end").val()
+                            let search_year = $("#search_year").val()
+                            let search_address = $("#search_address").val()
+                            let search_course_id = $("#search_course_id").val()
+                            
+                            if(num == 1){
+                                search_topicmain_id = null
+                                search_topicminor_id = null
+                            }
+                            var table = $("#table_report").DataTable({
+                                serverSide: true,
+                                processing: true,
+                                ajax: {
                                     type:"post",
                                     url:"Training",
                                     data:{
-                                        type:"getdatatrainingbyid",
-                                        training_id:id
+                                        type:"getdatatraining",
+                                        search_topicmain_id:search_topicmain_id,
+                                        search_topicminor_id:search_topicminor_id,
+                                        search_date_start:search_date_start,
+                                        search_date_end:search_date_end,
+                                        search_year:search_year,
+                                        search_address:search_address,
+                                        search_course_id:search_course_id
                                     },
-                                    success:function(msg){
-                                        var js =  JSON.parse(msg);
-                                        console.log(js)
-                                        $("#evaluation_training_id").val(js.training_id);
-                                        $("#evaluation_topicmain_id").val(js.training_topicmain_name);
-                                        $("#evaluation_topicminor_id").val(js.training_topicminor_name);
-                                        $("#evaluation_course_id").val(js.training_course);
-                                        $("#evaluation_company").val(js.training_company);
-                                        $("#evaluation_expenses").val(js.training_expenses);
-                                        $("#evaluation_date").val(js.training_datetraining);
-                                        $("#evaluation_year").val(js.training_year);
-                                        $("#evaluation_address").val(js.training_address);
-                                        $("#evaluation_hour").val(js.training_hour);
-                                        $("#evaluation_type").html(js.training_type);
-                                        var table = $("#table_employee_evaluation").DataTable({
-                                            data: js.listem,
-                                            columns: [
-                                                { 
-                                                    title: 'สาขา',
-                                                    data: "employee_company"
-                                                },
-                                                { 
-                                                    title: 'รหัส',
-                                                    data: "employee_id"
-                                                },
-                                                { 
-                                                    title: 'การจ้าง',
-                                                    data: "employee_employment"
-                                                },
-                                                { 
-                                                    title: 'เลขบัตรประชาชน',
-                                                    data: "employee_idcard"
-                                                },
-                                                { 
-                                                    title: 'คำหน้า', 
-                                                    data: "employee_prefixdesc"
-                                                },
-                                                { 
-                                                    title: 'ชื่อ', 
-                                                    data: "employee_fname"
-                                                },
-                                                { 
-                                                    title: 'สกุล', 
-                                                    data: "employee_lname" 
-                                                },
-                                                { 
-                                                    title: 'ตำเเหน่ง',
-                                                    data: "employee_posiddesc"
-                                                },
-                                                { 
-                                                    title: 'หน่วยงาน', 
-                                                    data: "employee_deptdesc"
-                                                },
-                                                { 
-                                                    title: 'CT',
-                                                    data: "employee_ct" 
-                                                },
-                                                {
-                                                    title: 'วัน/เดือน/ปี เกิด',
-                                                    data: "employee_birthday" 
-                                                },
-                                                { 
-                                                    title: 'วันเริ่มงาน',
-                                                    data: "employee_startdate"
-                                                },
-                                                { 
-                                                    title: 'อายุงาน',
-                                                    data: "employee_age"
-                                                }
-                                            
-                                            ],
-                                            processing: true,
-                                            scrollCollapse: true,
-                                            scrollX: true, 
-                                            bDestroy: true,
-                                            fixedColumns:{
-                                                left: 2,
-                                                right: 1
-                                            },
-                                       
-                                            dom: 'Bfrtip',
-                                            lengthMenu: [[10, 25, 50,100,9999999], [10, 25, 50,100 ,"All"]],
-                                            buttons: [
-                                                'pageLength',
-                                                {
-                                                    extend: 'excel',
-                                                    title: 'รายชื่อผู้เข้าอบรมหลักสูตร : ' + js.training_course
-                                                }
+                                    dataSrc:function(json){
+                                        var data = JSON.parse(json.data)
+                                        var arr = []
                                         
-                                            ],
-                                            order: [[1, 'asc']]
-                                        });
-                                    
-                                        $(document).on('shown.bs.modal', '#modal_report', function () {
-                                            table.columns.adjust().draw();
-                                        });
-       
-                                    }
-                                })
-        
-                            }
-
-                            function gettabletraining(num){
-                                let search_topicmain_id = $("#search_topicmain_id").val()
-                                let search_topicminor_id = $("#search_topicminor_id").val()
-                                let search_date_start = $("#search_date_start").val()
-                                let search_date_end = $("#search_date_end").val()
-                                let search_year = $("#search_year").val()
-                                let search_address = $("#search_address").val()
-                                let search_course_id = $("#search_course_id").val()
-                            
-                                if(num == 1){
-                                    search_topicmain_id = null
-                                    search_topicminor_id = null
-                                }
-                                var table = $("#table_report").DataTable({
-                                    serverSide: true,
-                                    processing: true,
-                                    ajax: {
-                                        type:"post",
-                                        url:"Training",
-                                        data:{
-                                            type:"getdatatraining",
-                                            search_topicmain_id:search_topicmain_id,
-                                            search_topicminor_id:search_topicminor_id,
-                                            search_date_start:search_date_start,
-                                            search_date_end:search_date_end,
-                                            search_year:search_year,
-                                            search_address:search_address,
-                                            search_course_id:search_course_id
-                                        },
-                                        dataSrc:function(json){
-                                            var data = JSON.parse(json.data)
-                                            var arr = []
-                                        
-                                            $.each(data,function(k,v){
-                                                var result = {
-                                                    training_address : v.training_address,
-                                                    training_company :  v.training_company,
-                                                    training_datetraining :  v.training_datetraining,
-                                                    training_expenses :  v.training_expenses,
-                                                    training_hour :  v.training_hour,
-                                                    training_id :  v.training_id,
-                                                    training_topicmain :  v.training_topicmain,
-                                                    training_topminor :  v.training_topminor,
-                                                    training_year :  v.training_year,
-                                                    training_course:v.training_course,
-                                                    btn_details : '<button class="btn btn-warning btn-sm" type="button" onclick="evaluation('+v.training_id+')" id="bt_details">ดูรายละเอียด</button>',
+                                        $.each(data,function(k,v){
+                                            var result = {
+                                                training_address : v.training_address,
+                                                training_company :  v.training_company,
+                                                training_datetraining :  v.training_datetraining,
+                                                training_expenses :  v.training_expenses,
+                                                training_hour :  v.training_hour,
+                                                training_id :  v.training_id,
+                                                training_topicmain :  v.training_topicmain,
+                                                training_topminor :  v.training_topminor,
+                                                training_year :  v.training_year,
+                                                training_course:v.training_course,
+                                                btn_details : '<button class="btn btn-warning btn-sm" type="button" onclick="evaluation('+v.training_id+')" id="bt_details">ดูรายละเอียด</button>',
                                                 
-                                                }
-                                                arr.push(result);
+                                            }
+                                            arr.push(result);
                              
-                                            })
-                                            return arr
+                                        })
+                                        return arr
+                                    }
+                                },
+                                columns: [
+                                    { 
+                                        title: 'รหัส',
+                                        data: "training_id"
+                                    },
+                                    { 
+                                        title: 'บริษัท',
+                                        data: "training_company"
+                                    },
+                                    { 
+                                        title: 'ปี', 
+                                        data: "training_year"
+                                    },
+                                    { 
+                                        title: 'ชั้วโมง', 
+                                        data: "training_hour"
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" },
+                                    { 
+                                        title: 'ค่าใช้จ่าย',
+                                        data: "training_expenses" },
+                                    { 
+                                        title: 'สาขา', 
+                                        data:"training_address"
+                                                 
+                                    },
+                                    { 
+                                        title: 'หมวดหลัก', 
+                                        data: "training_topicmain"
+                                    },
+                                    { 
+                                        title: 'หมวดย่อย',
+                                        data: "training_topminor" 
+                                    },
+                                    {
+                                        title: 'หลักสูตร',
+                                        data: "training_course" 
+                                    },
+                                    { 
+                                        title: 'รายละเอียด',
+                                        data: "btn_details"
+                                    }
+                                ],
+                                dom: 'Bfrtip',
+                                lengthMenu: [[10, 25, 50,100,9999999], [10, 25, 50,100 ,"All"]],
+                                buttons: [
+                                    'pageLength',
+                                    {
+                                        extend: 'excel',
+                                        title: 'รายชื่อหลักสูตร',
+                                        exportOptions: {
+                                            columns: [0,1,2,3,4,5,6,7,8,9]
                                         }
                                     },
-                                    columns: [
-                                        { 
-                                            title: 'รหัส',
-                                            data: "training_id"
-                                        },
-                                        { 
-                                            title: 'บริษัท',
-                                            data: "training_company"
-                                        },
-                                        { 
-                                            title: 'ปี', 
-                                            data: "training_year"
-                                        },
-                                        { 
-                                            title: 'ชั้วโมง', 
-                                            data: "training_hour"
-                                        },
-                                        { 
-                                            title: 'วันที่อบรม', 
-                                            data: "training_datetraining" },
-                                        { 
-                                            title: 'ค่าใช้จ่าย',
-                                            data: "training_expenses" },
-                                        { 
-                                            title: 'สาขา', 
-                                            data:"training_address"
-                                                 
-                                        },
-                                        { 
-                                            title: 'หมวดหลัก', 
-                                            data: "training_topicmain"
-                                        },
-                                        { 
-                                            title: 'หมวดย่อย',
-                                            data: "training_topminor" 
-                                        },
-                                        {
-                                            title: 'หลักสูตร',
-                                            data: "training_course" 
-                                        },
-                                        { 
-                                            title: 'รายละเอียด',
-                                            data: "btn_details"
-                                        }
-                                    ],
-                                
-                                    scrollCollapse: true,
-                                    scrollX:true, 
-                                    bDestroy: true
-                                })
-                            }
+                                    
+                                ],
+                                scrollCollapse: true,
+                                scrollX:true, 
+                                bDestroy: true
+                            })
+                        }
 
 
                         
 
-                            $(document).ready(function(){
-                                getaddress()
-                                getdropdown(1)
-                                $("#table_report").DataTable({
-                                    columns: [
-                                        { 
-                                            title: 'รหัส',
-                                            data: "training_id"
-                                        },
-                                        { 
-                                            title: 'บริษัท',
-                                            data: "training_company"
-                                        },
-                                        { 
-                                            title: 'ปี', 
-                                            data: "training_year"
-                                        },
-                                        { 
-                                            title: 'ชั้วโมง', 
-                                            data: "training_hour"
-                                        },
-                                        { 
-                                            title: 'วันที่อบรม', 
-                                            data: "training_datetraining" },
-                                        { 
-                                            title: 'ค่าใช้จ่าย',
-                                            data: "training_expenses" },
-                                        { 
-                                            title: 'สาขา', 
-                                            data:"training_address"
+                        $(document).ready(function(){
+                            getaddress()
+                            getdropdown(1)
+                            $("#table_report").DataTable({
+                                columns: [
+                                    { 
+                                        title: 'รหัส',
+                                        data: "training_id"
+                                    },
+                                    { 
+                                        title: 'บริษัท',
+                                        data: "training_company"
+                                    },
+                                    { 
+                                        title: 'ปี', 
+                                        data: "training_year"
+                                    },
+                                    { 
+                                        title: 'ชั้วโมง', 
+                                        data: "training_hour"
+                                    },
+                                    { 
+                                        title: 'วันที่อบรม', 
+                                        data: "training_datetraining" },
+                                    { 
+                                        title: 'ค่าใช้จ่าย',
+                                        data: "training_expenses" },
+                                    { 
+                                        title: 'สาขา', 
+                                        data:"training_address"
                                                  
-                                        },
-                                        { 
-                                            title: 'หมวดหลัก', 
-                                            data: "training_topicmain"
-                                        },
-                                        { 
-                                            title: 'หมวดย่อย',
-                                            data: "training_topminor" 
-                                        },
-                                        {
-                                            title: 'หลักสูตร',
-                                            data: "training_course" 
-                                        },
-                                        { 
-                                            title: 'รายละเอียด',
-                                            data: "btn_details"
-                                        }
-                                    ]
-                                })
+                                    },
+                                    { 
+                                        title: 'หมวดหลัก', 
+                                        data: "training_topicmain"
+                                    },
+                                    { 
+                                        title: 'หมวดย่อย',
+                                        data: "training_topminor" 
+                                    },
+                                    {
+                                        title: 'หลักสูตร',
+                                        data: "training_course" 
+                                    },
+                                    { 
+                                        title: 'รายละเอียด',
+                                        data: "btn_details"
+                                    }
+                                ]
+                            })
                               
                                                                 
         
-                                $("#listreport").addClass("menu-is-opening menu-open");
-                                $("#pagereport").addClass("active");
-                                $("#datareporttopic").addClass("active");
+                            $("#listreport").addClass("menu-is-opening menu-open");
+                            $("#pagereport").addClass("active");
+                            $("#datareporttopic").addClass("active");
                             
                            
-                            })
+                        })
                     </script>
                 </div><!-- /.container-fluid -->
             </section>

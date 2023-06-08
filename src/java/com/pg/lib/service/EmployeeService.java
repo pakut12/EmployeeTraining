@@ -179,7 +179,7 @@ public class EmployeeService {
         List<ET_Employee> listemployee = new ArrayList<ET_Employee>();
 
         try {
-            String sql = "select * from v_pwemployee@l_myhrpg where PWEMPLOYEE = ?";
+            String sql = "select * from v_pwemployee@l_myhrpg where pwstatwork <> 'Y' and PWEMPLOYEE = ?";
             conn = ConnectDB.getConnectionhr();
             ps = conn.prepareStatement(sql);
             ps.setString(1, employeebyid);
@@ -218,7 +218,7 @@ public class EmployeeService {
         List<ET_Employee> listemployee = new ArrayList<ET_Employee>();
 
         try {
-            String sql = "select * from v_pwemployee@l_myhrpg where PWEMPLOYEE in (";
+            String sql = "select * from v_pwemployee@l_myhrpg where pwstatwork <> 'Y' and PWEMPLOYEE in (";
             for (int n = 0; n < listem.size(); n++) {
                 if (n < listem.size() - 1) {
                     sql += "'" + listem.get(n).getEmployee_id() + "',";

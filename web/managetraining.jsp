@@ -1280,6 +1280,7 @@
         
                             
                             var table = $("#table_training").DataTable({
+                                processing: true,
                                 serverSide: true,
                                 ajax: {
                                     type:"post",
@@ -1369,6 +1370,7 @@
                                     }
                                     
                                 ],
+                               
                                 scrollCollapse: true,
                                 scrollX:true, 
                                 bDestroy: true
@@ -1394,59 +1396,59 @@
                                 })
                             }else{
                                
-                            if($("#add_topicmain_id").val() == "" || $("#add_topicminor_id").val() == ""  || $("#add_course_id").val() == "" ){
-                                Swal.fire({
-                                    icon:"error",
-                                    title:"บันทึก",
-                                    text:"บันทึกไม่สำเร็จ : กรุณาเลือกหมวดให้ถูกต้อง"
-                                })
-                            } else{
+                                if($("#add_topicmain_id").val() == "" || $("#add_topicminor_id").val() == ""  || $("#add_course_id").val() == "" ){
+                                    Swal.fire({
+                                        icon:"error",
+                                        title:"บันทึก",
+                                        text:"บันทึกไม่สำเร็จ : กรุณาเลือกหมวดให้ถูกต้อง"
+                                    })
+                                } else{
                                 
-                                var form = $("#myformadd").serialize()
-                                var numlist = employeelist.length-1
-                                var listemployeeid = []
-                                for(var n = 0;n<=numlist;n++){
-                                    listemployeeid.push(employeelist[n].employee_id)
-                                }
-                                form += "&listemployeeid=" + listemployeeid
-                                form += "&type=addtraining"
-                            
-                                $.ajax({
-                                    type:"post",
-                                    url:"Training",
-                                    data:form,
-                                    success:function(msg){
-                                        if(msg == "true"){
-                                            Swal.fire({
-                                                icon:"success",
-                                                title:"บันทึก",
-                                                text:"บันทึกสำเร็จ"
-                                            })
-                                        }else if(msg == "false1"){
-                                            Swal.fire({
-                                                icon:"error",
-                                                title:"บันทึก",
-                                                text:"บันทึกไม่สำเร็จ : มีข้อมูลเเล้ว "
-                                            })
-                                        }else if(msg == "false2"){
-                                            Swal.fire({
-                                                icon:"error",
-                                                title:"บันทึก",
-                                                text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลฝึกอบรมไม่สำเร็จ"
-                                            })
-                                        }else if(msg == "false3"){
-                                            Swal.fire({
-                                                icon:"error",
-                                                title:"บันทึก",
-                                                text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
-                                            })
-                                        }
-                                        gettabletraining()
-                                        ClearInput()
-                                        $("#modal_addtraining").modal('hide')
+                                    var form = $("#myformadd").serialize()
+                                    var numlist = employeelist.length-1
+                                    var listemployeeid = []
+                                    for(var n = 0;n<=numlist;n++){
+                                        listemployeeid.push(employeelist[n].employee_id)
                                     }
-                                })
-                            }
+                                    form += "&listemployeeid=" + listemployeeid
+                                    form += "&type=addtraining"
+                            
+                                    $.ajax({
+                                        type:"post",
+                                        url:"Training",
+                                        data:form,
+                                        success:function(msg){
+                                            if(msg == "true"){
+                                                Swal.fire({
+                                                    icon:"success",
+                                                    title:"บันทึก",
+                                                    text:"บันทึกสำเร็จ"
+                                                })
+                                            }else if(msg == "false1"){
+                                                Swal.fire({
+                                                    icon:"error",
+                                                    title:"บันทึก",
+                                                    text:"บันทึกไม่สำเร็จ : มีข้อมูลเเล้ว "
+                                                })
+                                            }else if(msg == "false2"){
+                                                Swal.fire({
+                                                    icon:"error",
+                                                    title:"บันทึก",
+                                                    text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลฝึกอบรมไม่สำเร็จ"
+                                                })
+                                            }else if(msg == "false3"){
+                                                Swal.fire({
+                                                    icon:"error",
+                                                    title:"บันทึก",
+                                                    text:"บันทึกไม่สำเร็จ : เพิ่มข้อมูลรายชื่อพนักงานไม่สำเร็จ"
+                                                })
+                                            }
+                                            gettabletraining()
+                                            ClearInput()
+                                            $("#modal_addtraining").modal('hide')
+                                        }
+                                    })
+                                }
                             }
                           
                         }

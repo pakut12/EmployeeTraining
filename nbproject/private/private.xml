@@ -2,8 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/src/java/com/pg/lib/Servlet/Employee.java</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/src/java/com/pg/lib/Servlet/Training.java</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/src/java/com/pg/lib/Servlet/User.java</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/src/java/com/pg/lib/service/EmployeeService.java</file>
         <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/src/java/com/pg/lib/utility/ConnectDB.java</file>
         <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/web/login.jsp</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/web/managereportemployee.jsp</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/web/managereporttopic.jsp</file>
+        <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/web/managetraining.jsp</file>
         <file>file:/C:/Users/pakutsing/Desktop/Github/EmployeeTraining/web/share/header.jsp</file>
     </open-files>
 </project-private>
