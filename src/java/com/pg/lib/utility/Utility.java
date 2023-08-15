@@ -5,6 +5,8 @@
 package com.pg.lib.utility;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,38 +41,54 @@ public class Utility {
         return coverdate;
     }
 
+    public static String CoverDate2(String txt) {
+
+        String[] date = txt.split("/");
+        String coverdate = date[2] + "-" + date[1] + "-" + date[0];
+
+        return coverdate;
+    }
+
     public static String getdatetoday() throws SQLException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = new Date();
         return formatter.format(date);
     }
 
-    public static String GetWorkTime(String startdate) throws NamingException, SQLException {
+    public static String GetWorkTime(String startdate) throws NamingException, SQLException, ParseException {
 
-        String[] datestart = startdate.split("/");
-        String[] dateend = getdatetoday().split("-");
+      
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
+        Date startDate = sdf.parse(CoverDate2(startdate)); // Replace with your start date
 
+        Date endDate = sdf.parse(getdatetoday());     // Replace with your end date
 
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(startDate);
 
-        cal1.set(Integer.parseInt(datestart[2]), Integer.parseInt(datestart[1]), Integer.parseInt(datestart[0])); // August 1st, 2000
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(endDate);
 
-        cal2.set(Integer.parseInt(dateend[0]), Integer.parseInt(dateend[1]), Integer.parseInt(dateend[2])); // May 10th, 2023
+        int years = 0;
+        int months = 0;
 
-        Date date1 = cal1.getTime();
-        Date date2 = cal2.getTime();
+        while (startCal.before(endCal)) {
+            startCal.add(Calendar.MONTH, 1);
+            months++;
 
-        int years = cal2.get(Calendar.YEAR) - cal1.get(Calendar.YEAR);
-        int months = cal2.get(Calendar.MONTH) - cal1.get(Calendar.MONTH);
-
-        if (months < 0) {
-            years--;
-            months += 12;
+            if (startCal.after(endCal)) {
+                startCal.add(Calendar.MONTH, -1);
+                months--;
+                break;
+            }
         }
 
-        String worktime = years + " ปี " + (months - 1) + " เดือน";
+        years = months / 12;
+        months = months % 12;
+
+
+        String worktime = years + " ปี " + months + " เดือน";
 
         return worktime;
     }

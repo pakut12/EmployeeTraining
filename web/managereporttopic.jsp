@@ -246,7 +246,8 @@
                     
                     
                     <script>
-                        
+                
+
                         const employeelist = [];
                     
                         function getaddress(){
@@ -605,6 +606,8 @@
                                             {
                                                 extend: 'excel',
                                                 title: 'รายชื่อผู้เข้าอบรมหลักสูตร : ' + js.training_course
+                                                
+                                        
                                             }
                                         
                                         ],
@@ -621,6 +624,16 @@
                         }
 
                         function gettabletraining(num){
+                                    pdfMake.fonts = {
+                Roboto: {
+                    normal: 'https://fonts.cdnfonts.com/s/16399/THSarabunNew.woff',
+                    bold: 'https://fonts.cdnfonts.com/s/16399/THSarabunNew.woff',
+                    italics: 'https://fonts.cdnfonts.com/s/16399/THSarabunNew.woff',
+                    bolditalics: 'https://fonts.cdnfonts.com/s/16399/THSarabunNew.woff'
+                }
+            }
+        
+        
                             let search_topicmain_id = $("#search_topicmain_id").val()
                             let search_topicminor_id = $("#search_topicminor_id").val()
                             let search_date_start = $("#search_date_start").val()
@@ -723,14 +736,24 @@
                                 lengthMenu: [[10, 25, 50,100,9999999], [10, 25, 50,100 ,"All"]],
                                 buttons: [
                                     'pageLength',
-                                    {
-                                        extend: 'excel',
+                                   {
+                                        extend: 'pdf',
                                         title: 'รายชื่อหลักสูตร',
+                                        titleAttr: 'PDF',
+                                        action: newexportaction,
                                         exportOptions: {
                                             columns: [0,1,2,3,4,5,6,7,8,9]
                                         }
                                     },
-                                    
+                                    {
+                                        extend: 'excelHtml5',
+                                        title: 'รายชื่อหลักสูตร',
+                                        titleAttr: 'Excel',
+                                        action: newexportaction,
+                                        exportOptions: {
+                                            columns: [0,1,2,3,4,5,6,7,8,9]
+                                        }
+                                    },
                                 ],
                                 scrollCollapse: true,
                                 scrollX:true, 
@@ -738,10 +761,51 @@
                             })
                         }
 
-
+                        function newexportaction(e, dt, button, config) {
+                            var self = this;
+                            var oldStart = dt.settings()[0]._iDisplayStart;
+                            dt.one('preXhr', function (e, s, data) {
+                                // Just this once, load all data from the server...
+                                data.start = 0;
+                                data.length = 2147483647;
+                                dt.one('preDraw', function (e, settings) {
+                                    // Call the original action function
+                                    if (button[0].className.indexOf('buttons-copy') >= 0) {
+                                        $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
+                                    } else if (button[0].className.indexOf('buttons-excel') >= 0) {
+                                        $.fn.dataTable.ext.buttons.excelHtml5.available(dt, config) ?
+                                            $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt, button, config) :
+                                            $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt, button, config);
+                                    } else if (button[0].className.indexOf('buttons-csv') >= 0) {
+                                        $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
+                                            $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
+                                            $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
+                                    } else if (button[0].className.indexOf('buttons-pdf') >= 0) {
+                                        $.fn.dataTable.ext.buttons.pdfHtml5.available(dt, config) ?
+                                            $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button, config) :
+                                            $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button, config);
+                                    } else if (button[0].className.indexOf('buttons-print') >= 0) {
+                                        $.fn.dataTable.ext.buttons.print.action(e, dt, button, config);
+                                    }
+                                    dt.one('preXhr', function (e, s, data) {
+                                        // DataTables thinks the first item displayed is index 0, but we're not drawing that.
+                                        // Set the property to what it was before exporting.
+                                        settings._iDisplayStart = oldStart;
+                                        data.start = oldStart;
+                                    });
+                                    // Reload the grid with the original page. Otherwise, API functions like table.cell(this) don't work properly.
+                                    setTimeout(dt.ajax.reload, 0);
+                                    // Prevent rendering of the full data to the DOM
+                                    return false;
+                                });
+                            });
+                            // Requery the server with the new one-time export settings
+                            dt.ajax.reload();
+                        }
                         
 
                         $(document).ready(function(){
+                        
                             getaddress()
                             getdropdown(1)
                             $("#table_report").DataTable({

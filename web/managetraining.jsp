@@ -367,7 +367,7 @@
                             จัดการข้อมูลฝึกอบรม
                         </div>
                         <div class="card-body">
-                            <div class="text-right mb-3">
+                            <div class="text-right mb-3" >
                                 <div class="btn-success btn btn-sm" id="adddata">เพิ่มข้อมูล</div>
                             </div>
                             <div class="" id="mytable">
@@ -822,8 +822,22 @@
 
                        
                         function delemployeebyid(id){
-                            employeelist.splice(id,1)
-                            getemployeebyid()
+                            //employeelist.splice(id,1)
+                            for (var i = 0; i < employeelist.length; i++) {
+                                console.log(employeelist[i].employee_id)
+                                if (employeelist[i].employee_id == id) {
+                                    employeelist.splice(i, 1);
+                                    console.log(employeelist)
+                                    getemployeebyid()
+                                    
+                break;
+                                    //i--; // Decrement i to recheck the current index after the splice
+                                }
+                            }
+                            
+        
+                       
+                            
                         }
                        
     
@@ -856,7 +870,7 @@
                                         employee_birthday:js.employee_birthday,   
                                         employee_employment:js.employee_employment,
                                         employee_age:js.employee_age,
-                                        employee_btdel:"<button type='button' class='btn btn-danger btn-sm' onclick='delemployeebyid("+(employeelist.length-1)+")'>ลบ</button>"
+                                        employee_btdel:"<button type='button' class='btn btn-danger btn-sm' onclick='delemployeebyid("+(js.employee_id)+")'>ลบ</button>"
                                       
                                     }
                                     

@@ -45,7 +45,9 @@
                                     <h3 class="card-title">คู่มือระบบฝึกอบรมพนักงาน</h3>
                                 </div>
                                 <div class="card-body">
-                            
+                                    <div class="overflow-hidden" style="height:70vh">
+                                        <iframe src="manual.pdf" style="width:100%; height:100%;" frameborder="1"></iframe>
+                                    </div>
                                 </div>
                                 
                             </div>
